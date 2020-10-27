@@ -64,5 +64,31 @@ module.exports = [
         link: '/app/booker/solicitude'
       },
     ]
+  },
+  {
+    key: 'agency',
+    name: 'Agencia',
+    icon: 'flight',
+    roles: [1, 4],
+    child: [
+      {
+        key: 'index',
+        name: 'Hoteles',
+        icon: 'list-alt',
+        link: '/app/agency/hotels'
+      },
+      {
+        key: 'index',
+        name: 'Cupones',
+        icon: 'list-alt',
+        link: '/app/agency/coupon'
+      },
+      {
+        key: 'index',
+        name: 'Pago Banamex',
+        icon: 'list-alt',
+        link: '/app/agency/paymentlink'
+      },
+    ]
   }
 ];

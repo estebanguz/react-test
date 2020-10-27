@@ -97,3 +97,18 @@ export const Solicitude = Loadable({
   loader: () => import('./Pages/DashboardBookers/solicitude'),
   loading: Loading
 });
+
+export const HotelList = Loadable({
+  loader: () => import('./Agency/Hotels/index'),
+  loading: Loading
+});
+
+export const CouponsView = Loadable({
+  loader: () => import('./Agency/Coupons/index'),
+  loading: Loading
+});
+
+export const PaymentLink = Loadable({
+  loader: () => import('./Agency/Paymentlink/index'),
+  loading: Loading
+});

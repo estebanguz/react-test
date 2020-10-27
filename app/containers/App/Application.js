@@ -12,7 +12,10 @@ import {
   Distribution,
   BookerLeadsList,
   LeadDetails,
-  Solicitude
+  Solicitude,
+  HotelList,
+  CouponsView,
+  PaymentLink
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -33,6 +36,11 @@ class Application extends React.Component {
           <Route exact path="/app/booker/solicitude" component={Solicitude} />
           <Route path="/app/users/create" component={NewUser} />
           <Route path="/app/booker/leads" component={BookerLeadsList} />
+          
+          <Route path="/app/agency/hotels" component={HotelList} />
+          <Route path="/app/agency/coupon" component={CouponsView} />
+          <Route path="/app/agency/paymentlink" component={PaymentLink} />
+
           <Route path="/app/pages/not-found" component={NotFound} />
           <Route path="/app/pages/error" component={Error} />
           <Route component={NotFound} />
