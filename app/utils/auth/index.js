@@ -9,6 +9,7 @@ export const setJWT = (cname, cvalue, exdays) => {
 
 // eslint-disable-next-line no-useless-escape
 export const getJWT = () => document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+export const getJWTAgency = () => document.cookie.replace(/(?:(?:^|.*;\s*)jwtAgency\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 
 export const isLogged = () => {
   const token = getJWT();
@@ -20,5 +21,6 @@ export const isLogged = () => {
 
 export const logout = () => {
   document.cookie = 'jwt= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+  document.cookie = 'jwtAgency= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
   window.location.href = '/';
 };
