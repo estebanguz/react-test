@@ -1,13 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
-import { PapperBlock, LeadsList } from 'enl-components';
+import { PapperBlock } from 'enl-components';
 import { injectIntl } from 'react-intl';
+import { HotelsView } from '../../../components/Agency/Hotels/index';
 
 class HotelList extends React.Component {
   render() {
     const title = brand.name + ' - Leads';
     const description = brand.desc;
+
     return (
       <div>
         <Helmet>
@@ -23,7 +25,7 @@ class HotelList extends React.Component {
           icon="king_bed"
           desc="En esta sección podrás buscar y seleccionar los destinos y mejores hoteles para tus clientes."
         >
-          
+          <HotelsView />
         </PapperBlock>
       </div>
     );

@@ -11,7 +11,7 @@ export const getJWT = async () => {
 				secret_key: config.agency.secret_key,
 			},
 			{
-				headers: {
+				headers: {        
 					"Content-Type": "application/json",
 				},
 			}
