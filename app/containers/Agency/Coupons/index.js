@@ -1,8 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
-import { PapperBlock } from 'enl-components';
+import { PapperBlock, GeneratedCoupon, NewCoupon } from 'enl-components';
 import { injectIntl } from 'react-intl';
+
 
 class CouponsView extends React.Component {
   render() {
@@ -23,7 +24,8 @@ class CouponsView extends React.Component {
           icon="bookmarks"
           desc="Gestiona los cupones de descuento disponibles para tus clientes."
         >
-          
+          <NewCoupon />
+          <GeneratedCoupon />
         </PapperBlock>
       </div>
     );

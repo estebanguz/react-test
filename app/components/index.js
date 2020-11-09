@@ -39,3 +39,9 @@ export LeadsFilterBooker from './DashboardBookers/filters.js';
 export Cover from './Profile/Cover';
 
 export AutoCompleteSelect from './HotelSelect/index.js';
+
+// cupones
+
+export NewCoupon from './Coupon/NewCoupon.js';
+
+export GeneratedCoupon from './Coupon/GeneratedCoupon.js';
