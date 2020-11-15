@@ -43,7 +43,7 @@ import {
 	KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { useLeadStatus } from "./hooks/useLeadStatus";
-//const socket = io('http://io.apicrmcancun.gq');
+//const socket = io('http://io.apicrmcancun.gq/');
 const socket = io('http://localhost:1234');
 
 function LeadsBooker(props) {
@@ -74,6 +74,7 @@ function LeadsBooker(props) {
 	};
 
 	const sendNumber = (lead) => {
+		console.log(lead);
 		socket.emit('sendnumber', {
 			id: user.id,
 			lead: lead

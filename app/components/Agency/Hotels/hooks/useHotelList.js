@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { getAgencyHotels } from "../../../../api/agency/hotels";
-import moment from 'moment';
+import moment from "moment";
 
 export const useHotelList = () => {
-	const _date = moment().format('YYYY-MM-DD');	
+	const _date = moment().format("YYYY-MM-DD");
 	const [destinationType, setDestinationType] = useState(1010);
 	const [zoneCode, setZoneCode] = useState(0);
 	const [productCode, setProductCode] = useState(4);
-	const [arrival, setArrival] = useState(moment(_date, 'YYYY-MM-DD').add(4, 'days'));
-	const [departure, setDeparture] = useState(moment(_date, 'YYYY-MM-DD').add(6, 'days'));
+	const [arrival, setArrival] = useState(
+		moment(_date, "YYYY-MM-DD").add(4, "days")
+	);
+	const [departure, setDeparture] = useState(
+		moment(_date, "YYYY-MM-DD").add(6, "days")
+	);
 	const [rooms, setRooms] = useState(1);
 	const [pax, setPax] = useState([
 		{
 			adultos: 2,
-			menor: 0,
+			menor: 2,
 			edad: {
 				menor1: 0,
 				menor2: 0,
@@ -34,7 +38,6 @@ export const useHotelList = () => {
 	const [childs, setChilds] = useState(0);
 	const [destination, setDestination] = useState("Cancun");
 	const [hotelList, setHotelList] = useState([]);
-		
 
 	return [
 		destinationType,
@@ -58,6 +61,6 @@ export const useHotelList = () => {
 		setAdults,
 		setChilds,
 		setDestination,
-		setHotelList
+		setHotelList,
 	];
 };

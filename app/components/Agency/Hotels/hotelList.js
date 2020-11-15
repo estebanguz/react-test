@@ -1,7 +1,30 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
 import { StarsCategory } from "./stars";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => {
+	return {
+		table: {
+			"& > div": {
+				overflow: "auto",
+			},
+			"& table": {
+				"& td": {
+					wordBreak: "keep-all",
+				},
+				[theme.breakpoints.down("md")]: {
+					"& td": {
+						height: 60,
+						overflow: "hidden",
+						textOverflow: "ellipsis",
+					},
+				},
+			},
+		},
+	};
+});
 
 const columns = [
 	{
@@ -50,9 +73,11 @@ const columns = [
 		options: {
 			filter: false,
 			customBodyRender: (value) => {
-				return <Button variant="contained" color="primary">
-					Reservar
-				</Button>;
+				return (
+					<Button variant="contained" color="primary">
+						Reservar
+					</Button>
+				);
 			},
 		},
 	},
@@ -66,8 +91,10 @@ export const HotelList = ({ hotels }) => {
 		rowsPerPage: 10,
 		page: 0,
 		download: false,
-		selectableRows: false,
+		selectableRows: false
+		
 	};
+	const classes = useStyles();
 
 	let _data = [];
 	console.log(hotels);
@@ -78,6 +105,7 @@ export const HotelList = ({ hotels }) => {
 	return (
 		<div>
 			<MUIDataTable
+				className={classes.table}
 				title="Hoteles en Cancun"
 				data={_data}
 				columns={columns}

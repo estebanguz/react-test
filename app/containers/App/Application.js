@@ -15,7 +15,8 @@ import {
   Solicitude,
   HotelList,
   CouponsView,
-  PaymentLink
+  PaymentLink,
+  HotelDetails
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -37,7 +38,8 @@ class Application extends React.Component {
           <Route path="/app/users/create" component={NewUser} />
           <Route path="/app/booker/leads" component={BookerLeadsList} />
           
-          <Route path="/app/agency/hotels" component={HotelList} />
+          <Route exact path="/app/agency/hotels" component={HotelList} />
+          <Route exact path="/app/agency/hotels/details" component={HotelDetails} />
           <Route path="/app/agency/coupon" component={CouponsView} />
           <Route path="/app/agency/paymentlink" component={PaymentLink} />
 

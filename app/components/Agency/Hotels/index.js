@@ -65,14 +65,14 @@ export const HotelsView = () => {
 				arrival={arrival}
 				departure={departure}
 				rooms={rooms}
-				adults={adults}
-				childs={childs}
+				pax={pax}
 				setDestination={setDestination}
 				setArrival={setArrival}
 				setDeparture={setDeparture}
 				setRooms={setRooms}
 				setAdults={setAdults}
 				setChidls={setChilds}
+				setPax={setPax}
 			/>
 			<br />
 			{hotelList.length > 0 ? <HotelList hotels={hotelList} /> : <></>}
