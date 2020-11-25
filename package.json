@@ -131,6 +131,7 @@
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
+    "joi": "^17.3.0",
     "jsdom": "^13.0.0",
     "jss": "^10.0.0",
     "jss-rtl": "^0.3.0",
@@ -187,6 +188,7 @@
     "sinon": "^7.3.2",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^2.3.0",
+    "sweetalert2": "^10.10.1",
     "tunnel-agent": "^0.6.0",
     "warning": "4.0.2"
   },
