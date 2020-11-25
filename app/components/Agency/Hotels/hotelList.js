@@ -1,9 +1,7 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import { StarsCategory } from './stars';
+import { columnsHotels } from './utils/index';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -24,67 +22,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const columns = [
-  {
-    name: 'Hotel',
-    options: {
-      filter: true,
-    },
-  },
-  {
-    name: 'Categoria',
-    options: {
-      filter: true,
-      customBodyRender: (value) => <StarsCategory value={value} />,
-    },
-  },
-  {
-    name: 'Tipo',
-    options: {
-      filter: true,
-    },
-  },
-  {
-    name: 'Precio',
-    options: {
-      filter: true,
-      customBodyRender: (value) => {
-        const nf = new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'MXN',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        });
-
-        return nf.format(value);
-      },
-    },
-  },
-  {
-    name: 'Oferta',
-    options: {
-      filter: true,
-    },
-  },
-  {
-    name: 'Reservar',
-    options: {
-      filter: false,
-      customBodyRender: (value) => (
-        <Link to={{
-          pathname: `/app/agency/hotel/details/${value}`,
-        }}
-        >
-          <Button variant="contained" color="primary">
-							Reservar
-
-          </Button>
-        </Link>
-      ),
-    },
-  },
-];
 
 export const HotelList = ({ hotels }) => {
   const options = {
@@ -110,7 +47,7 @@ export const HotelList = ({ hotels }) => {
         className={classes.table}
         title="Hoteles en Cancun"
         data={_data}
-        columns={columns}
+        columns={columnsHotels}
         options={options}
       />
     </div>

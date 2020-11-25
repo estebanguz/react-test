@@ -22,31 +22,28 @@ import { useAutocomplete } from './hooks/useAutocomplete';
 const useStyles = makeStyles((theme) => hotelSearchStyles(theme));
 
 export const HotelSearch = ({
-  destination,
   arrival,
   departure,
   rooms,
-  adults,
-  childs,
-  setDestination,
   setArrival,
   setDeparture,
   setRooms,
-  setAdults,
-  setChidls,
+  setPax,
+  setDestination,
+  setZoneCode
 }) => {
   const classes = useStyles();
   const [_pax, _setPax] = useState([]);
   const [_adults, _setAdults] = useState([2]);
   const [_childs, _setChilds] = useState([]);
-  const [_childsAge, _setChildsAge] = useState([]);
+  const [_childsAge, _setChildsAge] = useState([[0, 0, 0], [0, 0, 0]]);
   const [_rooms, _setRooms] = useState(rooms);
-  const [query, destinations, setQuery, setDestinations] = useAutocomplete();
+  const [query, destinations, setQuery, setDestinations] = useAutocomplete({ setDestination });
 
   useEffect(() => {
     _setRooms(rooms);
     setArrayRooms();
-  }, [rooms, _rooms, _adults]);
+  }, [rooms, _rooms, _adults, _childsAge, _childs]);
 
   const setArrayRooms = () => {
     const _array = [];
@@ -92,6 +89,21 @@ export const HotelSearch = ({
     _setChilds(_arrayTemp);
   };
 
+  const addChildAge = (room, input, age) => {
+    const _array = [..._childsAge];
+    switch (room) {
+      case 0:
+        _array[room][input - 1] = age;
+        console.log(`Add menor${input} to first room`);
+        break;
+      case 1:
+        _array[room][input - 1] = age;
+        console.log(`Add menor${input} to second room`);
+        break;
+    }
+    _setChildsAge(_array);
+  };
+
   const search = () => {
     const _arr = [];
     for (let i = 0; i < rooms; i++) {
@@ -99,13 +111,14 @@ export const HotelSearch = ({
         adultos: _adults[i],
         menor: _childs[i],
         edad: {
-          menor1: 0,
-          menor2: 0,
-          menor3: 0,
+          menor1: parseInt(_childsAge[i][0]),
+          menor2: parseInt(_childsAge[i][1]),
+          menor3: parseInt(_childsAge[i][2]),
         },
       });
     }
     console.log(_arr);
+    setPax(_arr);
   };
 
   return (
@@ -126,7 +139,7 @@ export const HotelSearch = ({
               id="simple-start-adornment"
             />
             {
-			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinations={setDestinations} setQuery={setQuery} /> : <></>
+			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} /> : <></>
 			      }
           </FormControl>
         </Grid>
@@ -227,25 +240,25 @@ export const HotelSearch = ({
                           <div>
                             {
                               _childs[index] >= 1 ? (
-                                <FormControl key={`keyChilds-${index}`} className={classes.selectRooms}>
+                                <FormControl key={`keyChilds-${index}-1`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 1</InputLabel>
-                                  <Input name="age1" />
+                                  <Input onChange={(e) => addChildAge(index, 1, e.target.value)} name="age1" />
                                 </FormControl>
                               ) : <></>
                             }
                             {
                               _childs[index] >= 2 ? (
-                                <FormControl key={`keyChilds-${index}`} className={classes.selectRooms}>
+                                <FormControl key={`keyChilds-${index}-2`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 2</InputLabel>
-                                  <Input name="age2" />
+                                  <Input onChange={(e) => addChildAge(index, 2, e.target.value)} name="age2" />
                                 </FormControl>
                               ) : <></>
                             }
                             {
                               _childs[index] >= 3 ? (
-                                <FormControl key={`keyChilds-${index}`} className={classes.selectRooms}>
+                                <FormControl key={`keyChilds-${index}-3`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 3</InputLabel>
-                                  <Input name="age3" />
+                                  <Input onChange={(e) => addChildAge(index, 3, e.target.value)} name="age3" />
                                 </FormControl>
                               ) : <></>
                             }
@@ -262,7 +275,6 @@ export const HotelSearch = ({
         <Grid item md={12} xs={12}>
           <Button onClick={() => search()} className={classes.search} variant="contained" color="primary">
 						Buscar
-
           </Button>
         </Grid>
       </Grid>

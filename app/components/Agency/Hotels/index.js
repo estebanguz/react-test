@@ -1,85 +1,56 @@
 import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { HotelSearch } from './hotelSearch';
 import { useHotelList } from './hooks/useHotelList';
 import { getAgencyHotels } from '../../../api/agency/hotels';
 import { HotelList } from './hotelList';
 
+const styles = makeStyles((theme) => ({
+  progress: {
+    margin: '15px',
+  },
+  progressDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  }
+}));
+
 export const HotelsView = () => {
+  const classes = styles();
+
   const [
-    destinationType,
-    zoneCode,
-    productCode,
     arrival,
     departure,
     rooms,
     pax,
-    adults,
-    childs,
-    destination,
     hotelList,
-    setDestinationType,
-    setZoneCode,
-    setProductCode,
     setArrival,
     setDeparture,
     setRooms,
     setPax,
-    setAdults,
-    setChilds,
     setDestination,
-    setHotelList,
+    setZoneCode
   ] = useHotelList();
-
-  useEffect(() => {
-    if (hotelList.length <= 0) {
-      getHotels();
-    }
-  }, [hotelList]);
-
-  const getHotels = async () => {
-    const data = {
-      destination_type: destinationType,
-      zone_code: zoneCode,
-      product_code: productCode,
-      llegada: arrival,
-      salida: departure,
-      room: rooms,
-      pax,
-      adultos: adults,
-      menores: childs,
-      destino: destination,
-    };
-
-    sessionStorage.setItem('dataSearch', JSON.stringify(data));
-
-    const res = await getAgencyHotels(data);
-
-    if (res) {
-      setHotelList(res.data.message);
-    }
-  };
 
   return (
     <div>
       <HotelSearch
-        destination={destination}
         arrival={arrival}
         departure={departure}
         rooms={rooms}
-        adults={adults}
-        childs={childs}
-        setDestination={setDestination}
         setArrival={setArrival}
         setDeparture={setDeparture}
         setRooms={setRooms}
-        setAdults={setAdults}
-        setChidls={setChilds}
         setPax={setPax}
+        setDestination={setDestination}
+        setZoneCode={setZoneCode}
       />
       <br />
-      {hotelList.length > 0 ? <HotelList hotels={hotelList} /> : <></>}
+      {hotelList.length > 0 ? <HotelList hotels={hotelList} /> : <div className={classes.progressDiv}><CircularProgress className={classes.progress} /></div>}
     </div>
   );
 };
