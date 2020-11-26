@@ -44,4 +44,4 @@ export AutoCompleteSelect from './HotelSelect/index.js';
 
 export NewCoupon from './Coupon/NewCoupon.js';
 
-export GeneratedCoupon from './Coupon/GeneratedCoupon.js';
+export TableCoupon from './Coupon/TableCoupon.js';

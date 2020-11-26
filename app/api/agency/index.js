@@ -4,8 +4,7 @@ import { getJwtAgency } from '../../utils/auth';
 
 export const getJWT = async () => {
 	try {
-		return await axios.post(
-			`${config.agency.hostname}/login`,
+		return await axios.post('http://api-sitio.com/login',
 			{
 				public_key: config.agency.public_key,
 				secret_key: config.agency.secret_key,

@@ -7,8 +7,13 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import moment from "moment";
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackBarCustom from "../../utils/tools/SnackBarCustom";
+import {CreateCupon} from 'api/agency/Cupones.js';
 
 const NewCoupon = () => {
+
   const useStyles = makeStyles({
     paper: {
       padding: '16px'
@@ -17,15 +22,63 @@ const NewCoupon = () => {
       width: '100%'
     }
   });
+  const classes = useStyles();  
+  const [openSnack, setOpenSnack] = useState(false)
+  const [openError, setOpenError] = useState(false)
+  const [openWarning, setOpenWarning] = useState(false)
+  const [snackMessage, setSnackMessage] = useState('')
+  const TypeCupon = [
+    {"cupon":["TOUR GRATIS","tour_gratis"]},   
+    {"cupon":["SESION DE FOTOS","sesion_fotos"]},
+    {"cupon":["DESCUENTOS TOUR","descuento_tour"]},
+    {"cupon":["KIT PLAYERAS","kit_playeras"]},
+    {"cupon":["DESCUENTOS","descuento"]},
+  ]
+  const [form , setForm ] = useState(
+      { cupon:'',
+        descuento:'',
+        vigencia : moment().format("YYYY-MM-DD"),
+        usuario:'victor'
+      }
+     )
 
-  const classes = useStyles();
-  const [selectedDate, handleDateChange] = useState(new Date());
-  const [currency, setCurrency] = React.useState();
+  const handleChange = (event) => { 
+    setForm({...form ,[event.target.name]: event.target.value})
+  }
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
+  const handleSubmit = async (e) => {    
+    e.preventDefault()
+    if(Object.keys(form.cupon).length > 0 && Object.keys(form.descuento).length > 0)
+     {
+        CreateCupon(form).then((resp) => { 
+          console.log(resp.status)
+          if(resp.status)
+          {
+            setSnackMessage("Cupon creado correctamenete");
+            setOpenSnack(true)           
+          }
+          else{
+            setSnackMessage("error");
+            setOpenError(true)
+          }          
+        })
+    }
+    else 
+    {
+      setSnackMessage("campos vacios");      
+      setOpenWarning(true)
+    }
+  }
 
+  const handleCloseStyle = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpenSnack(false);
+    setOpenError(false);
+    setOpenWarning(false);
+  }
+  
   return (
     <React.Fragment>
       <Paper className={classes.paper} elevation={4}>
@@ -38,18 +91,19 @@ const NewCoupon = () => {
               className={classes.form}
               label="Tipo de Cupon"
               select
-              value={currency}
+              name = "cupon"
+              value={form.cupon}
               onChange={handleChange}
-              SelectProps={{
-                native: true,
-              }}
+              SelectProps={{ native: true}}
               helperText="seleccione su tipo de cupon"
               variant="outlined"
             >
               <option value="" />
-              <option>hola 1</option>
-              <option>hola 2</option>
-              <option>hola 3</option>
+              { 
+                TypeCupon.map((text ,index) =>[
+                  <option key = {index} value = {text.cupon[1]} > { text.cupon[0] } </option>
+                ]) 
+              }
             </TextField>
           </Grid>
           <Grid item xs={12} md={3}>
@@ -57,30 +111,45 @@ const NewCoupon = () => {
               className={classes.form}
               label="Cantidad Descuento"
               variant="outlined"
-              type="numer"
-            />
-          </Grid>
+              type="number"
+              name = "descuento"
+              value = {form.descuento}
+              onChange = {handleChange}              
+            />           
+          </Grid>                           
           <Grid item xs={12} md={3} style={{ paddingTop: 12 }}>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DatePicker
                 className={classes.form}
-                value={10}
-                label="Fecha de Inicio"
+                name = "vigencia"
+                value={form.vigencia}
+                label="Fecha de Inicio"               
                 animateYearScrolling={false}
+                onChange={(event) => {                                            
+                  setForm({...form ,['vigencia']: event.toISOString().slice(0,10)})
+                }}
               />
             </MuiPickersUtilsProvider>
           </Grid>
           <Grid item xs={12} md={3}>
-            <Button variant="contained" color="primary" className={classes.form}>
-                              Generar Cupon
+            <Button variant="contained" color="primary" className={classes.form} onClick = {handleSubmit}>
+              Generar Cupon
             </Button>
-          </Grid>
-        </Grid>
+          </Grid>    
+            <Snackbar anchorOrigin={{vertical: "bottom",horizontal: "left",}}  open={openSnack} autoHideDuration={6000} onClose={handleCloseStyle}>
+                <SnackBarCustom variant="success" message={snackMessage} onClose={handleCloseStyle}/> 
+            </Snackbar>
+            <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left",}} open={openError}	autoHideDuration={6000} onClose={handleCloseStyle}>
+			  	      <SnackBarCustom variant="error"	message={snackMessage} onClose={handleCloseStyle}/>
+			      </Snackbar> 
+            <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left",}} open={openWarning}	autoHideDuration={6000} onClose={handleCloseStyle}>
+			  	      <SnackBarCustom variant="warning"	message={snackMessage} onClose={handleCloseStyle}/>
+			      </Snackbar> 
+        </Grid>        
       </Paper>
       <br />
     </React.Fragment>
   );
 };
-
 
 export default injectIntl(NewCoupon);

@@ -1,11 +1,34 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
-import { PapperBlock, GeneratedCoupon, NewCoupon } from 'enl-components';
+import { PapperBlock, TableCoupon, NewCoupon } from 'enl-components';
 import { injectIntl } from 'react-intl';
+import {ListCupon} from 'api/agency/Cupones.js';
 
+class CouponsView extends React.Component 
+{
+  state = {
+    value:[]
+  }
 
-class CouponsView extends React.Component {
+  async componentWillMount()
+  {
+    await this.Peticion()    
+  }
+  
+  async Peticion ()
+  {    
+      const _cupon = await ListCupon()
+      if (_cupon.data.code === 201)
+      {        
+        this.setState({value:_cupon.data.message})      
+      } 
+      else 
+      {
+        console.log(_cupon.data.message);
+      }
+  }
+  
   render() {
     const title = brand.name + ' - Leads';
     const description = brand.desc;
@@ -25,7 +48,7 @@ class CouponsView extends React.Component {
           desc="Gestiona los cupones de descuento disponibles para tus clientes."
         >
           <NewCoupon />
-          <GeneratedCoupon />
+          <TableCoupon dataResponse  = {this.state.value}/>          
         </PapperBlock>
       </div>
     );
