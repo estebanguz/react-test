@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
 import { PapperBlock } from 'enl-components';
 import { injectIntl } from 'react-intl';
-import { HotelsView } from '../../../components/Agency/Hotels/index';
+import { HotelDetails } from '../../../components/Agency/Hotels/hotelDetails';
 
 class HotelList extends React.Component {
   render() {
@@ -21,11 +21,11 @@ class HotelList extends React.Component {
           <meta property="twitter:description" content={description} />
         </Helmet>
         <PapperBlock
-          title="Búsqueda de Destinos y Hoteles"
-          icon="king_bed"
-          desc="En esta sección podrás buscar y seleccionar los destinos y mejores hoteles para tus clientes."
+          title="Detalles de Hotel"
+          icon="hotel"
+          desc="Selecciona el tipo de habitación que más se adecue a las necesidades del cliente."
         >
-          <HotelsView />
+          <HotelDetails />
         </PapperBlock>
       </div>
     );

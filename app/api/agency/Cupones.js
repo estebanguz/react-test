@@ -4,7 +4,7 @@ import {getJWTAgency} from '../../utils/auth';
 
 export const ListCupon = async () => {  
   try {    
-		const token = getJWTAgency()
+		const token = await getJWTAgency()
 
 		return await axios.post(`${config.agency.hostname}/users/lista-cupon`,
 			{
@@ -24,7 +24,7 @@ export const ListCupon = async () => {
 
 export const CreateCupon = async (data) => {  
 	try {    
-		  const token = getJWTAgency()
+		  const token = await getJWTAgency()
   
 		  return await axios.post(`${config.agency.hostname}/users/cupon-asesor`,
 			  {

@@ -103,6 +103,12 @@ export const HotelList = Loadable({
   loading: Loading
 });
 
+export const HotelDetails = Loadable({
+  loader: () => import('./Agency/Hotels/details'),
+  loading: Loading
+});
+
+
 export const CouponsView = Loadable({
   loader: () => import('./Agency/Coupons/index'),
   loading: Loading

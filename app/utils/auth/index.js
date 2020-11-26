@@ -1,3 +1,4 @@
+import { getJWT } from '../../api/agency/index';
 // eslint-disable-next-line import/prefer-default-export
 // eslint-disable-next-line no-return-assign
 
@@ -9,16 +10,15 @@ export const setJWT = (cname, cvalue, exdays) => {
 };   
 
 // eslint-disable-next-line no-useless-escape
-export const getJWT = () => document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-export const getJWTAgency = () => document.cookie.replace(/(?:(?:^|.*;\s*)jwtAgency\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+export const getJWTCrm = () => document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+export const getJWTAgency = async () => await getJWT();
 
 export const isLogged = () => {
-  const token = getJWT();
+  const token = getJWTCrm();
   if (!token) return false;
 
   return token;
 };
-
 
 export const logout = () => {
   document.cookie = 'jwt= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';

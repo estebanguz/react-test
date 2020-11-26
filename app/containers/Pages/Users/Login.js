@@ -25,9 +25,8 @@ class Login extends React.Component {
         // eslint-disable-next-line react/destructuring-assignment
         const _login = await login(this.state.valueForm);
         if (_login.data.status === 200) {
-          const jwtAgencyResponse = await getJWT();          
-          setJWT('jwt', _login.data.message.token, 14);
-          setJWT('jwtAgency', jwtAgencyResponse.data.message.Authorization, 14);
+          const jwtAgencyResponse = await getJWT();
+          setJWT('jwt', _login.data.message.token, 14);          
           window.location.href = '/app';
         } else {
           console.log(_login.data.message);
