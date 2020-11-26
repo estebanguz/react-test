@@ -1,10 +1,9 @@
 import axios from "axios";
 import config from "../config";
-import { getJwtAgency } from '../../utils/auth';
 
 export const getJWT = async () => {
 	try {
-		return await axios.post(
+		const response = await axios.post(
 			`${config.agency.hostname}/login`,
 			{
 				public_key: config.agency.public_key,
@@ -16,6 +15,8 @@ export const getJWT = async () => {
 				},
 			}
 		);
+
+		return response.data.message.Authorization;
 	} catch (err) {
 		console.log(err);
 	}

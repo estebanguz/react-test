@@ -2,9 +2,9 @@ import axios from 'axios';
 import config from '../config';
 import { getJWTAgency } from '../../utils/auth';
 
-export const getAgencyHotels = async (data) => {
-  const token = getJWTAgency();
+export const getAgencyHotels = async (data) => {  
   try {
+    const token = await getJWTAgency();    
     return await axios.post(
       `${config.agency.hostnameProduction}/hotels/avialabilitydestination`,
       data,
@@ -21,7 +21,7 @@ export const getAgencyHotels = async (data) => {
 };
 
 export const getDestination = async (data) => {
-  const token = getJWTAgency();
+  const token = await getJWTAgency();
   try {
     return await axios.get(
       `${config.agency.hostnameProduction}/hotels/search/${data}`,
@@ -36,9 +36,8 @@ export const getDestination = async (data) => {
   }
 };
 
-
 export const getHotelAvailability = async (data) => {
-  const token = getJWTAgency();
+  const token = await getJWTAgency();
   try {
     return await axios.post(
       `${config.agency.hostnameProduction}/hotels/avialability`,
@@ -56,7 +55,7 @@ export const getHotelAvailability = async (data) => {
 };
 
 export const createBooking = async (data) => {
-  const token = getJWTAgency();
+  const token = await getJWTAgency();
   try {
     return await axios.post(
       `${config.agency.hostname}/booking/create-booking-hotel`,

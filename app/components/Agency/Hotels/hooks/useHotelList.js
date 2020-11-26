@@ -24,15 +24,6 @@ export const useHotelList = () => {
         menor3: 0,
       },
     },
-    {
-      adultos: 2,
-      menor: 0,
-      edad: {
-        menor1: 0,
-        menor2: 0,
-        menor3: 0,
-      },
-    },
   ]);
   const [adults, setAdults] = useState(2);
   const [childs, setChilds] = useState(0);

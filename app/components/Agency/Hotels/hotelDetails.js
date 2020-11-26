@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { HotelSearch } from './hotelSearch';
+import { SearchComponent } from './searchComponent';
 import { useHotelList } from './hooks/useHotelList';
 import { getHotelAvailability } from '../../../api/agency/hotels';
 import { HotelDescription } from './hotelDescription';
@@ -10,28 +10,17 @@ export const HotelDetails = () => {
   const [hotelDetails, setHotelDetails] = useState([]);
 
   const [
-    destinationType,
-    zoneCode,
-    productCode,
     arrival,
     departure,
     rooms,
     pax,
-    adults,
-    childs,
-    destination,
     hotelList,
-    setDestinationType,
-    setZoneCode,
-    setProductCode,
     setArrival,
     setDeparture,
     setRooms,
     setPax,
-    setAdults,
-    setChilds,
     setDestination,
-    setHotelList,
+    setZoneCode
   ] = useHotelList();
 
   useEffect(() => {
@@ -61,20 +50,7 @@ export const HotelDetails = () => {
 
   return (
     <>
-      <HotelSearch
-        destination={destination}
-        arrival={arrival}
-        departure={departure}
-        rooms={rooms}
-        pax={pax}
-        setDestination={setDestination}
-        setArrival={setArrival}
-        setDeparture={setDeparture}
-        setRooms={setRooms}
-        setAdults={setAdults}
-        setChidls={setChilds}
-        setPax={setPax}
-      />
+      <SearchComponent />
       {
 			  hotelDetails.length > 0 ? <HotelDescription hotelDetails={hotelDetails} /> : <></>
       }
