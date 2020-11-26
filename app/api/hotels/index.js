@@ -1,10 +1,10 @@
 import axios from "axios";
 import config from "../config";
-import { getJWT } from "../../utils/auth";
+import { getJWTCrm } from "../../utils/auth";
 
 export const getOldHotels = () => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return axios.get(`${config.hostname}/hotels`, {
 			headers: {
 				Authorization: `Bearer: ${token}`,

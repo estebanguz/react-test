@@ -1,6 +1,8 @@
 import axios from "axios";
 import config from "../config";
 
+export { createBooking, saveBookingAgency } from './hotels'
+
 export const getJWT = async () => {
 	try {
 		const response = await axios.post(

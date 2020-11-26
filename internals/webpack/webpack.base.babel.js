@@ -188,6 +188,7 @@ module.exports = options => ({
     mainFields: ['browser', 'jsnext:main', 'main'],
     alias: {
       'enl-components': path.resolve(__dirname, '../../app/components/'),
+      'site-agency': path.resolve(__dirname, '../../app/api/agency/'),
       'enl-containers': path.resolve(__dirname, '../../app/containers/'),
       'enl-styles': path.resolve(__dirname, '../../app/styles/components/'),
       'enl-api': path.resolve(__dirname, '../../app/api/'),

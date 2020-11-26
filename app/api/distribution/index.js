@@ -1,10 +1,10 @@
 import axios from "axios";
 import config from "../config";
-import { getJWT } from "../../utils/auth";
+import { getJWTCrm } from "../../utils/auth";
 
 export const setLeadsByQuantity = async ({ data }) => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return await axios.post(
 			`${config.hostname}/distribution/quantity`,
 			{
@@ -28,7 +28,7 @@ export const setLeadsByQuantity = async ({ data }) => {
 
 export const setLeadsByArray = async ({ data }) => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return await axios.post(
 			`${config.hostname}/distribution`,
 			{

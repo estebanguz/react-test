@@ -131,30 +131,30 @@ export const SearchComponent = () => {
                   </Grid>
                   <Grid item md={3} sm={12} xs={6}>
                     {
-                      0 > 0
+                      value.menor > 0
                         ? (
                           <div>
                             {
-                              _childs[index] >= 1 ? (
+                              value.menor >= 1 ? (
                                 <FormControl key={`keyChilds-${index}-1`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 1</InputLabel>
-                                  <Input name="age1" />
+                                  <Input value={value.edad.menor1} name="age1" />
                                 </FormControl>
                               ) : <></>
                             }
                             {
-                              _childs[index] >= 2 ? (
+                              value.menor >= 2 ? (
                                 <FormControl key={`keyChilds-${index}-2`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 2</InputLabel>
-                                  <Input name="age2" />
+                                  <Input value={value.edad.menor1} name="age2" />
                                 </FormControl>
                               ) : <></>
                             }
                             {
-                              _childs[index] >= 3 ? (
+                              value.menor >= 3 ? (
                                 <FormControl key={`keyChilds-${index}-3`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 3</InputLabel>
-                                  <Input name="age3" />
+                                  <Input value={value.edad.menor1} name="age3" />
                                 </FormControl>
                               ) : <></>
                             }

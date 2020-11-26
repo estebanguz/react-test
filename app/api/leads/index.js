@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-import { getJWT } from "../../utils/auth";
+import { getJWTCrm } from "../../utils/auth";
 
 export const getLeads = async ({
 	page,
@@ -9,7 +9,7 @@ export const getLeads = async ({
 	finalDate = " ",
 }) => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return await axios.get(
 			`${config.hostname}/leads?page=${page}&size=${size}${
 				initialDate ? "&initial_date=" : ""
@@ -31,7 +31,7 @@ export const getLeads = async ({
 
 export const updateLeadStatus = async ({ leadId, status }) => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return await axios.put(
 			`${config.hostname}/lead/${leadId}`,
 			{ status: status },

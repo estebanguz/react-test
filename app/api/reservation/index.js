@@ -1,10 +1,10 @@
 import axios from "axios";
 import config from "../config";
-import { getJWT } from "../../utils/auth";
+import { getJWTCrm } from "../../utils/auth";
 
 export const newReservation = async ({ data }) => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return await axios.post(`${config.hostname}/solicitude`, data, {
 			headers: {
 				Authorization: `Bearer: ${token}`,
@@ -21,7 +21,7 @@ export const newReservation = async ({ data }) => {
 
 export const nextFolio = async () => {
 	try {
-		const token = getJWT();
+		const token = getJWTCrm();
 		return await axios.get(`${config.hostname}/clients/nextfolio`, {
 			headers: {
 				Authorization: `Bearer: ${token}`,

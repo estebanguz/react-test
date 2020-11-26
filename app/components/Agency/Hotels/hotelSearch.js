@@ -118,6 +118,7 @@ export const HotelSearch = ({
       });
     }
     console.log(_arr);
+    sessionStorage.removeItem('dataSearch');
     setPax(_arr);
   };
 
