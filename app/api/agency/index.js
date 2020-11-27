@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "../config";
 
 export { createBooking, saveBookingAgency } from './hotels'
+export { createUserAgency, createUserComision } from './users';
 
 export const getJWT = async () => {
 	try {

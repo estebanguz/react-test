@@ -25,7 +25,6 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) {
 });
 
 class MainMenu extends React.Component {
-	// eslint-disable-line
 	handleClick() {
 		const { toggleDrawerOpen, loadTransition } = this.props;
 		toggleDrawerOpen();
@@ -34,95 +33,101 @@ class MainMenu extends React.Component {
 
 	render() {
 		const { classes, openSubMenu, open, dataMenu, intl } = this.props;
-		//const user = JSON.parse(sessionStorage.getItem("user"));
+		const user = JSON.parse(sessionStorage.getItem("user"));		
 		const getMenus = (menuArray) =>
 			menuArray.map((item, index) => {
-				if (item.child) {
-					return (
-						<div key={index.toString()}>
-							<ListItem
-								button
-								className={classNames(
-									classes.head,
-									item.icon ? classes.iconed : "",
-									open.indexOf(item.key) > -1 ? classes.opened : ""
-								)}
-								onClick={() => openSubMenu(item.key, item.keyParent)}
-							>
-								{item.icon && (
-									<ListItemIcon className={classes.icon}>
-										<Icon>{item.icon}</Icon>
-									</ListItemIcon>
-								)}
-								<ListItemText
-									classes={{ primary: classes.primary }}
-									variant="inset"
-									primary={item.name}
-								/>
-								{open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore />}
-							</ListItem>
-							<Collapse
+				console.log(item);
+				const _r = item.roles.find(element => element == user.role_id) ? item.roles.find(element => element == user.role_id) : false;								
+				if (_r) {
+					if (item.child) {
+						return (
+							<div key={index.toString()}>
+								<ListItem
+									button
+									className={classNames(
+										classes.head,
+										item.icon ? classes.iconed : "",
+										open.indexOf(item.key) > -1 ? classes.opened : ""
+									)}
+									onClick={() => openSubMenu(item.key, item.keyParent)}
+								>
+									{item.icon && (
+										<ListItemIcon className={classes.icon}>
+											<Icon>{item.icon}</Icon>
+										</ListItemIcon>
+									)}
+									<ListItemText
+										classes={{ primary: classes.primary }}
+										variant="inset"
+										primary={item.name}
+									/>
+									{open.indexOf(item.key) > -1 ? <ExpandLess /> : <ExpandMore />}
+								</ListItem>
+								<Collapse
+									component="div"
+									className={classNames(
+										classes.nolist,
+										item.keyParent ? classes.child : ""
+									)}
+									in={open.indexOf(item.key) > -1}
+									timeout="auto"
+									unmountOnExit
+								>
+									<List className={classes.dense} component="nav" dense>
+										{getMenus(item.child, "key")}
+									</List>
+								</Collapse>
+							</div>
+						);
+					}
+					if (item.title) {
+						return (
+							<ListSubheader
+								disableSticky
+								key={index.toString()}
 								component="div"
-								className={classNames(
-									classes.nolist,
-									item.keyParent ? classes.child : ""
-								)}
-								in={open.indexOf(item.key) > -1}
-								timeout="auto"
-								unmountOnExit
+								className={classes.title}
 							>
-								<List className={classes.dense} component="nav" dense>
-									{getMenus(item.child, "key")}
-								</List>
-							</Collapse>
-						</div>
-					);
-				}
-				if (item.title) {
+								{messages[item.key] !== undefined ? (
+									<FormattedMessage {...messages[item.key]} />
+								) : (
+										item.name
+									)}
+							</ListSubheader>
+						);
+					}
 					return (
-						<ListSubheader
-							disableSticky
+						<ListItem
 							key={index.toString()}
-							component="div"
-							className={classes.title}
+							button
+							exact
+							className={classes.nested}
+							activeClassName={classes.active}
+							component={LinkBtn}
+							to={item.link}
+							onClick={() => this.handleClick()}
 						>
-							{messages[item.key] !== undefined ? (
-								<FormattedMessage {...messages[item.key]} />
-							) : (
-								item.name
-							)}
-						</ListSubheader>
-					);
-				}
-				return (
-					<ListItem
-						key={index.toString()}
-						button
-						exact
-						className={classes.nested}
-						activeClassName={classes.active}
-						component={LinkBtn}
-						to={item.link}
-						onClick={() => this.handleClick()}
-					>
-						<ListItemText
-							classes={{ primary: classes.primary }}
-							variant="inset"
-							primary={
-								messages[item.key] !== undefined
-									? intl.formatMessage(messages[item.key])
-									: item.name
-							}
-						/>
-						{item.badge && (
-							<Chip
-								color="primary"
-								label={item.badge}
-								className={classes.badge}
+							<ListItemText
+								classes={{ primary: classes.primary }}
+								variant="inset"
+								primary={
+									messages[item.key] !== undefined
+										? intl.formatMessage(messages[item.key])
+										: item.name
+								}
 							/>
-						)}
-					</ListItem>
-				);
+							{item.badge && (
+								<Chip
+									color="primary"
+									label={item.badge}
+									className={classes.badge}
+								/>
+							)}
+						</ListItem>
+					);
+				} else {
+					return <></>
+				}
 			});
 		return <div>{getMenus(dataMenu)}</div>;
 	}

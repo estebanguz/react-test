@@ -22,13 +22,11 @@ import {
 class Application extends React.Component {
   render() {
     const { changeMode, history } = this.props;
-    const user = sessionStorage.getItem('user');
-
-    console.log(JSON.parse(user));
+    console.log(JSON.parse(sessionStorage.getItem('user')).role_id == 5);
     return (
       <Dashboard history={history} changeMode={changeMode}>
         <Switch>
-          { /* Home */ }
+          { /* CRM */}
           <Route exact path="/app" component={DashboardPage} />
           <Route exact path="/app/users" component={UserList} />
           <Route exact path="/app/leads" component={LeadsList} />
@@ -37,12 +35,12 @@ class Application extends React.Component {
           <Route exact path="/app/booker/solicitude" component={Solicitude} />
           <Route path="/app/users/create" component={NewUser} />
           <Route path="/app/booker/leads" component={BookerLeadsList} />
-
-          <Route exact path="/app/agency/hotels" component={HotelList} />
-          <Route path="/app/agency/hotel/details/:hotel_name" component={HotelDetails} />
+          { /* Agency */}
+          <Route exact path="/app/agency/" component={HotelList} />
+          <Route exact path="/app/agency/hotels/" component={HotelList} />
+          <Route path="/app/agency/hotels/:hotel_name" component={HotelDetails} />
           <Route path="/app/agency/coupon" component={CouponsView} />
           <Route path="/app/agency/paymentlink" component={PaymentLink} />
-
           <Route path="/app/pages/not-found" component={NotFound} />
           <Route path="/app/pages/error" component={Error} />
           <Route component={NotFound} />

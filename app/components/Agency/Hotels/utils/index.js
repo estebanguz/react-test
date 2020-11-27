@@ -94,7 +94,7 @@ export const columnsHotels = [
       filter: false,
       customBodyRender: (value) => (
         <Link to={{
-          pathname: `/app/agency/hotel/details/${value}`,
+          pathname: `/app/agency/hotels/${value}`,
         }}
         >
           <Button variant="contained" color="primary">

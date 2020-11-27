@@ -1,10 +1,7 @@
-/* eslint-disable linebreak-style */
 import axios from 'axios';
 import config from '../config';
 import { getJWTCrm } from '../../utils/auth';
 
-// eslint-disable-next-line import/prefer-default-export
-// eslint-disable-next-line consistent-return
 export const login = async (valuesForm) => {
   try {
     return await axios.post(`${config.hostname}/login`, {
@@ -20,7 +17,6 @@ export const login = async (valuesForm) => {
   }
 };
 
-// eslint-disable-next-line consistent-return
 export const getUser = async () => {
   try {
     const token = getJWTCrm();
@@ -33,3 +29,4 @@ export const getUser = async () => {
     console.log(err);
   }
 };
+

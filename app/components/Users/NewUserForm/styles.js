@@ -31,5 +31,8 @@ export const styles = theme => ({
   },
   hidden: {
     display: 'none'
+  },
+  formControl: {
+    width: '100%'
   }
 });

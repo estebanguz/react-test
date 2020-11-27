@@ -13,7 +13,7 @@ export const autocomplete = (theme) => ({
     display: 'flex',
     padding: '10px',
     border: '1px solid #cacaca38',
-    background: '#303030',
+    //background: '#303030',
     cursor: 'pointer'
   },
   itemHover: {
