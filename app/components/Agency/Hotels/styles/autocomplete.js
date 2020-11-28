@@ -10,11 +10,8 @@ export const autocomplete = (theme) => ({
     maxHeight: '50vh'
   },
   item: {
-    display: 'flex',
-    padding: '10px',
-    border: '1px solid #cacaca38',
-    //background: '#303030',
-    cursor: 'pointer'
+    borderRadius: 0,
+    padding: '10px'
   },
   itemHover: {
     background: '#444444'

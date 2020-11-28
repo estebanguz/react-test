@@ -16,8 +16,7 @@ export const HotelDetails = () => {
   }, [hotelDetails]);
 
   const _getHotel = async () => {
-    const _search = JSON.parse(sessionStorage.getItem('dataSearch'));
-    console.log(_search);
+    const _search = JSON.parse(sessionStorage.getItem('dataSearch'));    
 
     const _data = {
       url: hotel_name,

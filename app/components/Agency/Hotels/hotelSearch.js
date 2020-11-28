@@ -202,11 +202,11 @@ export const HotelSearch = ({
                 >
                   <Grid item md={3} sm={12} xs={6}>
                     <FormControl className={classes.selectRooms}>
-                      <InputLabel htmlFor="age-helper">Adultos</InputLabel>
+                      <InputLabel htmlFor="adults-helper">Adultos</InputLabel>
                       <Select
                         value={_adults[index] ? _adults[index] : 0}
                         onChange={(e) => addAdults(e.target.value, index)}
-                        input={<Input name="age" id="age-helper" />}
+                        input={<Input name="adults" id="adults-helper" />}
                       >
                         <MenuItem value="">
                           <em>None</em>
@@ -218,11 +218,11 @@ export const HotelSearch = ({
                       </Select>
                     </FormControl>
                     <FormControl className={classes.selectRooms}>
-                      <InputLabel htmlFor="age-helper">Menores</InputLabel>
+                      <InputLabel htmlFor="childs-helper">Menores</InputLabel>
                       <Select
                         value={_childs[index] ? _childs[index] : 0}
                         onChange={(e) => addChilds(e.target.value, index)}
-                        input={<Input name="age" id="age-helper" />}
+                        input={<Input name="chidls" id="childs-helper" />}
                       >
                         <MenuItem value="">
                           <em>None</em>
@@ -243,7 +243,7 @@ export const HotelSearch = ({
                               _childs[index] >= 1 ? (
                                 <FormControl key={`keyChilds-${index}-1`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 1</InputLabel>
-                                  <Input onChange={(e) => addChildAge(index, 1, e.target.value)} name="age1" />
+                                  <Input onChange={(e) => addChildAge(index, 1, e.target.value)} name={`age${index}-1`} />
                                 </FormControl>
                               ) : <></>
                             }
@@ -251,7 +251,7 @@ export const HotelSearch = ({
                               _childs[index] >= 2 ? (
                                 <FormControl key={`keyChilds-${index}-2`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 2</InputLabel>
-                                  <Input onChange={(e) => addChildAge(index, 2, e.target.value)} name="age2" />
+                                  <Input onChange={(e) => addChildAge(index, 2, e.target.value)} name={`age${index}-2`} />
                                 </FormControl>
                               ) : <></>
                             }
@@ -259,7 +259,7 @@ export const HotelSearch = ({
                               _childs[index] >= 3 ? (
                                 <FormControl key={`keyChilds-${index}-3`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 3</InputLabel>
-                                  <Input onChange={(e) => addChildAge(index, 3, e.target.value)} name="age3" />
+                                  <Input onChange={(e) => addChildAge(index, 3, e.target.value)} name={`age${index}-3`} />
                                 </FormControl>
                               ) : <></>
                             }

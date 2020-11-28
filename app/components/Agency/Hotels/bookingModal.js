@@ -50,7 +50,7 @@ export const BookingModal = ({
                         <Grid item md={12} sm={12} xs={12}>
                             <Paper className={classes.paper} elevation={4}>                                
                                 <Typography variant="b">
-                                    Valor de la reserva: { booking.amount }
+                                    Valor de la reserva: { parseFloat(booking.amount).toFixed(2) }
                                 </Typography>
                             </Paper>
                         </Grid>

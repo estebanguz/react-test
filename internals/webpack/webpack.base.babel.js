@@ -189,6 +189,7 @@ module.exports = options => ({
     alias: {
       'enl-components': path.resolve(__dirname, '../../app/components/'),
       'site-agency': path.resolve(__dirname, '../../app/api/agency/'),
+      'site-auth': path.resolve(__dirname, '../../app/utils/auth'),
       'enl-containers': path.resolve(__dirname, '../../app/containers/'),
       'enl-styles': path.resolve(__dirname, '../../app/styles/components/'),
       'enl-api': path.resolve(__dirname, '../../app/api/'),

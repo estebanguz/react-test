@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme) => hotelSearchStyles(theme));
 
 export const SearchComponent = () => {
     const classes = useStyles();
-    const searchQuery = JSON.parse(sessionStorage.getItem('dataSearch'));    
-
-    console.log(searchQuery);
+    const searchQuery = JSON.parse(sessionStorage.getItem('dataSearch'));        
 
     return (
         <>

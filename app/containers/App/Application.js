@@ -2,6 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import Dashboard from '../Templates/Dashboard';
+import { AuthRoute } from '../../components/Router/AuthRoute';
 import {
   DashboardPage,
   Error,
@@ -18,31 +19,31 @@ import {
   PaymentLink,
   HotelDetails
 } from '../pageListAsync';
+import { ADMIN, VENTAS, AGENCIA } from 'site-auth';
 
-class Application extends React.Component {
-  render() {
-    const { changeMode, history } = this.props;
-    console.log(JSON.parse(sessionStorage.getItem('user')).role_id == 5);
+class Application extends React.Component {  
+  render() {    
+    const { changeMode, history } = this.props;     
     return (
       <Dashboard history={history} changeMode={changeMode}>
         <Switch>
           { /* CRM */}
-          <Route exact path="/app" component={DashboardPage} />
-          <Route exact path="/app/users" component={UserList} />
-          <Route exact path="/app/leads" component={LeadsList} />
-          <Route exact path="/app/leads/distribution" component={Distribution} />
-          <Route exact path="/app/lead" component={LeadDetails} />
-          <Route exact path="/app/booker/solicitude" component={Solicitude} />
-          <Route path="/app/users/create" component={NewUser} />
-          <Route path="/app/booker/leads" component={BookerLeadsList} />
+          <AuthRoute exact path="/app" Component={DashboardPage} role={ADMIN} />
+          <AuthRoute exact path="/app/users" Component={UserList} role={ADMIN} />
+          <AuthRoute exact path="/app/leads" Component={LeadsList} role={ADMIN} />
+          <AuthRoute exact path="/app/leads/distribution" Component={Distribution} role={ADMIN} />
+          <AuthRoute exact path="/app/lead" Component={LeadDetails} role={ADMIN} />
+          <AuthRoute exact path="/app/booker/solicitude" Component={Solicitude} role={VENTAS} />
+          <AuthRoute path="/app/users/create" Component={NewUser} role={ADMIN} />
+          <AuthRoute path="/app/booker/leads" Component={BookerLeadsList} role={VENTAS} />
           { /* Agency */}
-          <Route exact path="/app/agency/" component={HotelList} />
-          <Route exact path="/app/agency/hotels/" component={HotelList} />
-          <Route path="/app/agency/hotels/:hotel_name" component={HotelDetails} />
-          <Route path="/app/agency/coupon" component={CouponsView} />
-          <Route path="/app/agency/paymentlink" component={PaymentLink} />
-          <Route path="/app/pages/not-found" component={NotFound} />
-          <Route path="/app/pages/error" component={Error} />
+          <AuthRoute exact path="/app/agency/" Component={HotelList} role={AGENCIA} />
+          <AuthRoute exact path="/app/agency/hotels/" Component={HotelList} role={AGENCIA} />
+          <AuthRoute path="/app/agency/hotels/:hotel_name" Component={HotelDetails} role={AGENCIA} />          
+          <AuthRoute path="/app/agency/coupon" Component={CouponsView} role={AGENCIA} />
+          <AuthRoute path="/app/agency/paymentlink" Component={PaymentLink} role={AGENCIA} />          
+          <Route path="/app/not-found" component={NotFound} />
+          <Route path="/app/error" component={Error} />
           <Route component={NotFound} />
         </Switch>
       </Dashboard>

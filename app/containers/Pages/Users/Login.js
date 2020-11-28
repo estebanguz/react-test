@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { LoginForm } from 'enl-components';
 import logo from 'enl-images/logo.png';
 import styles from 'enl-components/Forms/user-jss';
-import { login } from '../../../api/auth';
+import { login, getUser } from '../../../api/auth';
 import { loginUserCommision } from '../../../api/agency/users';
 import { setJWT } from '../../../utils/auth';
 
@@ -26,10 +26,10 @@ class Login extends React.Component {
         const _login = await login(this.state.valueForm);
         if (_login.data.status === 200) {
           setJWT('jwt', _login.data.message.token, 14);
+          const user = await getUser();
+            localStorage.setItem('user', JSON.stringify(user.data.message));
           const _loginAgency = await loginUserCommision(this.state.valueForm);
-
-          if (_loginAgency != 0) {
-            console.log(_loginAgency);
+          if (_loginAgency != 0) {            
             setJWT('agencyUser', JSON.stringify({
               user_code: _loginAgency.code_user_comision,
               user_id: _loginAgency.id_user_comision

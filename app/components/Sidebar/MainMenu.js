@@ -19,8 +19,7 @@ import Icon from "@material-ui/core/Icon";
 import messages from "enl-api/ui/menuMessages";
 import styles from "./sidebar-jss";
 
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) {
-	// eslint-disable-line
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) {	
 	return <NavLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
 });
 
@@ -33,10 +32,9 @@ class MainMenu extends React.Component {
 
 	render() {
 		const { classes, openSubMenu, open, dataMenu, intl } = this.props;
-		const user = JSON.parse(sessionStorage.getItem("user"));		
+		const user = JSON.parse(localStorage.getItem("user"));		
 		const getMenus = (menuArray) =>
-			menuArray.map((item, index) => {
-				console.log(item);
+			menuArray.map((item, index) => {				
 				const _r = item.roles.find(element => element == user.role_id) ? item.roles.find(element => element == user.role_id) : false;								
 				if (_r) {
 					if (item.child) {

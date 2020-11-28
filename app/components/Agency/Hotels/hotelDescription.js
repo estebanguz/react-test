@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => hotelDescriptionStyles(theme));
 
 export const HotelDescription = ({ hotelDetails }) => {
   const classes = useStyles();
-  const [openClientModal, setOpenClientModal] = useState();
-  const [openBookingModal, setOpenBookingModal] = useState();
+  const [openClientModal, setOpenClientModal] = useState(false);
+  const [openBookingModal, setOpenBookingModal] = useState(false);
   const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal });
 
   const options = {
