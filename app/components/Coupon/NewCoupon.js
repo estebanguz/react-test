@@ -12,14 +12,18 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackBarCustom from "../../utils/tools/SnackBarCustom";
 import {CreateCupon} from 'api/agency/Cupones.js';
 
-const NewCoupon = () => {
+const NewCoupon = (props) => {
 
+  const {actualizar} = props
   const useStyles = makeStyles({
     paper: {
       padding: '16px'
     },
     form: {
       width: '100%'
+    },
+    root:{
+
     }
   });
   const classes = useStyles();  
@@ -50,10 +54,11 @@ const NewCoupon = () => {
     e.preventDefault()
     if(Object.keys(form.cupon).length > 0 && Object.keys(form.descuento).length > 0)
      {
-        CreateCupon(form).then((resp) => { 
-          console.log(resp.status)
+        CreateCupon(form).then((resp) => {           
           if(resp.status)
           {
+            actualizar()
+            setForm({cupon:'',descuento:'',vigencia:moment().format("YYYY-MM-DD"),usuario:'victor'})
             setSnackMessage("Cupon creado correctamenete");
             setOpenSnack(true)           
           }
@@ -137,13 +142,13 @@ const NewCoupon = () => {
             </Button>
           </Grid>    
             <Snackbar anchorOrigin={{vertical: "bottom",horizontal: "left",}}  open={openSnack} autoHideDuration={6000} onClose={handleCloseStyle}>
-                <SnackBarCustom variant="success" message={snackMessage} onClose={handleCloseStyle}/> 
+                <SnackBarCustom className = {classes.root} variant="success" message={snackMessage} onClose={handleCloseStyle}/> 
             </Snackbar>
             <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left",}} open={openError}	autoHideDuration={6000} onClose={handleCloseStyle}>
-			  	      <SnackBarCustom variant="error"	message={snackMessage} onClose={handleCloseStyle}/>
+			  	      <SnackBarCustom className = {classes.root} variant="error"	message={snackMessage} onClose={handleCloseStyle}/>
 			      </Snackbar> 
             <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "left",}} open={openWarning}	autoHideDuration={6000} onClose={handleCloseStyle}>
-			  	      <SnackBarCustom variant="warning"	message={snackMessage} onClose={handleCloseStyle}/>
+			  	      <SnackBarCustom className = {classes.root} variant="warning"	message={snackMessage} onClose={handleCloseStyle}/>
 			      </Snackbar> 
         </Grid>        
       </Paper>
