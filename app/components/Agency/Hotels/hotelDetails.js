@@ -9,20 +9,6 @@ export const HotelDetails = () => {
   const { hotel_name } = useParams();
   const [hotelDetails, setHotelDetails] = useState([]);
 
-  const [
-    arrival,
-    departure,
-    rooms,
-    pax,
-    hotelList,
-    setArrival,
-    setDeparture,
-    setRooms,
-    setPax,
-    setDestination,
-    setZoneCode
-  ] = useHotelList();
-
   useEffect(() => {
     if (hotelDetails.length <= 0) {
       _getHotel();
@@ -31,7 +17,6 @@ export const HotelDetails = () => {
 
   const _getHotel = async () => {
     const _search = JSON.parse(sessionStorage.getItem('dataSearch'));
-    console.log(_search);
 
     const _data = {
       url: hotel_name,

@@ -20,13 +20,11 @@ import { hotelSearchStyles } from './styles/hotelSearch';
 const useStyles = makeStyles((theme) => hotelSearchStyles(theme));
 
 export const SearchComponent = () => {
-    const classes = useStyles();
-    const searchQuery = JSON.parse(sessionStorage.getItem('dataSearch'));    
+  const classes = useStyles();
+  const searchQuery = JSON.parse(sessionStorage.getItem('dataSearch'));
 
-    console.log(searchQuery);
-
-    return (
-        <>
+  return (
+    <>
       <Grid
         container
         alignItems="center"
@@ -41,7 +39,7 @@ export const SearchComponent = () => {
               value={searchQuery.destino}
               disabled
               id="simple-start-adornment"
-            />            
+            />
           </FormControl>
         </Grid>
         <Grid item md={4} sm={12} xs={6}>
@@ -49,7 +47,7 @@ export const SearchComponent = () => {
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DatePicker
                 label="Llegada"
-                value={searchQuery.llegada}                
+                value={searchQuery.llegada}
                 animateYearScrolling={false}
               />
             </MuiPickersUtilsProvider>
@@ -58,7 +56,7 @@ export const SearchComponent = () => {
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DatePicker
                 label="Salida"
-                value={searchQuery.salida}                
+                value={searchQuery.salida}
                 animateYearScrolling={false}
               />
             </MuiPickersUtilsProvider>
@@ -68,7 +66,7 @@ export const SearchComponent = () => {
           <FormControl className={classes.selectRooms}>
             <InputLabel htmlFor="age-helper">Habitaciones</InputLabel>
             <Select
-              value={searchQuery.room}              
+              value={searchQuery.room}
               input={<Input name="age" id="age-helper" />}
             >
               <MenuItem value="">
@@ -101,7 +99,7 @@ export const SearchComponent = () => {
                     <FormControl className={classes.selectRooms}>
                       <InputLabel htmlFor="age-helper">Adultos</InputLabel>
                       <Select
-                        value={value.adultos}                        
+                        value={value.adultos}
                         input={<Input name="age" id="age-helper" />}
                       >
                         <MenuItem value="">
@@ -116,7 +114,7 @@ export const SearchComponent = () => {
                     <FormControl className={classes.selectRooms}>
                       <InputLabel htmlFor="age-helper">Menores</InputLabel>
                       <Select
-                        value={value.menor}                        
+                        value={value.menor}
                         input={<Input name="age" id="age-helper" />}
                       >
                         <MenuItem value="">
@@ -131,30 +129,30 @@ export const SearchComponent = () => {
                   </Grid>
                   <Grid item md={3} sm={12} xs={6}>
                     {
-                      0 > 0
+                      value.menor > 0
                         ? (
                           <div>
                             {
-                              _childs[index] >= 1 ? (
+                              value.menor >= 1 ? (
                                 <FormControl key={`keyChilds-${index}-1`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 1</InputLabel>
-                                  <Input name="age1" />
+                                  <Input value={value.edad.menor1} name="age1" />
                                 </FormControl>
                               ) : <></>
                             }
                             {
-                              _childs[index] >= 2 ? (
+                              value.menor >= 2 ? (
                                 <FormControl key={`keyChilds-${index}-2`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 2</InputLabel>
-                                  <Input name="age2" />
+                                  <Input value={value.edad.menor1} name="age2" />
                                 </FormControl>
                               ) : <></>
                             }
                             {
-                              _childs[index] >= 3 ? (
+                              value.menor >= 3 ? (
                                 <FormControl key={`keyChilds-${index}-3`} className={classes.selectRooms}>
                                   <InputLabel htmlFor="age-helper">Edad Menor 3</InputLabel>
-                                  <Input name="age3" />
+                                  <Input value={value.edad.menor1} name="age3" />
                                 </FormControl>
                               ) : <></>
                             }
@@ -175,5 +173,5 @@ export const SearchComponent = () => {
         </Grid>
       </Grid>
     </>
-    );
-}
+  );
+};

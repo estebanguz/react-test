@@ -17,7 +17,7 @@ export const useHotelList = () => {
   const [pax, setPax] = useState([
     {
       adultos: 2,
-      menor: 2,
+      menor: 0,
       edad: {
         menor1: 0,
         menor2: 0,
@@ -48,8 +48,9 @@ export const useHotelList = () => {
 		  menores: childs,
 		  destino: destination,
     };
-
-    sessionStorage.setItem('dataSearch', JSON.stringify(data));
+    if (!sessionStorage.getItem('dataSearch')) {
+      sessionStorage.setItem('dataSearch', JSON.stringify(data));
+    }
 
     const res = await getAgencyHotels(data);
 

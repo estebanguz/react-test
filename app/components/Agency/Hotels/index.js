@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { HotelSearch } from './hotelSearch';
 import { useHotelList } from './hooks/useHotelList';
-import { getAgencyHotels } from '../../../api/agency/hotels';
 import { HotelList } from './hotelList';
 
 const styles = makeStyles((theme) => ({

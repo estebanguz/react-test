@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-//import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
+import { createBooking, saveBookingAgency } from 'site-agency';
 import { CheckoutSchema } from '../../../../schemas/checkout';
-import { createBooking } from '../../../../api/agency/hotels';
 
-export const useCheckOut = () => {
-  const [checkOutResponse, setCheckOut] = useState();
+export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal }) => {
   const [name, setName] = useState();
   const [lastName, setlastName] = useState();
   const [mail, setMail] = useState();
@@ -13,8 +12,9 @@ export const useCheckOut = () => {
   const [cupon, setCupon] = useState('');
   const [precio_hab, setPrecioHab] = useState();
   const [rk, setRk] = useState();
+  const [booking, setBooking] = useState([]);
 
-  useEffect(() => { }, [name, lastName, mail, phone, cupon, rk]);
+  useEffect(() => { }, [name, lastName, mail, phone, cupon, rk, booking]);
 
   const checkOut = ({ nombre_hab }) => {
     Swal.fire({
@@ -29,7 +29,7 @@ export const useCheckOut = () => {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, enviar',
       cancelButtonText: 'No'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         const data = {
           name,
@@ -54,11 +54,24 @@ export const useCheckOut = () => {
             footer: `${validate.error.message}`
           });
         } else {
-          console.log(data);
+          const _booking = await createBooking(data);
+          if (_booking) {
+            const _cookie = document.cookie.replace(/(?:(?:^|.*;\s*)agencyUser\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+            const agencyCode = JSON.parse(_cookie).user_code;
+            const _saveBooking = await saveBookingAgency({
+              reserva: _booking.data.message.num_reserva,
+              code_comision: agencyCode
+            });
+            if (_saveBooking) {
+              setBooking(_booking.data.message);
+              setOpenBookingModal(true);
+              setOpenClientModal(false);
+            }
+          }
         }
       }
     });
   };
 
-  return [name, lastName, mail, phone, cupon, precio_hab, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut];
+  return [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut];
 };

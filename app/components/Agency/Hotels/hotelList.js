@@ -2,26 +2,9 @@ import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { makeStyles } from '@material-ui/core/styles';
 import { columnsHotels } from './utils/index';
+import { hotelListStyles } from './styles/hotelList';
 
-const useStyles = makeStyles((theme) => ({
-  table: {
-    '& > div': {
-      overflow: 'auto',
-    },
-    '& table': {
-      '& td': {
-        wordBreak: 'keep-all',
-      },
-      [theme.breakpoints.down('md')]: {
-        '& td': {
-          height: 60,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-        },
-      },
-    },
-  },
-}));
+const useStyles = makeStyles((theme) => hotelListStyles(theme));
 
 export const HotelList = ({ hotels }) => {
   const options = {
