@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { InputMask } from '../../helpers/inputMask';
 
 export const ClientModal = ({
     classes,

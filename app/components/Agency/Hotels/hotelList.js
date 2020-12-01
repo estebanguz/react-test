@@ -39,3 +39,5 @@ export const HotelList = ({ hotels }) => {
     </div>
   );
 };
+
+//border-bottom: solid 4px #03a9f4;

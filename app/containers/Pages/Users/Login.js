@@ -31,6 +31,7 @@ class Login extends React.Component {
           const _loginAgency = await loginUserCommision(this.state.valueForm);
           if (_loginAgency != 0) {            
             setJWT('agencyUser', JSON.stringify({
+              user_comision: _loginAgency.user_user_comision,
               user_code: _loginAgency.code_user_comision,
               user_id: _loginAgency.id_user_comision
             }), 14);

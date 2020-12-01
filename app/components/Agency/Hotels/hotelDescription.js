@@ -16,8 +16,7 @@ export const HotelDescription = ({ hotelDetails }) => {
   const classes = useStyles();
   const [openClientModal, setOpenClientModal] = useState(false);
   const [openBookingModal, setOpenBookingModal] = useState(false);
-  const [loader, setloader] = useState(false);
-  const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal, loader, setloader });
+  const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal });
 
   const options = {
     filterType: 'dropdown',
@@ -28,7 +27,7 @@ export const HotelDescription = ({ hotelDetails }) => {
     download: false,
     selectableRows: false
 
-  };  
+  };
 
   const _data = [];
   hotelDetails[0].habitacion.rooms.map((hotel, index) => {
@@ -57,7 +56,7 @@ export const HotelDescription = ({ hotelDetails }) => {
         columns={columnsHab}
         options={options}
       />
-      <ClientModal 
+      <ClientModal
         classes={classes}
         name={name}
         lastName={lastName}
@@ -66,7 +65,6 @@ export const HotelDescription = ({ hotelDetails }) => {
         cupon={cupon}
         hotelDetails={hotelDetails}
         precio_hab={precio_hab}
-        loader={loader}
         open={openClientModal}
         setOpen={setOpenClientModal}
         setName={setName}
@@ -80,9 +78,7 @@ export const HotelDescription = ({ hotelDetails }) => {
         classes={classes}
         open={openBookingModal}
         booking={booking}
-        phone={phone}
         setOpen={setOpenBookingModal}
-        setloader={setloader}
       />
     </div>
   );

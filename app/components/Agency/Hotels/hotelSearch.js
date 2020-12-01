@@ -30,7 +30,8 @@ export const HotelSearch = ({
   setRooms,
   setPax,
   setDestination,
-  setZoneCode
+  setZoneCode,
+  setDestinationType
 }) => {
   const classes = useStyles();
   const [_pax, _setPax] = useState([]);
@@ -140,7 +141,7 @@ export const HotelSearch = ({
               id="simple-start-adornment"
             />
             {
-			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} /> : <></>
+			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} setDestinationType={setDestinationType} /> : <></>
 			      }
           </FormControl>
         </Grid>
