@@ -7,7 +7,7 @@ import { autocomplete } from './styles/autocomplete';
 const useStyles = makeStyles((theme) => autocomplete(theme));
 
 export const AutocompleteDestination = ({
-  data, setDestinations, setZoneCode, setQuery, setDestinationType
+  data, setDestinationInput, setDestinations, setZoneCode, setQuery, setDestinationType
 }) => {
   const classes = useStyles();
   return (
@@ -16,7 +16,8 @@ export const AutocompleteDestination = ({
         data || data.lenght > 0 ? data.map((value, index) => (
           <>
             <Paper onClick={() => {
-              setQuery(value.nombre);
+              setQuery('');
+              setDestinationInput(value.name);
               setZoneCode(value.zone_code);
               setDestinationType(value.destination_type);
               setDestinations([]);
