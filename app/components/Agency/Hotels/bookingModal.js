@@ -17,7 +17,8 @@ export const BookingModal = ({
     open,
     booking,
     phone,
-    setOpen
+    setOpen,
+    setRedirectToHotels
 }) => {
     return (
         <Dialog
@@ -59,7 +60,10 @@ export const BookingModal = ({
                     </Grid>
                 </DialogContentText>
                 <DialogActions>
-                    <Button onClick={() => setOpen(false)} color="primary">
+                    <Button onClick={() => {
+                      setOpen(false);
+                      setRedirectToHotels(true);
+                    }} color="primary">
                         Cerrar
                     </Button>                    
                     <Button color="primary">

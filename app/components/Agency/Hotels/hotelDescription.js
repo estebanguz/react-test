@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -21,6 +22,7 @@ export const HotelDescription = ({ hotelDetails }) => {
   const [loader, setloader] = useState(false);
   const [descOpen, setDescOpen] = useState(true);
   const [roomSelection, setRoomSelection] = useState('');
+  const [redirectToHotels, setRedirectToHotels] = useState(false);
   const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal, setloader });
 
   const options = {
@@ -39,13 +41,16 @@ export const HotelDescription = ({ hotelDetails }) => {
     _data.push([hotel.name, hotel.rates.boardName, hotel.rates.net.toFixed(2), () => {
       setOpenClientModal(true);
       setPrecioHab(hotel.rates.net.toFixed(2));
-      setRk(hotel.rates.rateKey); 
+      setRk(hotel.rates.rateKey);
       setRoomSelection(hotel.name);
     }]);
   });
 
   return (
     <div>
+      {
+        redirectToHotels ? <Redirect to="/app/agency/hotels" /> : <></>
+      }
       <br />
       <Typography variant="h5">
         {hotelDetails[0].habitacion.name}
@@ -98,6 +103,7 @@ export const HotelDescription = ({ hotelDetails }) => {
         booking={booking}
         phone={phone}
         setOpen={setOpenBookingModal}
+        setRedirectToHotels={setRedirectToHotels}
       />
     </div>
   );
