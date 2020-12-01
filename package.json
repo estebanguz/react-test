@@ -151,6 +151,7 @@
     "react-clock": "^2.3.0",
     "react-countup": "^3.0.3",
     "react-credit-cards": "^0.8.3",
+    "react-device-detect": "^1.14.0",
     "react-dom": "16.8.6",
     "react-draft-wysiwyg": "^1.12.13",
     "react-dropzone": "^10.2.1",

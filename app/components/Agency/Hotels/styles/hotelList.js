@@ -14,6 +14,11 @@ export const hotelListStyles = (theme) => ({
               textOverflow: 'ellipsis',
             },
           },
+          [theme.breakpoints.down('xs')]: {
+            '& tr': {
+              borderBottom: '4px solid #7bd5ff',           
+            },
+          },
         },
       },
 });

@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { FormatBold } from '@material-ui/icons';
 
 export const ClientModal = ({
     classes,
@@ -21,6 +22,8 @@ export const ClientModal = ({
     cupon,
     hotelDetails,
     precio_hab,
+    hotel,
+    room,
     loader,
     open,
     setOpen,
@@ -51,6 +54,10 @@ export const ClientModal = ({
                         row="row"
                         spacing={3}
                     >
+                        <Grid item md={12} sm={12} xs={12}>
+                            <Typography><strong>Hotel: {hotel}</strong></Typography>
+                            <Typography><strong>Habitación: {room}</strong></Typography>
+                        </Grid>
                         <Grid item md={6} sm={12} xs={12}>
                             <FormControl className={classes.inputCLass}>
                                 <TextField
@@ -88,7 +95,7 @@ export const ClientModal = ({
                                     label="Teléfono"
                                     onChange={(e) => setPhone(e.target.value)}
                                     id="simple-start-adornment"
-                                />                                
+                                />
                             </FormControl>
                         </Grid>
                         <Grid item md={6} sm={12} xs={12}>

@@ -63,7 +63,7 @@ export const BookingModal = ({
                         Cerrar
                     </Button>                    
                     <Button color="primary">
-                        <a className={classes.linkModal} href={`https://wa.me/${phone}?text=${booking.url}`} target="_blank">Enviar por WhatsApp</a>
+                        <a className={classes.linkModal} href={`https://wa.me/${phone}?text=Hola! has click en el siguiente enlace para realizar tu pago de forma segura. ${booking.url}`} target="_blank">Enviar por WhatsApp</a>
                     </Button>                    
                 </DialogActions>
             </DialogContent>

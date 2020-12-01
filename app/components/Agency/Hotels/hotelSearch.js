@@ -39,7 +39,7 @@ export const HotelSearch = ({
   const [_childs, _setChilds] = useState([]);
   const [_childsAge, _setChildsAge] = useState([[0, 0, 0], [0, 0, 0]]);
   const [_rooms, _setRooms] = useState(rooms);
-  const [query, destinations, setQuery, setDestinations] = useAutocomplete({ setDestination });
+  const [query, destinations, destination, setQuery, setDestinations, setDestinationInput] = useAutocomplete({ setDestination });
 
   useEffect(() => {
     _setRooms(rooms);
@@ -136,12 +136,12 @@ export const HotelSearch = ({
           <FormControl className={classes.selectRooms}>
             <TextField
               label="Destino"
-              value={query}
+              value={query ? query : destination}
               onChange={(e) => setQuery(e.target.value)}
               id="simple-start-adornment"
             />
             {
-			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} setDestinationType={setDestinationType} /> : <></>
+			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinationInput={setDestinationInput} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} setDestinationType={setDestinationType} /> : <></>
 			      }
           </FormControl>
         </Grid>

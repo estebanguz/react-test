@@ -4,6 +4,7 @@ import { getDestination } from '../../../../api/agency/hotels';
 export const useAutocomplete = (({ setDestination }) => {
   const [destinations, setDestinations] = useState([]);
   const [query, setQuery] = useState('Cancún');
+  const [destination, setDestinationInput] = useState('');
 
   useEffect(() => {
     search();
@@ -22,5 +23,5 @@ export const useAutocomplete = (({ setDestination }) => {
     }
   };
 
-  return [query, destinations, setQuery, setDestinations];
+  return [query, destinations, destination, setQuery, setDestinations, setDestinationInput];
 });

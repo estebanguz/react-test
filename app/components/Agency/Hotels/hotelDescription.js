@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import MUIDataTable from 'mui-datatables';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import { columnsHab } from './utils/index';
 import { useCheckOut } from './hooks/useCheckout';
 import { ClientModal } from './clientModal';
 import { BookingModal } from './bookingModal';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { hotelDescriptionStyles } from './styles/hotelDescription';
 
 const useStyles = makeStyles((theme) => hotelDescriptionStyles(theme));
@@ -16,7 +18,10 @@ export const HotelDescription = ({ hotelDetails }) => {
   const classes = useStyles();
   const [openClientModal, setOpenClientModal] = useState(false);
   const [openBookingModal, setOpenBookingModal] = useState(false);
-  const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal });
+  const [loader, setloader] = useState(false);
+  const [descOpen, setDescOpen] = useState(true);
+  const [roomSelection, setRoomSelection] = useState('');
+  const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal, setloader });
 
   const options = {
     filterType: 'dropdown',
@@ -25,7 +30,7 @@ export const HotelDescription = ({ hotelDetails }) => {
     rowsPerPage: 10,
     page: 0,
     download: false,
-    selectableRows: false
+    selectableRows: 'none'
 
   };
 
@@ -34,7 +39,8 @@ export const HotelDescription = ({ hotelDetails }) => {
     _data.push([hotel.name, hotel.rates.boardName, hotel.rates.net.toFixed(2), () => {
       setOpenClientModal(true);
       setPrecioHab(hotel.rates.net.toFixed(2));
-      setRk(hotel.rates.rateKey);
+      setRk(hotel.rates.rateKey); 
+      setRoomSelection(hotel.name);
     }]);
   });
 
@@ -46,7 +52,16 @@ export const HotelDescription = ({ hotelDetails }) => {
       </Typography>
       <br />
       <Typography>
-        {hotelDetails[0].hotel.description}
+        <ExpansionPanel expanded={descOpen} onClick={() => setDescOpen(!descOpen)}>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>Información del Hotel</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              {hotelDetails[0].hotel.description}
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
       </Typography>
       <br />
       <MUIDataTable
@@ -65,6 +80,9 @@ export const HotelDescription = ({ hotelDetails }) => {
         cupon={cupon}
         hotelDetails={hotelDetails}
         precio_hab={precio_hab}
+        hotel={hotelDetails[0].habitacion.name}
+        room={roomSelection}
+        loader={loader}
         open={openClientModal}
         setOpen={setOpenClientModal}
         setName={setName}
@@ -78,6 +96,7 @@ export const HotelDescription = ({ hotelDetails }) => {
         classes={classes}
         open={openBookingModal}
         booking={booking}
+        phone={phone}
         setOpen={setOpenBookingModal}
       />
     </div>

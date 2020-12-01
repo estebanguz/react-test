@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { CheckoutSchema } from '../../../../schemas/checkout';
 import { createBooking, saveBookingAgency } from 'site-agency';
 
-export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal, loader, setloader }) => {  
+export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal, setloader }) => {  
   const [name, setName] = useState();
   const [lastName, setlastName] = useState();
   const [mail, setMail] = useState();
