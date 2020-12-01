@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { CheckoutSchema } from '../../../../schemas/checkout';
 import { createBooking, saveBookingAgency } from 'site-agency';
 
-export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal }) => {  
+export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal, loader, setloader }) => {  
   const [name, setName] = useState();
   const [lastName, setlastName] = useState();
   const [mail, setMail] = useState();
@@ -31,6 +31,7 @@ export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal }) => {
       cancelButtonText: 'No'
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setloader(true);
         const data = {
           name,
           last_name: lastName,
@@ -64,8 +65,9 @@ export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal }) => {
             });
             if (_saveBooking) {
               setBooking(_booking.data.message);
+              setloader(false);
               setOpenBookingModal(true);
-              setOpenClientModal(false);
+              setOpenClientModal(false);              
             }
           }
         }

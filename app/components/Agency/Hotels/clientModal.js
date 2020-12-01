@@ -9,6 +9,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import moment from 'moment';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { InputMask } from '../../helpers/inputMask';
 
 export const ClientModal = ({
     classes,
@@ -18,6 +21,8 @@ export const ClientModal = ({
     phone,
     cupon,
     hotelDetails,
+    precio_hab,
+    loader,
     open,
     setOpen,
     setName,
@@ -84,7 +89,7 @@ export const ClientModal = ({
                                     label="Teléfono"
                                     onChange={(e) => setPhone(e.target.value)}
                                     id="simple-start-adornment"
-                                />
+                                />                                
                             </FormControl>
                         </Grid>
                         <Grid item md={6} sm={12} xs={12}>
@@ -97,19 +102,25 @@ export const ClientModal = ({
                                 />
                             </FormControl>
                         </Grid>
-                        <hr className={classes.modalTitle} />
                         <Grid item md={12} sm={12} xs={12}>
                             <Typography>
                                 <b>Llegada: </b>
                                 {' '}
-                                {hotelDetails[0].search.checkin}
+                                {moment(hotelDetails[0].search.checkin).format('ll')}
                             </Typography>
                         </Grid>
                         <Grid item md={12} sm={12} xs={12}>
                             <Typography>
                                 <b>Salida: </b>
                                 {' '}
-                                {hotelDetails[0].search.checkout}
+                                {moment(hotelDetails[0].search.checkout).format('ll')}
+                            </Typography>
+                        </Grid>
+                        <Grid item md={12} sm={12} xs={12}>
+                            <Typography>
+                                <b>Habitaciones: </b>
+                                {' '}
+                                {hotelDetails[0].search.room}
                             </Typography>
                         </Grid>
                         <Grid item md={6} sm={12} xs={12}>
@@ -126,21 +137,40 @@ export const ClientModal = ({
                                 {hotelDetails[0].search.children}
                             </Typography>
                         </Grid>
+                        {
+                            loader ? <Grid item md={12} sm={12} xs={12} className={classes.loaderDiv}>
+                                <CircularProgress className={classes.progress} />
+                            </Grid> : <></>
+                        }
+                    </Grid>
+                    <hr />
+                    <Grid container
+                        alignItems="right"
+                        justify="space-around"
+                        row="row"
+                        spacing={3}>
+                        <Grid md={12}>
+                            <Typography className={classes.precioHabitacion}>
+                                <b>Precio de Habitación: ${parseFloat(precio_hab).toFixed(2)} MXN</b>
+                            </Typography>
+                        </Grid>
                     </Grid>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => setOpen(false)} color="primary">
                     Cerrar
-          </Button>
+                </Button>
                 <Button
-                    onClick={() => checkOut({
-                        nombre_hab: hotelDetails[0].habitacion.name,
-                    })}
+                    onClick={() => {
+                        checkOut({
+                            nombre_hab: hotelDetails[0].habitacion.name,
+                        });
+                    }}
                     color="primary"
                 >
                     Realizar Reserva
-          </Button>
+                </Button>
             </DialogActions>
         </Dialog>
     );

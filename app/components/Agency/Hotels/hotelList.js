@@ -14,14 +14,17 @@ export const HotelList = ({ hotels }) => {
     rowsPerPage: 10,
     page: 0,
     download: false,
-    selectableRows: false
-
+    selectableRows: false,
+    sortOrder: {
+      name: 'Hotel',
+      direction: 'desc'
+    }
   };
   const classes = useStyles();
 
-  const _data = [];
-  hotels.map((hotel, index) => {
-    _data.push([hotel.name, hotel.category, hotel.type, hotel.offers != 0 ? hotel.offers.precio_real : hotel.minRate, '', hotel.url]);
+  const _data = [];  
+  hotels.map((hotel, index) => {        
+    _data.push([hotel.name, hotel.category, hotel.type, hotel.offers != 0 ? hotel.offers.precio_real : hotel.minRate, hotel.offers != 0 ? `${parseFloat(hotel.offers.porcentaje).toFixed(2)}% de Descuento` : '', hotel.url]);
   });
 
   return (

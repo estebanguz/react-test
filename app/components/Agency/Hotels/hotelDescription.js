@@ -16,7 +16,8 @@ export const HotelDescription = ({ hotelDetails }) => {
   const classes = useStyles();
   const [openClientModal, setOpenClientModal] = useState(false);
   const [openBookingModal, setOpenBookingModal] = useState(false);
-  const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal });
+  const [loader, setloader] = useState(false);
+  const [name, lastName, mail, phone, cupon, precio_hab, booking, setName, setlastName, setMail, setPhone, setCupon, setPrecioHab, setRk, checkOut] = useCheckOut({ setOpenBookingModal, setOpenClientModal, loader, setloader });
 
   const options = {
     filterType: 'dropdown',
@@ -64,8 +65,10 @@ export const HotelDescription = ({ hotelDetails }) => {
         phone={phone}
         cupon={cupon}
         hotelDetails={hotelDetails}
+        precio_hab={precio_hab}
+        loader={loader}
         open={openClientModal}
-        setOpen={setOpenClientModal}        
+        setOpen={setOpenClientModal}
         setName={setName}
         setlastName={setlastName}
         setMail={setMail}
@@ -73,11 +76,13 @@ export const HotelDescription = ({ hotelDetails }) => {
         setCupon={setCupon}
         checkOut={checkOut}
       />
-      <BookingModal 
+      <BookingModal
         classes={classes}
         open={openBookingModal}
         booking={booking}
+        phone={phone}
         setOpen={setOpenBookingModal}
+        setloader={setloader}
       />
     </div>
   );

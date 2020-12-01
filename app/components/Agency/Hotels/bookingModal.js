@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -15,6 +16,7 @@ export const BookingModal = ({
     classes,
     open,
     booking,
+    phone,
     setOpen
 }) => {
     return (
@@ -43,14 +45,14 @@ export const BookingModal = ({
                                     Link de Pago
                                 </Typography>
                                 <Typography variant="b">
-                                    <a href={ booking.url } target="_blank">{ booking.url }</a>
+                                    <a href={booking.url} target="_blank">{booking.url}</a>
                                 </Typography>
                             </Paper>
                         </Grid>
                         <Grid item md={12} sm={12} xs={12}>
-                            <Paper className={classes.paper} elevation={4}>                                
+                            <Paper className={classes.paper} elevation={4}>
                                 <Typography variant="b">
-                                    Valor de la reserva: { parseFloat(booking.amount).toFixed(2) }
+                                    Valor de la reserva: <b>${parseFloat(booking.amount).toFixed(2)} MXN</b>
                                 </Typography>
                             </Paper>
                         </Grid>
@@ -58,7 +60,10 @@ export const BookingModal = ({
                 </DialogContentText>
                 <DialogActions>
                     <Button onClick={() => setOpen(false)} color="primary">
-                        He copiado el Link de Pago
+                        Cerrar
+                    </Button>                    
+                    <Button color="primary">
+                        <a className={classes.linkModal} href={`https://wa.me/${phone}?text=${booking.url}`} target="_blank">Enviar por WhatsApp</a>
                     </Button>                    
                 </DialogActions>
             </DialogContent>
