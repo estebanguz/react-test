@@ -5,27 +5,19 @@ import { PapperBlock, TableCoupon, NewCoupon } from 'enl-components';
 import { injectIntl } from 'react-intl';
 import {ListCupon} from 'api/agency/Cupones.js';
 
-
 class CouponsView extends React.Component 
 {
-  constructor (props)
+  state = {
+    value:[]
+  }
+
+  async componentWillMount()
   {
-    super(props)
-    this.state = {
-      value:[],
-      update: false
-    }
+    await this.Peticion()    
   }
   
-  actualizar = async () => {
-    await this.Peticion()
-  }
-
-  componentDidMount = async () => {
-    await this.Peticion();
-  }
-
-  Peticion = async () => {    
+  async Peticion ()
+  {    
       const _cupon = await ListCupon()
       if (_cupon.data.code === 201)
       {        
@@ -55,8 +47,8 @@ class CouponsView extends React.Component
           icon="bookmarks"
           desc="Gestiona los cupones de descuento disponibles para tus clientes."
         >
-          <NewCoupon actualizar = {this.actualizar} />
-          <TableCoupon dataResponse  = {this.state.value}/>            
+          <NewCoupon />
+          <TableCoupon dataResponse  = {this.state.value}/>          
         </PapperBlock>
       </div>
     );
