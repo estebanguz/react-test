@@ -3,15 +3,15 @@ import moment from 'moment';
 import { getAgencyHotels } from '../../../../api/agency/hotels';
 
 export const useHotelList = () => {
-  const _date = moment().format('YYYY-MM-DD');
+  const _date = moment().format('YYYY-MM-DD');  
   const [destinationType, setDestinationType] = useState(1010);
   const [zoneCode, setZoneCode] = useState(0);
   const [productCode, setProductCode] = useState(4);
   const [arrival, setArrival] = useState(
-    moment(_date, 'YYYY-MM-DD').add(4, 'days')
+    moment(_date, 'YYYY-MM-DD').add(14, 'days')
   );
   const [departure, setDeparture] = useState(
-    moment(_date, 'YYYY-MM-DD').add(6, 'days')
+    moment(arrival, 'YYYY-MM-DD').add(4, 'days')
   );
   const [rooms, setRooms] = useState(1);
   const [pax, setPax] = useState([
@@ -70,6 +70,7 @@ export const useHotelList = () => {
     setRooms,
     setPax,
     setDestination,
-    setZoneCode
+    setZoneCode,
+    setDestinationType
 	  ];
 };

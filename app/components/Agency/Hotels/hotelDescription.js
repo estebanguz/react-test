@@ -64,6 +64,7 @@ export const HotelDescription = ({ hotelDetails }) => {
         phone={phone}
         cupon={cupon}
         hotelDetails={hotelDetails}
+        precio_hab={precio_hab}
         open={openClientModal}
         setOpen={setOpenClientModal}
         setName={setName}

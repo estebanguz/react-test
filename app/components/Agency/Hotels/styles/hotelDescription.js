@@ -37,5 +37,16 @@ export const hotelDescriptionStyles = (theme) => ({
   },
   paper: {
     padding: '15px'
+  },
+  precioHabitacion: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  loaderDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  linkModal: {
+    textDecoration: 'none'
   }
 });

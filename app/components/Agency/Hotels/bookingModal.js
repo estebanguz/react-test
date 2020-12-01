@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -15,53 +16,58 @@ export const BookingModal = ({
   classes,
   open,
   booking,
+  phone,
   setOpen
-}) => (
-  <Dialog
-    className={classes.modalIndex}
-    open={open}
-    onClose={() => setOpen(false)}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-  >
-    <DialogTitle id="alert-dialog-title">
-      {`Reserva No: ${booking.num_reserva}`}
-    </DialogTitle>
-    <DialogContent className={classes.modalIndex}>
-      <DialogContentText id="alert-dialog-description">
-        <Grid
-          container
-          alignItems="center"
-          justify="space-around"
-          row="row"
-          spacing={3}
-        >
-          <Grid item md={12} sm={12} xs={12}>
-            <Paper className={classes.paper} elevation={4}>
-              <Typography variant="h5">
-                                    Link de Pago
+}) => {
+  return (
+    <Dialog
+      className={classes.modalIndex}
+      open={open}
+      onClose={() => setOpen(false)}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description">
+      <DialogTitle id="alert-dialog-title">
+        {`Reserva No: ${booking.num_reserva}`}
+      </DialogTitle>
+      <DialogContent className={classes.modalIndex}>
+        <DialogContentText id="alert-dialog-description">
+          <Grid
+            container
+            alignItems="center"
+            justify="space-around"
+            row="row"
+            spacing={3}
+          >
+            <Grid item md={12} sm={12} xs={12}>
+              <Paper className={classes.paper} elevation={4}>
+                <Typography variant="h5">
+                  Link de Pago
               </Typography>
-              <Typography variant="b">
-                <a href={booking.url} target="_blank">{ booking.url }</a>
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item md={12} sm={12} xs={12}>
-            <Paper className={classes.paper} elevation={4}>
-              <Typography variant="b">
-                                    Valor de la reserva:
+                <Typography variant="b">
+                  <a href={booking.url} target="_blank">{booking.url}</a>
+                </Typography>
+              </Paper>
+            </Grid>
+            <Grid item md={12} sm={12} xs={12}>
+              <Paper className={classes.paper} elevation={4}>
+                <Typography variant="b">
+                  Valor de la reserva:
                 {' '}
-                { parseFloat(booking.amount).toFixed(2) }
-              </Typography>
-            </Paper>
+                  {parseFloat(booking.amount).toFixed(2)}
+                </Typography>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </DialogContentText>
-      <DialogActions>
-        <Button onClick={() => setOpen(false)} color="primary">
-                        He copiado el Link de Pago
-        </Button>
-      </DialogActions>
-    </DialogContent>
-  </Dialog>
-);
+        </DialogContentText>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} color="primary">
+            Cerrar
+                    </Button>
+          <Button color="primary">
+            <a className={classes.linkModal} href={`https://wa.me/${phone}?text=${booking.url}`} target="_blank">Enviar por WhatsApp</a>
+          </Button>
+        </DialogActions>
+      </DialogContent>
+    </Dialog>
+  )
+}

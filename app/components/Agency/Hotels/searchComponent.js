@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -167,9 +168,13 @@ export const SearchComponent = () => {
           </Grid>
         )) : <></>}
         <Grid item md={12} xs={12}>
-          <Button onClick={() => console.log('Busqueda')} className={classes.search} variant="contained" color="primary">
-				Hacer una nueva búsqueda
-          </Button>
+          <Link to="/app/agency/hotels">
+            <Button onClick={() => {
+              sessionStorage.removeItem('dataSearch')            
+            }} className={classes.search} variant="contained" color="primary">
+              Hacer una nueva búsqueda
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </>

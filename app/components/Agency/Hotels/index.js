@@ -30,7 +30,8 @@ export const HotelsView = () => {
     setRooms,
     setPax,
     setDestination,
-    setZoneCode
+    setZoneCode,
+    setDestinationType
   ] = useHotelList();
 
   return (
@@ -45,6 +46,7 @@ export const HotelsView = () => {
         setPax={setPax}
         setDestination={setDestination}
         setZoneCode={setZoneCode}
+        setDestinationType={setDestinationType}
       />
       <br />
       {hotelList.length > 0 ? <HotelList hotels={hotelList} /> : <div className={classes.progressDiv}><CircularProgress className={classes.progress} /></div>}
