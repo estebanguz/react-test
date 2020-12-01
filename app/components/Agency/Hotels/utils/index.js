@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { StarsCategory } from '../stars';
 import { Typography } from '@material-ui/core';
+import { StarsCategory } from '../stars';
 
 export const columnsHab = [
   {
@@ -28,7 +28,7 @@ export const columnsHab = [
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
-        
+
         return nf.format(value);
       },
     },
@@ -93,7 +93,7 @@ export const columnsHotels = [
     options: {
       filter: true,
       sortThirdClickReset: true,
-    },    
+    },
   },
   {
     name: 'Reservar',

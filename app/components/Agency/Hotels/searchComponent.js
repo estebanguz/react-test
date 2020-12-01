@@ -169,9 +169,14 @@ export const SearchComponent = () => {
         )) : <></>}
         <Grid item md={12} xs={12}>
           <Link to="/app/agency/hotels">
-            <Button onClick={() => {
-              sessionStorage.removeItem('dataSearch')            
-            }} className={classes.search} variant="contained" color="primary">
+            <Button
+              onClick={() => {
+                sessionStorage.removeItem('dataSearch');
+              }}
+              className={classes.search}
+              variant="contained"
+              color="primary"
+            >
               Hacer una nueva búsqueda
             </Button>
           </Link>

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { getAgencyHotels } from '../../../../api/agency/hotels';
 
 export const useHotelList = () => {
-  const _date = moment().format('YYYY-MM-DD');  
+  const _date = moment().format('YYYY-MM-DD');
   const [destinationType, setDestinationType] = useState(1010);
   const [zoneCode, setZoneCode] = useState(0);
   const [productCode, setProductCode] = useState(4);

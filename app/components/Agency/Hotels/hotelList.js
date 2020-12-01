@@ -22,8 +22,8 @@ export const HotelList = ({ hotels }) => {
   };
   const classes = useStyles();
 
-  const _data = [];  
-  hotels.map((hotel, index) => {        
+  const _data = [];
+  hotels.map((hotel, index) => {
     _data.push([hotel.name, hotel.category, hotel.type, hotel.offers != 0 ? hotel.offers.precio_real : hotel.minRate, hotel.offers != 0 ? `${parseFloat(hotel.offers.porcentaje).toFixed(2)}% de Descuento` : '', hotel.url]);
   });
 
@@ -40,4 +40,4 @@ export const HotelList = ({ hotels }) => {
   );
 };
 
-//border-bottom: solid 4px #03a9f4;
+// border-bottom: solid 4px #03a9f4;

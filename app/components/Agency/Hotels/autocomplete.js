@@ -15,12 +15,16 @@ export const AutocompleteDestination = ({
       {
         data || data.lenght > 0 ? data.map((value, index) => (
           <>
-            <Paper onClick={() => {
-              setQuery(value.nombre);
-              setZoneCode(value.zone_code);
-              setDestinationType(value.destination_type);
-              setDestinations([]);
-            }} className={classes.item} elevation={4}>
+            <Paper
+              onClick={() => {
+                setQuery(value.nombre);
+                setZoneCode(value.zone_code);
+                setDestinationType(value.destination_type);
+                setDestinations([]);
+              }}
+              className={classes.item}
+              elevation={4}
+            >
               <div dangerouslySetInnerHTML={{ __html: value.nombre }} />
             </Paper>
           </>
