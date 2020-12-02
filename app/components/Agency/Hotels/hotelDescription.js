@@ -33,7 +33,6 @@ export const HotelDescription = ({ hotelDetails }) => {
     page: 0,
     download: false,
     selectableRows: 'none'
-
   };
 
   const _data = [];

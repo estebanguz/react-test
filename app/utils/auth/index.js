@@ -24,7 +24,7 @@ export const isLogged = () => {
 export const logout = () => {
   document.cookie = 'jwt= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
   document.cookie = 'agencyUser= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-  localStorage.removeItem('user');
+  sessionStorage.removeItem('user');
   window.location.href = '/';
 };
 

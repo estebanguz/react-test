@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'Vacaciones Cancun - CRM',
-  desc: 'A CRM from Vacaciones Cancun',
+  name: 'Sitio Cancun - CRM',
+  desc: 'A CRM from Sitio Cancun',
   prefix: 'enlite',
-  footerText: 'Vacaciones Cancun All Rights Reserved 2020',
-  logoText: 'Vacaciones Cancun',
+  footerText: 'Sitio Cancun All Rights Reserved 2020',
+  logoText: 'Sitio Cancun',
 };

@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { HotelSearch } from './hotelSearch';
-import { useHotelList } from './hooks/useHotelList';
-import { HotelList } from './hotelList';
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { HotelSearch } from "./hotelSearch";
+import { useHotelList } from "./hooks/useHotelList";
+import { HotelList } from "./hotelList";
+import { NotFoundComponent } from "../../../components/helpers/NotFoundComponent";
 
 const styles = makeStyles((theme) => ({
   progress: {
-    margin: '15px',
+    margin: "15px",
   },
   progressDiv: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-  }
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+  },
 }));
 
 export const HotelsView = () => {
@@ -31,7 +32,7 @@ export const HotelsView = () => {
     setPax,
     setDestination,
     setZoneCode,
-    setDestinationType
+    setDestinationType,
   ] = useHotelList();
 
   return (
@@ -49,7 +50,15 @@ export const HotelsView = () => {
         setDestinationType={setDestinationType}
       />
       <br />
-      {hotelList.length > 0 ? <HotelList hotels={hotelList} /> : <div className={classes.progressDiv}><CircularProgress className={classes.progress} /></div>}
+      {hotelList == null ? (
+        <NotFoundComponent />
+      ) : hotelList.length > 0 ? (
+        <HotelList hotels={hotelList} />
+      ) : (
+        <div className={classes.progressDiv}>
+          <CircularProgress className={classes.progress} />
+        </div>
+      )}
     </div>
   );
 };
