@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
 import { StarsCategory } from '../stars';
 
 export const columnsHab = [
@@ -9,18 +8,22 @@ export const columnsHab = [
     name: 'Habitación',
     options: {
       filter: true,
+      sort: false,
     },
   },
   {
     name: 'Board Name',
     options: {
       filter: true,
+      sort: false,
     },
   },
   {
     name: 'Precio',
     options: {
       filter: true,
+      sort: true,
+      sortDirection: 'asc',
       customBodyRender: (value) => {
         const nf = new Intl.NumberFormat('en-US', {
           style: 'currency',
@@ -52,8 +55,8 @@ export const columnsHotels = [
     name: 'Hotel',
     options: {
       filter: true,
-      sortThirdClickReset: true,
-      sortDescFirst: true,
+      sort: true,
+      sortDirection: 'asc',
     },
   },
   {
@@ -72,7 +75,7 @@ export const columnsHotels = [
     },
   },
   {
-    name: 'Precio',
+    name: 'Precio Desde',
     options: {
       filter: true,
       sortThirdClickReset: true,

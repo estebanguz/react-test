@@ -21,7 +21,7 @@ export const StarsCategory = ({ value }) => {
 			{stars.map((value, index) => {
 				return (
 					<Grid key={`key12-${index}-${new Date()}`} item>
-						<Star />
+						<Star fontSize='small' />
 					</Grid>
 				);
 			})}

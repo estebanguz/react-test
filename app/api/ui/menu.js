@@ -102,7 +102,7 @@ module.exports = [
       {
         key: 'index',
         name: 'Pago Banamex',
-        roles: [1, 5],
+        roles: [1],
         icon: 'list-alt',
         link: '/app/agency/paymentlink'
       },

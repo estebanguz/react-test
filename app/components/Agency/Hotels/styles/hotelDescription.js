@@ -10,8 +10,13 @@ export const hotelDescriptionStyles = (theme) => ({
       [theme.breakpoints.down('md')]: {
         '& td': {
           height: 60,
-          overflow: 'hidden',
+          overflow: 'scroll',
           textOverflow: 'ellipsis',
+        },
+      },
+      [theme.breakpoints.down('xs')]: {
+        '& tr': {
+          borderBottom: '4px solid #7bd5ff',
         },
       },
     },

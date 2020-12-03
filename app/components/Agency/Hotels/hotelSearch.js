@@ -39,7 +39,9 @@ export const HotelSearch = ({
   const [_childs, _setChilds] = useState([]);
   const [_childsAge, _setChildsAge] = useState([[0, 0, 0], [0, 0, 0]]);
   const [_rooms, _setRooms] = useState(rooms);
-  const [query, destinations, setQuery, setDestinations] = useAutocomplete({ setDestination });
+  const [expandedRoom1, setExpandedRoom1] = useState(false);
+  const [expandedRoom2, setExpandedRoom2] = useState(false);
+  const [query, destinations, destination, setQuery, setDestinations, setDestinationInput] = useAutocomplete({ setDestination });
 
   useEffect(() => {
     _setRooms(rooms);
@@ -64,6 +66,24 @@ export const HotelSearch = ({
 
     _setPax(_array);
   };
+
+  const hanldeExpanded1 = () => {
+    if (expandedRoom2 && !expandedRoom1){
+      setExpandedRoom2(false);
+      setExpandedRoom1(true);
+    }else if (!expandedRoom2){
+      setExpandedRoom1(!expandedRoom1);
+    }
+  }
+
+  const hanldeExpanded2 = () => {
+    if (expandedRoom1 && !expandedRoom2){
+      setExpandedRoom1(false);
+      setExpandedRoom2(true);
+    }else if (!expandedRoom1){
+      setExpandedRoom2(!expandedRoom2);
+    }
+  }
 
   const addAdults = (value, index) => {
     const _arrayTemp = [];
@@ -136,12 +156,19 @@ export const HotelSearch = ({
           <FormControl className={classes.selectRooms}>
             <TextField
               label="Destino"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              value={destination ? destination : query}
+              onKeyDown={(e) => {
+                if(destination){
+                  setDestinationInput('');
+                }
+              }}
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
               id="simple-start-adornment"
             />
             {
-			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} setDestinationType={setDestinationType} /> : <></>
+			        destinations.length > 0 ? <AutocompleteDestination data={destinations} setDestinationInput={setDestinationInput} setDestinations={setDestinations} setZoneCode={setZoneCode} setQuery={setQuery} setDestinationType={setDestinationType} /> : <></>
 			      }
           </FormControl>
         </Grid>
@@ -185,8 +212,8 @@ export const HotelSearch = ({
         </Grid>
         {_pax.map((value, index) => (
           <Grid key={`keyPax-${index}`} item md={12} xs={12}>
-            <ExpansionPanel>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <ExpansionPanel expanded={index == 0 ? expandedRoom1 : expandedRoom2}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} onClick={() => index == 0 ? hanldeExpanded1() : hanldeExpanded2()}>
                 <Typography className={classes.heading}>
 										Habitación
                   {' '}

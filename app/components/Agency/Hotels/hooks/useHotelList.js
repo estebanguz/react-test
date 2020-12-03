@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import { getAgencyHotels } from '../../../../api/agency/hotels';
+import React, { useEffect, useState } from "react";
+import moment from "moment";
+import { getAgencyHotels } from "../../../../api/agency/hotels";
 
 export const useHotelList = () => {
-  const _date = moment().format('YYYY-MM-DD');
+  const _date = moment().format("YYYY-MM-DD");
   const [destinationType, setDestinationType] = useState(1010);
   const [zoneCode, setZoneCode] = useState(0);
   const [productCode, setProductCode] = useState(4);
   const [arrival, setArrival] = useState(
-    moment(_date, 'YYYY-MM-DD').add(14, 'days')
+    moment(_date, "YYYY-MM-DD").add(14, "days")
   );
   const [departure, setDeparture] = useState(
-    moment(arrival, 'YYYY-MM-DD').add(4, 'days')
+    moment(arrival, "YYYY-MM-DD").add(4, "days")
   );
   const [rooms, setRooms] = useState(1);
   const [pax, setPax] = useState([
@@ -27,37 +27,38 @@ export const useHotelList = () => {
   ]);
   const [adults, setAdults] = useState(2);
   const [childs, setChilds] = useState(0);
-  const [destination, setDestination] = useState('Cancun');
+  const [destination, setDestination] = useState("Cancun");
   const [hotelList, setHotelList] = useState([]);
 
   useEffect(() => {
-		  getHotels();
-	  }, [pax]);
+    getHotels();
+  }, [pax]);
 
-	  const getHotels = async () => {
-		  setHotelList([]);
+  const getHotels = async () => {
+    setHotelList([]);
+    sessionStorage.setItem("dataSearch", '');
     const data = {
-		  destination_type: destinationType,
-		  zone_code: zoneCode,
-		  product_code: productCode,
-		  llegada: arrival,
-		  salida: departure,
-		  room: rooms,
-		  pax,
-		  adultos: adults,
-		  menores: childs,
-		  destino: destination,
+      destination_type: destinationType,
+      zone_code: zoneCode,
+      product_code: productCode,
+      llegada: arrival,
+      salida: departure,
+      room: rooms,
+      pax,
+      adultos: adults,
+      menores: childs,
+      destino: destination,
     };
-    if (!sessionStorage.getItem('dataSearch')) {
-      sessionStorage.setItem('dataSearch', JSON.stringify(data));
+    if (!sessionStorage.getItem("dataSearch")) {
+      sessionStorage.setItem("dataSearch", JSON.stringify(data));
     }
 
     const res = await getAgencyHotels(data);
 
     if (res) {
-		  setHotelList(res.data.message);
+      setHotelList(res.data.message);
     }
-	  };
+  };
 
   return [
     arrival,
@@ -71,6 +72,6 @@ export const useHotelList = () => {
     setPax,
     setDestination,
     setZoneCode,
-    setDestinationType
-	  ];
+    setDestinationType,
+  ];
 };
