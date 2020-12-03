@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { getDestination } from "../../../../api/agency/hotels";
+import React, { useState, useEffect } from 'react';
+import { getDestination } from '../../../../api/agency/hotels';
 
 export const useAutocomplete = ({ setDestination }) => {
   const [destinations, setDestinations] = useState([]);
-  const [query, setQuery] = useState("Cancún");
-  const [destination, setDestinationInput] = useState("");
+  const [query, setQuery] = useState('Cancún');
+  const [destination, setDestinationInput] = useState('');
 
   useEffect(() => {
     search();
@@ -14,7 +14,7 @@ export const useAutocomplete = ({ setDestination }) => {
   }, [query]);
 
   const search = async () => {
-    if (query == "" || query == "Cancún") {
+    if (query == '' || query == 'Cancún') {
       setDestinations([]);
     } else {
       const _destinations = await getDestination(query);

@@ -3,14 +3,14 @@ import { Redirect } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { columnsHab } from './utils/index';
-import { useCheckOut } from './hooks/useCheckout';
-import { ClientModal } from './clientModal';
-import { BookingModal } from './bookingModal';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { columnsHab } from './utils/index';
+import { useCheckOut } from './hooks/useCheckout';
+import { ClientModal } from './clientModal';
+import { BookingModal } from './bookingModal';
 import { hotelDescriptionStyles } from './styles/hotelDescription';
 
 const useStyles = makeStyles((theme) => hotelDescriptionStyles(theme));

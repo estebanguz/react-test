@@ -68,22 +68,22 @@ export const HotelSearch = ({
   };
 
   const hanldeExpanded1 = () => {
-    if (expandedRoom2 && !expandedRoom1){
+    if (expandedRoom2 && !expandedRoom1) {
       setExpandedRoom2(false);
       setExpandedRoom1(true);
-    }else if (!expandedRoom2){
+    } else if (!expandedRoom2) {
       setExpandedRoom1(!expandedRoom1);
     }
-  }
+  };
 
   const hanldeExpanded2 = () => {
-    if (expandedRoom1 && !expandedRoom2){
+    if (expandedRoom1 && !expandedRoom2) {
       setExpandedRoom1(false);
       setExpandedRoom2(true);
-    }else if (!expandedRoom1){
+    } else if (!expandedRoom1) {
       setExpandedRoom2(!expandedRoom2);
     }
-  }
+  };
 
   const addAdults = (value, index) => {
     const _arrayTemp = [];
@@ -156,9 +156,9 @@ export const HotelSearch = ({
           <FormControl className={classes.selectRooms}>
             <TextField
               label="Destino"
-              value={destination ? destination : query}
+              value={destination || query}
               onKeyDown={(e) => {
-                if(destination){
+                if (destination) {
                   setDestinationInput('');
                 }
               }}
@@ -213,7 +213,7 @@ export const HotelSearch = ({
         {_pax.map((value, index) => (
           <Grid key={`keyPax-${index}`} item md={12} xs={12}>
             <ExpansionPanel expanded={index == 0 ? expandedRoom1 : expandedRoom2}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} onClick={() => index == 0 ? hanldeExpanded1() : hanldeExpanded2()}>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} onClick={() => (index == 0 ? hanldeExpanded1() : hanldeExpanded2())}>
                 <Typography className={classes.heading}>
 										Habitación
                   {' '}

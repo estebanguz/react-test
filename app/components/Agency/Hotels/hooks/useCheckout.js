@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { createBooking, saveBookingAgency } from 'site-agency';
 import { CheckoutSchema } from '../../../../schemas/checkout';
 
-export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal, setloader }) => {  
+export const useCheckOut = ({ setOpenBookingModal, setOpenClientModal, setloader }) => {
   const [name, setName] = useState();
   const [lastName, setlastName] = useState();
   const [mail, setMail] = useState();

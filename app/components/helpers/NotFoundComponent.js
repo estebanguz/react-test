@@ -1,7 +1,7 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { notfound } from "./styles/notfound";
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import { notfound } from './styles/notfound';
 
 const useStyles = makeStyles((theme) => notfound(theme));
 
