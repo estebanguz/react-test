@@ -36,7 +36,7 @@ class Login extends React.Component {
               user_id: _loginAgency.id_user_comision
             }), 14);
           }
-          window.location.href = '/app';
+           window.location.href = '/app';
         } else {
           console.log(_login.data.message);
         }

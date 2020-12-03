@@ -11,6 +11,7 @@ export const setJWT = (cname, cvalue, exdays) => {
   document.cookie = `${cname}=${cvalue};${expires};path=/`;
 };
 
+export const getCookieUser = () => document.cookie.replace(/(?:(?:^|.*;\s*)agencyUser\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 export const getJWTCrm = () => document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 export const getJWTAgency = async () => await getJWT();
 

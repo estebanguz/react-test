@@ -1,14 +1,14 @@
 import axios from 'axios';
 import config from '../config';
-import {getJWTAgency} from '../../utils/auth';
+import {getJWTAgency,getCookieUser} from '../../utils/auth';
 
 export const ListCupon = async () => {  
   try {    
 		const token = await getJWTAgency()
-
+		const user = JSON.parse(getCookieUser())				
 		return await axios.post(`${config.agency.hostname}/users/lista-cupon`,
 			{
-				usuario : 'victor'
+				usuario : user.user_comision
 			},
 			{
 				headers: {			
@@ -25,13 +25,13 @@ export const ListCupon = async () => {
 export const CreateCupon = async (data) => {  
 	try {    
 		  const token = await getJWTAgency()
-  
+		  const user = JSON.parse(getCookieUser())				
 		  return await axios.post(`${config.agency.hostname}/users/cupon-asesor`,
 			  {
 				tipo_cupon : data.cupon,
 				cantidad_descuento : data.descuento,
 				vigencia : data.vigencia,
-				usuario : data.usuario
+				usuario : user.user_comision
 			  },
 			  {
 				headers: {			

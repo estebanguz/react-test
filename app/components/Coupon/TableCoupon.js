@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from 'react';
+import React, { useState ,useEffect ,useRef} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -17,6 +17,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Grid from '@material-ui/core/Grid';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const TableCoupon = (props) => 
 {
@@ -26,6 +29,7 @@ const TableCoupon = (props) =>
       padding: '16px'
     }
   });
+  const referencia = useRef([])
   const [order,setOrder] = useState('desc');
   const [totalPage,setTotalPage] = useState(0);
   const [pageActual,setPageActual] = useState(1);
@@ -85,6 +89,17 @@ const TableCoupon = (props) =>
     }   
   },[data,pageActual,order])
 
+  const Valorar = (index) => {
+    //const copyCupon = referencia.current.children[index].children[1].innerText    
+   // copyCupon.focus()   
+    //document.execCommand('copy') 
+    //document.execCommand('selectAll')
+    //console.log(referencia)
+    //console.log(referencia.current.children[index].className)
+    referencia.focus()
+    document.execCommand('selectAll')
+  }
+
   return (
     <React.Fragment>
       <Paper className={useStyles().paper} elevation={4}>
@@ -119,23 +134,35 @@ const TableCoupon = (props) =>
           <Table className={classNames(classes.table, classes.hover)}>
             <TableHead>
               <TableRow>
+                <TableCell align="left">ID</TableCell>
                 <TableCell align="left">Cupon</TableCell>
                 <TableCell align="left">Descripcion</TableCell>
-                <TableCell align="left">Cantidad</TableCell>
+                <TableCell align="left">Descuento</TableCell>
                 <TableCell align="left">Vigencia</TableCell>
-                <TableCell align="left">Estatus</TableCell>
+                <TableCell align="left">Copiar</TableCell>
+                <TableCell align="left">Borrar</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody >
               { listCupones
                 ?  
                 listCupones.map((index , n) =>[
                   <TableRow key ={n}>
                       <TableCell align="left">{index.id_cupon}</TableCell>
+                      <TableCell align="left" ref = {referencia}>{index.cupon}</TableCell>
                       <TableCell align="left">{index.descripcion}</TableCell>
                       <TableCell align="left">{index.cantidad_descuento}</TableCell>
-                      <TableCell align="left">{index.valido}</TableCell>
-                      <TableCell align="left">{index.status}</TableCell>        
+                      <TableCell align="left">{index.valido}</TableCell>                           
+                      <TableCell align="left">
+                        <IconButton  onClick = {()=>Valorar(n)}>
+                            <FileCopyIcon color="primary" />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell align="left">
+                        <IconButton>
+                            <DeleteIcon style={{color: "#F40B00"}} />
+                        </IconButton>
+                      </TableCell>                              
                   </TableRow>
                 ])
                 :""}                                  

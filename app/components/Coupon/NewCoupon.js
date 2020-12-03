@@ -41,8 +41,7 @@ const NewCoupon = (props) => {
   const [form , setForm ] = useState(
       { cupon:'',
         descuento:'',
-        vigencia : moment().format("YYYY-MM-DD"),
-        usuario:'victor'
+        vigencia : moment().format("YYYY-MM-DD")        
       }
      )
 
