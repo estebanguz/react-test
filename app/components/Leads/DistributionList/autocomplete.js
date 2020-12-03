@@ -27,10 +27,11 @@ const useStyles = makeStyles((theme) => ({
 		flex: 1,
 		alignItems: "center",
 		overflow: "hidden",
+		zIndex: 1000,
 	},
 	chip: {
 		margin: theme.spacing(0.5, 0.25),
-		zIndex: 100,
+		zIndex: 1000,
 	},
 	chipFocused: {
 		backgroundColor: emphasize(
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	singleValue: {
 		fontSize: 16,
+		zIndex: 1000,
 	},
 	placeholder: {
 		position: "absolute",
@@ -61,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	container: {
 		padding: "16px",
+		zIndex: 1000,
 	},
 	textField: {
 		borderRadius: "15px",
@@ -150,6 +153,7 @@ function Option(props) {
 			component="div"
 			style={{
 				fontWeight: isSelected ? 500 : 400,
+				zIndex: 1000
 			}}
 			{...innerProps}
 		>

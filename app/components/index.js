@@ -28,7 +28,7 @@ export UsersList from './Users/ListUsers/index.js';
 
 export LeadsList from './Leads/ListLeads/index.js';
 
-export DistributionList from './Leads/DistributionList/index.js';
+export { DistributionList } from './Leads/DistributionList/index.js';
 
 export SelectColaborator from './Leads/DistributionList/autocomplete.js';
 
