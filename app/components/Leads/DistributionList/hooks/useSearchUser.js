@@ -3,6 +3,7 @@ import { searchUser } from "../../../../api/users/index";
 
 export const useSearchUser = () => {
   const [query, setQuery] = useState("");
+  const [selectedUser, setSelectedUser] = useState([]);
   const [usersSearch, setUsersSearch] = useState([]);
 
   useEffect(() => {
@@ -21,5 +22,5 @@ export const useSearchUser = () => {
     }
   };
 
-  return [query, usersSearch, setQuery];
+  return [query, usersSearch, selectedUser, setQuery, setSelectedUser];
 };

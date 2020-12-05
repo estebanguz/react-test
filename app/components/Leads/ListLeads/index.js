@@ -5,6 +5,7 @@ import { LeadsMuiTable } from "./table";
 import styles from "enl-components/Tables/tableStyle-jss";
 import { FiltersLeads } from "../LeadsFilters";
 import { useSearchLeads } from "./hooks/useSearchLeads";
+import { getLeads } from "../../../api/leads";
 
 function LeadsTable(props) {
   const { classes } = props;
@@ -19,7 +20,7 @@ function LeadsTable(props) {
     finalDate,
     setFinalDate,
     setSearch,
-  ] = useSearchLeads();
+  ] = useSearchLeads({ repository: getLeads });
 
   return (
     <div className={classes.rootTable}>

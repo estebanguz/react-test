@@ -5,14 +5,21 @@ import { autocompleteStyles } from "./styles";
 
 const useStyles = makeStyles((theme) => autocompleteStyles(theme));
 
-export const AutocompleteItems = ({ items }) => {
+export const AutocompleteItems = ({ items, setSelectedItem, setQuery }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.list}>
       {items.map((value, index) => {
         return (
-          <Paper className={classes.item} elevation={4}>
+          <Paper
+            onClick={() => {
+                setSelectedItem(value);
+                setQuery('');
+            }}
+            className={classes.item}
+            elevation={4}
+          >
             {value.username}
           </Paper>
         );

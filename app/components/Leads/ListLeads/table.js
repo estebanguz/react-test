@@ -6,8 +6,38 @@ import { columns } from "./columns";
 
 const useStyles = makeStyles((theme) => leadsTableStyles(theme));
 
-export const LeadsMuiTable = ({ leads, pageChange, setSearch }) => {
+export const LeadsMuiTable = ({
+  leads,
+  type = "leads",
+  actionCheckbox,
+  pageChange,
+  array = "",
+  setSearch,
+  emailAction = () => {
+    console.log("");
+  },
+  phoneAction = () => {
+    console.log("");
+  },
+  whatsappAction = () => {
+    console.log("");
+  },
+  viewAction = () => {
+    console.log("");
+  },
+  actionRowComponent
+}) => {
   const classes = useStyles();
+  const _columns = columns({
+    type,
+    actionCheckbox,
+    array,
+    emailAction,
+    phoneAction,
+    whatsappAction,
+    viewAction,
+    actionRowComponent
+  });
 
   const options = {
     filterType: "dropdown",
@@ -17,7 +47,7 @@ export const LeadsMuiTable = ({ leads, pageChange, setSearch }) => {
     serverSide: true,
     search: false,
     filter: false,
-    count: parseInt(leads.total_pages + 1),
+    count: leads.total_rows,
     download: false,
     selectableRows: "none",
     onTableChange: (action, tableState) => {
@@ -36,8 +66,9 @@ export const LeadsMuiTable = ({ leads, pageChange, setSearch }) => {
       className={classes.table}
       title="Leads Recientes"
       data={leads.data}
-      columns={columns}
+      columns={_columns}
       options={options}
+      actionRowComponent={<h1>Accion</h1>}
     />
   );
 };

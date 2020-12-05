@@ -32,7 +32,7 @@ export { DistributionList } from './Leads/DistributionList/index.js';
 
 export SelectColaborator from './Leads/DistributionList/autocomplete.js';
 
-export LeadsBooker from './DashboardBookers/leads.js';
+export { LeadsBooker } from './DashboardBookers/leads.js';
 
 export LeadsFilterBooker from './DashboardBookers/filters.js';
 

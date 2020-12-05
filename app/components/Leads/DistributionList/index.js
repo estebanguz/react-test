@@ -1,12 +1,9 @@
-import React, { useState, useEffect, setState } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import styles from "enl-components/Tables/tableStyle-jss";
 import Button from "@material-ui/core/Button";
 import { setLeadsByQuantity, setLeadsByArray } from "../../../api/distribution";
 import { FiltersLeads } from "../LeadsFilters";
-import SelectSuggestions from "./autocomplete";
 import { LeadsMuiTable } from "../ListLeads/table";
 import Grid from "@material-ui/core/Grid";
 import { TextField } from "@material-ui/core";
@@ -16,8 +13,9 @@ import { useSearchLeads } from "../ListLeads/hooks/useSearchLeads";
 import { distributionStyles } from "./distributionStyles";
 import { AutoCompleteSitio } from "../../AutocompleteSitio";
 import { useSearchUser } from "./hooks/useSearchUser";
+import { getFreeLeads } from "../../../api/distribution";
 
-const useStyles = makeStyles((theme) => distributionStyles());
+const useStyles = makeStyles((theme) => distributionStyles(theme));
 
 export const DistributionList = () => {
   const classes = useStyles();
@@ -32,13 +30,17 @@ export const DistributionList = () => {
     finalDate,
     setFinalDate,
     setSearch,
-  ] = useSearchLeads();
-  const [query, usersSearch, setQuery] = useSearchUser();
+    setForceSearch,
+  ] = useSearchLeads({ repository: getFreeLeads });
+  const [
+    query,
+    usersSearch,
+    selectedUser,
+    setQuery,
+    setSelectedUser,
+  ] = useSearchUser();
   const [selectedLeads, setSelectedLeads] = useState([]);
-  const [colaborador, setColaborador] = React.useState(null);
-  const [colabs, setColabs] = React.useState([]);
   const [cantidad, setCantidad] = React.useState();
-  const [leadsColab, setLeadsColab] = React.useState([]);
   const [selectAll, setSelectAll] = React.useState();
   const [openSnack, setOpenSnack] = React.useState(false);
   const [snackMessage, setSnackMessage] = React.useState();
@@ -52,32 +54,53 @@ export const DistributionList = () => {
     setOpenError(false);
   };
 
+  const selectLead = (id) => {
+    const _leads = selectedLeads;
+    const _temp = [];
+
+    if (!selectedLeads.includes(id)) {
+      _temp.push(id);
+      const _new = _temp.concat(_leads);
+      setSelectedLeads(_new);
+    } else {
+      const _index = _leads.indexOf(id);
+      _leads.splice(_index, 1);
+      const _new = _temp.concat(_leads);
+      setSelectedLeads(_new);
+    }
+  };
+
   const handleDistribution = () => {
-    if (colaborador) {
+    if (selectedUser.id) {
       if (cantidad > 0) {
         const data = {
-          broker: colaborador,
+          broker: selectedUser.id,
           quantity: cantidad,
+          initial_date: initialDate,
+          final_date: finalDate,
         };
         setLeadsByQuantity({ data }).then(() => {
           setSnackMessage("Leads asignados");
           setOpenSnack(true);
+          setForceSearch(true);
+          setCantidad(0);
         });
       } else if (selectedLeads.length > 0) {
         const data = {
-          broker: colaborador.value,
+          broker: selectedUser.id,
           leads: selectedLeads,
         };
         setLeadsByArray({ data }).then(() => {
           setSnackMessage("Leads asignados");
           setOpenSnack(true);
+          setForceSearch(true);
         });
       } else {
-        setSnackMessage("Selecciona algunos leads");
+        setSnackMessage("Debes seleccionar leads antes de distribuirlos.");
         setOpenError(true);
       }
     } else {
-      setSnackMessage("Selecciona Colaborador");
+      setSnackMessage("Selecciona un Asesor.");
       setOpenError(true);
     }
   };
@@ -114,6 +137,8 @@ export const DistributionList = () => {
           setQuery={setQuery}
           data={usersSearch}
           label="Selecciona el Asesor"
+          selectedItem={selectedUser}
+          setSelectedItem={setSelectedUser}
         />
         <Grid
           container
@@ -122,10 +147,10 @@ export const DistributionList = () => {
           row="row"
           spacing={3}
         >
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
             <TextField
               id="outlined-password-input"
-              label="Cantidad de Leads a Distribuir"
+              label="Leads a Distribuir"
               className={classes.textField}
               type="number"
               margin="normal"
@@ -136,7 +161,8 @@ export const DistributionList = () => {
               }}
             />
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={6} xs={12}>
+            <br />
             <Button
               variant="contained"
               color="primary"
@@ -151,6 +177,9 @@ export const DistributionList = () => {
       {leads ? (
         <LeadsMuiTable
           leads={leads}
+          actionCheckbox={selectLead}
+          type="distribution"
+          array={selectedLeads}
           pageChange={setPage}
           setSearch={setSearch}
         />

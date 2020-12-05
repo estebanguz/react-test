@@ -13,6 +13,7 @@ export const autocompleteStyles = (theme) => ({
   },
   item: {
     borderRadius: 0,
-    padding: "10px",    
+    padding: "10px",
+    cursor: "pointer",
   },
 });

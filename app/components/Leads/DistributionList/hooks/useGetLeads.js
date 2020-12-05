@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
+import { getFreeLeads } from "../../../../api/distribution";
 
-export const useSearchLeads = ({ repository }) => {
+export const useGetLeads = () => {
   const [leads, setLeads] = useState();
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
@@ -16,20 +17,18 @@ export const useSearchLeads = ({ repository }) => {
       .format("YYYY-MM-DD")
   );
   const [search, setSearch] = useState(true);
-  const [forceSearch, setForceSearch] = useState(false);
 
   useEffect(() => {
-    if (search || forceSearch) {
+    if (search) {
       searchLeads();
     }
-  }, [search, page, forceSearch]);
+  }, [search, page]);
 
   const searchLeads = async () => {
-    const response = await repository({ page, size, initialDate, finalDate });
+    const response = await getFreeLeads({ page, size, initialDate, finalDate });
     if (response.data.message) {
       setLeads(response.data.message);
       setSearch(false);
-      setForceSearch(false);
     } else {
       console.log(response);
     }
@@ -45,7 +44,6 @@ export const useSearchLeads = ({ repository }) => {
     setInitialDate,
     finalDate,
     setFinalDate,
-    setSearch,
-    setForceSearch
+    setSearch
   ];
 };
