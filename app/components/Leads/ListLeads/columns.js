@@ -21,7 +21,8 @@ export const columns = ({
   phoneAction,
   whatsappAction,
   viewAction,
-  actionRowComponent,
+  ActionRowComponent,
+  setForceSearch,
 }) => {
   let _array = [];
 
@@ -92,7 +93,7 @@ export const columns = ({
       customBodyRender: (value) => {
         return (
           <div className={classes.buttonsIcons}>
-            <IconButton onClick={emailAction} aria-label="view">
+            <IconButton onClick={() => emailAction()} aria-label="view">
               <EmailIcon />
             </IconButton>
           </div>
@@ -108,13 +109,18 @@ export const columns = ({
       filter: true,
       sort: false,
       customBodyRender: (value) => {
+        const phone = value;
         return (
           <div className={classes.buttonsIcons}>
-            <IconButton onClick={phoneAction} color="primary" aria-label="view">
+            <IconButton
+              onClick={() => phoneAction({ phone })}
+              color="primary"
+              aria-label="view"
+            >
               <CallIcon />
             </IconButton>
             <IconButton
-              onClick={whatsappAction}
+              onClick={() => whatsappAction({ phone })}
               color="secondary"
               aria-label="view"
             >
@@ -135,15 +141,41 @@ export const columns = ({
     },
   });
 
-  if (type != "distribution") {
+  if (type != "distribution" && type != "admin") {
     _array.push({
-      name: "id",
-      label: "Accion",
+      name: "status_lead",
+      label: "Estatus",
       options: {
         filter: false,
         customBodyRender: (value) => {
           return (
-            <div className={classes.buttonsIcons}>{actionRowComponent}</div>
+            <div className={`${classes.buttonsIcons} ${classes.status}`}>
+              <ActionRowComponent
+                setForceSearch={setForceSearch}
+                lead={value}
+              />
+            </div>
+          );
+        },
+      },
+    });
+  }
+
+  if (type != "distribution" && type != "admin") {
+    _array.push({
+      name: "id",
+      label: "Ver",
+      options: {
+        filter: false,
+        customBodyRender: (value) => {
+          return (
+            <IconButton
+              onClick={() => viewAction()}
+              color="primary"
+              aria-label="view"
+            >
+              <VisibilityIcon />
+            </IconButton>
           );
         },
       },

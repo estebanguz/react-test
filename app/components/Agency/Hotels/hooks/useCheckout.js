@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { createBooking, saveBookingAgency } from 'site-agency';
 import { CheckoutSchema } from '../../../../schemas/checkout';
 

@@ -9,7 +9,7 @@ export const leadsTableStyles = (theme) => ({
         },
         [theme.breakpoints.down('md')]: {
           '& td': {
-            height: 60,
+            height: 70,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
           },
@@ -24,6 +24,10 @@ export const leadsTableStyles = (theme) => ({
     buttonsIcons: {
       display: 'flex',
       justifyContent: 'center',
+    },
+    status: {
+      padding: 0,
+      margin: 0
     }
   });
   

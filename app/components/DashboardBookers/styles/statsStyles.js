@@ -18,4 +18,7 @@ export const statsStyles = (theme) => ({
   avatar: {
     backgroundColor: blue[500],
   },
+  itemStat: {
+    cursor: 'pointer'
+  }
 });

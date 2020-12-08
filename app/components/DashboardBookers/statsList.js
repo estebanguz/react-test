@@ -6,13 +6,31 @@ import { StatsItem } from "./statsItem";
 
 const useStyles = makeStyles((theme) => statsStyles(theme));
 
-export const StatsList = ({ stats }) => {
+export const StatsList = ({ stats, filterByStatus }) => {
   const classes = useStyles();
+
   return (
     <Grid container spacing={3}>
+      <Grid
+        className={classes.itemStat}
+        item
+        md={3}
+        xs={6}
+        onClick={() => filterByStatus(0)}
+      >
+        <StatsItem stat={{ status: 0, count: '' }} />
+        </Grid>
       {stats.map((value, index) => {
         return (
-          <Grid item md={2} xs={6}>
+          <Grid
+            className={classes.itemStat}
+            onClick={() => {
+              filterByStatus(value);
+            }}
+            item
+            md={3}
+            xs={6}
+          >
             <StatsItem stat={value} />
           </Grid>
         );

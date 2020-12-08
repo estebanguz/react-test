@@ -23,12 +23,15 @@ export const useSearchLeads = ({ repository }) => {
       searchLeads();
     }
   }, [search, page, forceSearch]);
+  const [status, setStatus] = useState();
 
-  const searchLeads = async () => {
-    const response = await repository({ page, size, initialDate, finalDate });
+  const searchLeads = async () => {    
+    const response = await repository({ page, size, initialDate, finalDate, status });
     if (response.data.message) {
-      setLeads(response.data.message);
-      setSearch(false);
+      console.log('Action');
+      const _temp = [];
+      const _tempConcat = _temp.concat(response.data.message);
+      setLeads(_tempConcat[0]);
       setForceSearch(false);
     } else {
       console.log(response);
@@ -46,6 +49,7 @@ export const useSearchLeads = ({ repository }) => {
     finalDate,
     setFinalDate,
     setSearch,
-    setForceSearch
+    setForceSearch,
+    setStatus
   ];
 };

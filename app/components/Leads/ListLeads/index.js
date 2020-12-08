@@ -20,6 +20,7 @@ function LeadsTable(props) {
     finalDate,
     setFinalDate,
     setSearch,
+    setForceSearch
   ] = useSearchLeads({ repository: getLeads });
 
   return (
@@ -38,6 +39,11 @@ function LeadsTable(props) {
           leads={leads}
           pageChange={setPage}
           setSearch={setSearch}
+          type="admin"
+          actionRowComponent={() => {
+            return <h1>Test</h1>
+          }}
+          setForceSearch={setForceSearch}
         />
       ) : (
         <></>

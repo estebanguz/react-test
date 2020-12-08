@@ -25,9 +25,11 @@ export const LeadsMuiTable = ({
   viewAction = () => {
     console.log("");
   },
-  actionRowComponent
+  actionRowComponent,
+  setForceSearch
 }) => {
   const classes = useStyles();
+
   const _columns = columns({
     type,
     actionCheckbox,
@@ -36,7 +38,8 @@ export const LeadsMuiTable = ({
     phoneAction,
     whatsappAction,
     viewAction,
-    actionRowComponent
+    ActionRowComponent: actionRowComponent,
+    setForceSearch
   });
 
   const options = {
@@ -47,7 +50,7 @@ export const LeadsMuiTable = ({
     serverSide: true,
     search: false,
     filter: false,
-    count: leads.total_rows,
+    count: 16,
     download: false,
     selectableRows: "none",
     onTableChange: (action, tableState) => {
@@ -68,7 +71,6 @@ export const LeadsMuiTable = ({
       data={leads.data}
       columns={_columns}
       options={options}
-      actionRowComponent={<h1>Accion</h1>}
     />
   );
 };

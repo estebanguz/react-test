@@ -7,13 +7,14 @@ export const getLeads = async ({
   size,
   initialDate = ' ',
   finalDate = ' ',
+  status = null
 }) => {
   try {
     const token = getJWTCrm();
     return await axios.get(
       `${config.hostname}/leads?page=${page}&size=${size}${
         initialDate ? '&initial_date=' : ''
-      }${initialDate}${finalDate ? '&final_date=' : ''}${finalDate}`,
+      }${initialDate}${finalDate ? '&final_date=' : ''}${finalDate}${status == null ? '' : '&status='+status}`,
       {
         headers: {
           Authorization: `Bearer: ${token}`,
