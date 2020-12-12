@@ -8,8 +8,9 @@ import { FiltersLeads } from "../Leads/LeadsFilters";
 import { useSearchLeads } from "../Leads/ListLeads/hooks/useSearchLeads";
 import { StatsList } from "./statsList";
 import { BookerLeadsStatus } from "./bookerLeadsStatus";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { WhatsApp } from "@material-ui/icons";
+import { isMobile } from "react-device-detect";
 
 //const socket = io('http://io.apicrmcancun.gq/');
 const socket = io("http://localhost:1234");
@@ -50,18 +51,25 @@ export const LeadsBooker = () => {
 
   const sendWhatsapp = ({ phone }) => {
     const _string = `https://api.whatsapp.com/send?text=%C2%A1Hola%20%F0%9F%A4%97%20Hemos%20intentado%20comunicarnos%20contigo%20del%20Sitio%20Oficial%20de%20Canc%C3%BAn%20%F0%9F%8F%9D%20para%20asesorarlo%20en%20sus%20pr%C3%B3ximas%20vacaciones%20%F0%9F%A5%B3%20%C2%BFA%20que%20hora%20estar%C3%A1%20disponible?%20https://www.vacacionescancun.com/bienvenido_al_paraiso&phone=${phone}`;
-    window.open(_string, '_blank');
-  }
+    window.open(_string, "_blank");
+  };
 
   const callNumber = ({ phone }) => {
-    window.location.href=`tel:${phone}`;
-  }
+    if (!isMobile) {
+      window.location.href = `tel:${phone}`;
+    } else {
+      window.location.href = `tel:${phone.substring(3, 13)}`;
+    }
+  };
 
   const filterByStatus = ({ status }) => {
     setStatus(status);
     setForceSearch(true);
   };
 
+  const sendMail = ({ mail }) => {
+    window.location.href = `mailto:${mail}`;
+  };
 
   useEffect(() => {
     if (!socketConnect) {
@@ -97,6 +105,7 @@ export const LeadsBooker = () => {
           setForceSearch={setForceSearch}
           whatsappAction={sendWhatsapp}
           phoneAction={callNumber}
+          emailAction={sendMail}
         />
       ) : (
         <div className={classes.progressDiv}>

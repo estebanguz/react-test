@@ -10,12 +10,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
+		width: '100%',
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2),
 	},
+	mBottom: {
+		marginBottom: '20px'
+	}
 }));
 
 export const NewReservation = ({
@@ -33,10 +35,10 @@ export const NewReservation = ({
 	const classes = useStyles();
 
 	return (
-		<Grid container spacing={2}>
-			<Grid item xs={12}>
+		<Grid container className={classes.mBottom}>
+			<Grid item xs={12} md={12}>
 				<Grid container justify="flex-start" spacing={4}>
-					<Grid item>
+					<Grid item xs={12}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guest}
@@ -45,7 +47,7 @@ export const NewReservation = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={4}>
 						<FormControl className={classes.formControl}>
 							<InputLabel id="demo-simple-select-label">¿Apartado?</InputLabel>
 							<Select
@@ -61,7 +63,7 @@ export const NewReservation = ({
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={4}>
 						<FormControl className={classes.formControl}>
 							<InputLabel id="demo-simple-select-label">
 								Calificación
@@ -79,7 +81,7 @@ export const NewReservation = ({
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={4}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								label="Asesor"
@@ -88,7 +90,7 @@ export const NewReservation = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={4}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								label="Fecha de Registro"

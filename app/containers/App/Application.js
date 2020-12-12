@@ -18,7 +18,8 @@ import {
   HotelList,
   CouponsView,
   PaymentLink,
-  HotelDetails
+  HotelDetails,
+  LeadDetail
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -30,12 +31,13 @@ class Application extends React.Component {
           { /* CRM */}
           <AuthRoute exact path="/app" Component={DashboardPage} role={ADMIN} />
           <AuthRoute exact path="/app/users" Component={UserList} role={ADMIN} />
-          <AuthRoute exact path="/app/leads" Component={LeadsList} role={ADMIN} />
+          <AuthRoute exact path="/app/leads" Component={LeadsList} role={ADMIN} />        
           <AuthRoute exact path="/app/leads/distribution" Component={Distribution} role={ADMIN} />
           <AuthRoute exact path="/app/lead" Component={LeadDetails} role={ADMIN} />
           <AuthRoute exact path="/app/booker/solicitude" Component={Solicitude} role={VENTAS} />
           <AuthRoute path="/app/users/create" Component={NewUser} role={ADMIN} />
           <AuthRoute path="/app/booker/leads" Component={BookerLeadsList} role={VENTAS} />
+          <AuthRoute exact path="/app/booker/lead" Component={LeadDetail} role={VENTAS} />
           { /* Agency */}
           <AuthRoute exact path="/app/agency/" Component={HotelList} role={AGENCIA} />
           <AuthRoute exact path="/app/agency/hotels/" Component={HotelList} role={AGENCIA} />

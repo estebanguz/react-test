@@ -11,8 +11,7 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
-		margin: theme.spacing(1),
-		minWidth: "100%",
+		width: "100%",
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2),
@@ -21,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
 		display: "flex",
 		alignItems: "center",
 	},
+	marginB: {
+		marginBottom: '20px'
+	}
 }));
 
 export const Companions = ({ companions, addCompanion }) => {
@@ -33,23 +35,25 @@ export const Companions = ({ companions, addCompanion }) => {
 	}, [companions]);
 
 	return (
-		<Grid container spacing={2}>
+		<Grid container spacing={2} className={classes.marginB}>
 			<Grid item xs={12}>
 				{companions.length > 0
 					? companions.map((companion, index) => (
 							<Grid key={`${companion.age}${index}`} container justify="flex-start" spacing={4}>
-								<Grid item xs={4}>
+								<Grid item xs={4} md={4}>
 									<FormControl className={classes.formControl}>
 										<TextField
+											disabled
 											value={companion.name}
 											onInput={(e) => setName(e.target.value)}
-											label="Nombre completo"
+											label="Nombre"
 										/>
 									</FormControl>
 								</Grid>
-								<Grid item xs={4}>
+								<Grid item xs={4} md={4}>
 									<FormControl className={classes.formControl}>
 										<TextField
+											disabled
 											label="Edad"
 											value={companion.age}
 											onInput={(e) => setAge(e.target.value)}
@@ -59,13 +63,6 @@ export const Companions = ({ companions, addCompanion }) => {
 								</Grid>
 								<Grid item className={classes.gridItem} xs={4}>
 									<FormControl className={classes.formControl}>
-										<Button
-											onClick={() => addCompanion({ name, age })}
-											variant="contained"
-											color="primary"
-										>
-											Editar
-										</Button>
 										<Button
 											onClick={() => addCompanion({ name, age })}
 											variant="contained"
@@ -79,16 +76,16 @@ export const Companions = ({ companions, addCompanion }) => {
 					  ))
 					: "Nothing"}
 				<Grid container justify="flex-start" spacing={4}>
-					<Grid item xs={4}>
+					<Grid item xs={6} md={4}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={name}
 								onInput={(e) => setName(e.target.value)}
-								label="Nombre completo"
+								label="Nombre"
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item xs={4}>
+					<Grid item xs={6} md={4}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								label="Edad"
@@ -98,7 +95,7 @@ export const Companions = ({ companions, addCompanion }) => {
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item className={classes.gridItem} xs={4}>
+					<Grid item className={classes.gridItem} xs={12} md={4}>
 						<FormControl className={classes.formControl}>
 							<Button
 								onClick={() => addCompanion({ name, age })}

@@ -118,3 +118,8 @@ export const PaymentLink = Loadable({
   loader: () => import('./Agency/Paymentlink/index'),
   loading: Loading
 });
+
+export const LeadDetail = Loadable({
+  loader: () => import('./Pages/LeadDetail/index'),
+  loading: Loading
+});

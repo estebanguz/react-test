@@ -10,12 +10,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
+		width: '100%'
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2),
 	},
+	marginB: {
+		marginBottom: '20px'
+	}
 }));
 
 export const GuestData = ({
@@ -43,10 +45,10 @@ export const GuestData = ({
 	const classes = useStyles();
 
 	return (
-		<Grid container spacing={2}>
+		<Grid container className={classes.marginB}>
 			<Grid item xs={12}>
 				<Grid container justify="flex-start" spacing={4}>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestName}
@@ -55,7 +57,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestAge}
@@ -65,7 +67,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								label="Profesión"
@@ -74,7 +76,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestCompany}
@@ -83,7 +85,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestPosition}
@@ -92,7 +94,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<InputLabel id="demo-simple-select-label">
 								Estado Civil
@@ -113,7 +115,7 @@ export const GuestData = ({
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestAddress}
@@ -122,7 +124,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestCity}
@@ -131,7 +133,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestState}
@@ -140,7 +142,7 @@ export const GuestData = ({
 							/>
 						</FormControl>
 					</Grid>
-					<Grid item>
+					<Grid item xs={12} md={3}>
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guestCp}

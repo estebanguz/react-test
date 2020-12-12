@@ -93,7 +93,7 @@ export const columns = ({
       customBodyRender: (value) => {
         return (
           <div className={classes.buttonsIcons}>
-            <IconButton onClick={() => emailAction()} aria-label="view">
+            <IconButton onClick={() => emailAction({ mail: value })} aria-label="view">
               <EmailIcon />
             </IconButton>
           </div>
