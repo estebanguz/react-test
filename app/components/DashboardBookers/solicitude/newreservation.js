@@ -42,6 +42,7 @@ export const NewReservation = ({
 						<FormControl className={classes.formControl}>
 							<TextField
 								value={guest}
+								type="number"
 								onInput={(e) => setGuest(e.target.value)}
 								label="Número de Huesped"
 							/>

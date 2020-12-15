@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   marginBootom: {
-    marginBottom: "20px",
+    marginBottom: "25px",
   },
 }));
 
@@ -91,22 +91,22 @@ export const RoomDescription = ({
     <Grid container spacing={2} className={classes.marginBottom}>
       <Grid item xs={12}>
         <FormControl className={classes.formControl}>
-          <AutoCompleteSelect
-            title="Hotel"
-            options={hotelOptions}
-            option={hotel}
-            callBack={(e) => setHotel(e)}
-          />
-        </FormControl>
-      </Grid>
-      <Grid item xs={12}>
-        <FormControl className={classes.formControl}>
           <TextField
             label="Destino"
             value={destination}
             onInput={(e) => setDestination(e.target.value)}
             disabled
             value="Cancun"
+          />
+        </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+        <FormControl className={classes.formControl}>
+          <AutoCompleteSelect
+            title="Hotel"
+            options={hotelOptions}
+            option={hotel}
+            callBack={(e) => setHotel(e)}
           />
         </FormControl>
       </Grid>
@@ -145,7 +145,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={openDate == 1 ? 6 : 3}>
+      <Grid item xs={openDate == 1 ? 6 : 6} md={openDate == 1 ? 6 : 3}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label2">Habitación</InputLabel>
           <Select
@@ -166,7 +166,7 @@ export const RoomDescription = ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={openDate == 1 ? 6 : 3}>
+      <Grid item xs={openDate == 1 ? 6 : 6} md={openDate == 1 ? 6 : 3}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label3">
             ¿Fechas Abiertas?
@@ -182,7 +182,7 @@ export const RoomDescription = ({
         </FormControl>
       </Grid>
       {openDate == 2 ? (
-        <Grid item xs={3}>
+        <Grid item xs={openDate == 1 ? 6 : 6} md={openDate == 1 ? 6 : 3}>
           <FormControl className={classes.formControl}>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DatePicker
@@ -198,7 +198,7 @@ export const RoomDescription = ({
         ""
       )}
       {openDate == 2 ? (
-        <Grid item xs={3}>
+        <Grid item xs={openDate == 1 ? 6 : 6} md={openDate == 1 ? 6 : 3}>
           <FormControl className={classes.formControl}>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <DatePicker
@@ -213,7 +213,7 @@ export const RoomDescription = ({
       ) : (
         ""
       )}
-      <Grid item xs={3}>
+      <Grid item xs={6} md={6}>
         <FormControl className={classes.formControl}>
           <TextField
             label="PAX"
@@ -223,7 +223,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={6} md={3}>
         <FormControl className={classes.formControl}>
           <TextField
             label="Presentación de 90 min"
@@ -232,7 +232,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <DatePicker
@@ -244,7 +244,7 @@ export const RoomDescription = ({
           </MuiPickersUtilsProvider>
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label4">ID Check In</InputLabel>
           <Select
@@ -264,7 +264,7 @@ export const RoomDescription = ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label5">
             Tipo de Tarjeta 1
@@ -279,7 +279,7 @@ export const RoomDescription = ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <AutoCompleteSelect
             title="Banco"
@@ -289,7 +289,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label6">
             Tipo de Tarjeta 2
@@ -304,7 +304,7 @@ export const RoomDescription = ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <AutoCompleteSelect
             title="Banco"
@@ -314,7 +314,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label7">Transportación</InputLabel>
           <Select
@@ -329,7 +329,7 @@ export const RoomDescription = ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item md={3} xs={12}>
         <FormControl className={classes.formControl}>
           <TextField
             value={internalNotes}
@@ -338,7 +338,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item md={3} xs={12}>
         <FormControl className={classes.formControl}>
           <TextField
             label="Notas Importantes (Externas)"
@@ -347,7 +347,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item md={3} xs={12}>
         <FormControl className={classes.formControl}>
           <TextField
             label="Número de Tarjetas"
@@ -357,7 +357,7 @@ export const RoomDescription = ({
           />
         </FormControl>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         <FormControl className={classes.formControl}>
           <TextField
             label="Total de Venta"
