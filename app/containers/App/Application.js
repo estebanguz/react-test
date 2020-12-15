@@ -1,9 +1,9 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
-import { ADMIN, VENTAS, AGENCIA } from 'site-auth';
-import Dashboard from '../Templates/Dashboard';
-import { AuthRoute } from '../../components/Router/AuthRoute';
+import React from "react";
+import { PropTypes } from "prop-types";
+import { Switch, Route } from "react-router-dom";
+import { ADMIN, VENTAS, AGENCIA, GERENTE } from "site-auth";
+import Dashboard from "../Templates/Dashboard";
+import { AuthRoute } from "../../components/Router/AuthRoute";
 import {
   DashboardPage,
   Error,
@@ -19,8 +19,8 @@ import {
   CouponsView,
   PaymentLink,
   HotelDetails,
-  LeadDetail
-} from '../pageListAsync';
+  LeadDetail,
+} from "../pageListAsync";
 
 class Application extends React.Component {
   render() {
@@ -28,22 +28,87 @@ class Application extends React.Component {
     return (
       <Dashboard history={history} changeMode={changeMode}>
         <Switch>
-          { /* CRM */}
-          <AuthRoute exact path="/app" Component={DashboardPage} role={ADMIN} />
-          <AuthRoute exact path="/app/users" Component={UserList} role={ADMIN} />
-          <AuthRoute exact path="/app/leads" Component={LeadsList} role={ADMIN} />        
-          <AuthRoute exact path="/app/leads/distribution" Component={Distribution} role={ADMIN} />
-          <AuthRoute exact path="/app/lead" Component={LeadDetails} role={ADMIN} />
-          <AuthRoute exact path="/app/booker/solicitude" Component={Solicitude} role={VENTAS} />
-          <AuthRoute path="/app/users/create" Component={NewUser} role={ADMIN} />
-          <AuthRoute path="/app/booker/leads" Component={BookerLeadsList} role={VENTAS} />
-          <AuthRoute exact path="/app/booker/lead" Component={LeadDetail} role={VENTAS} />
-          { /* Agency */}
-          <AuthRoute exact path="/app/agency/" Component={HotelList} role={AGENCIA} />
-          <AuthRoute exact path="/app/agency/hotels/" Component={HotelList} role={AGENCIA} />
-          <AuthRoute path="/app/agency/hotels/:hotel_name" Component={HotelDetails} role={AGENCIA} />
-          <AuthRoute path="/app/agency/coupon" Component={CouponsView} role={AGENCIA} />
-          <AuthRoute path="/app/agency/paymentlink" Component={PaymentLink} role={AGENCIA} />
+          {/* CRM */}
+          <AuthRoute
+            exact
+            path="/app"
+            Component={DashboardPage}
+            roles={[ADMIN]}
+          />
+          <AuthRoute
+            exact
+            path="/app/users"
+            Component={UserList}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/leads"
+            Component={LeadsList}
+            roles={[ADMIN]}
+          />
+          <AuthRoute
+            exact
+            path="/app/leads/distribution"
+            Component={Distribution}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/lead"
+            Component={LeadDetails}
+            roles={[ADMIN]}
+          />
+          <AuthRoute
+            exact
+            path="/app/booker/solicitude"
+            Component={Solicitude}
+            roles={[VENTAS, GERENTE]}
+          />
+          <AuthRoute
+            path="/app/users/create"
+            Component={NewUser}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            path="/app/booker/leads"
+            Component={BookerLeadsList}
+            roles={[VENTAS, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/booker/lead"
+            Component={LeadDetail}
+            roles={[VENTAS, GERENTE]}
+          />
+          {/* Agency */}
+          <AuthRoute
+            exact
+            path="/app/agency/"
+            Component={HotelList}
+            roles={[AGENCIA]}
+          />
+          <AuthRoute
+            exact
+            path="/app/agency/hotels/"
+            Component={HotelList}
+            roles={[AGENCIA]}
+          />
+          <AuthRoute
+            path="/app/agency/hotels/:hotel_name"
+            Component={HotelDetails}
+            roles={[AGENCIA]}
+          />
+          <AuthRoute
+            path="/app/agency/coupon"
+            Component={CouponsView}
+            roles={[AGENCIA]}
+          />
+          <AuthRoute
+            path="/app/agency/paymentlink"
+            Component={PaymentLink}
+            roles={[AGENCIA]}
+          />
           <Route path="/app/not-found" component={NotFound} />
           <Route path="/app/error" component={Error} />
           <Route component={NotFound} />

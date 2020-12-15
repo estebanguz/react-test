@@ -3,19 +3,19 @@ module.exports = [
     key: 'account_page',
     name: 'Usuarios',
     icon: 'account_box',
-    roles: [1],
+    roles: [1, 6],
     child: [
       {
         key: 'list',
         name: 'Lista de Usuarios',
-        roles: [1],
+        roles: [1, 6],
         icon: 'account_box',
         link: '/app/users'
       },
       {
         key: 'create',
         name: 'Nuevo Usuario',
-        roles: [1],
+        roles: [1, 6],
         icon: 'account_box',
         link: '/app/users/create'
       }
@@ -25,7 +25,7 @@ module.exports = [
     key: 'leads_page',
     name: 'Leads',
     icon: 'list',
-    roles: [1],
+    roles: [1, 6],
     child: [
       {
         key: 'create',
@@ -44,7 +44,7 @@ module.exports = [
       {
         key: 'distribution',
         name: 'Distribución de Leads',
-        roles: [1],
+        roles: [1, 6],
         icon: 'list',
         link: '/app/leads/distribution'
       },
@@ -61,19 +61,19 @@ module.exports = [
     key: 'leads_booker',
     name: 'Dashboard Bookers',
     icon: 'list-alt',
-    roles: [4],
+    roles: [4, 6],
     child: [
       {
         key: 'index',
         name: 'Leads Recientes',
-        roles: [4],
+        roles: [4, 6],
         icon: 'list-alt',
         link: '/app/booker/leads'
       },
       {
         key: 'solicitude',
         name: 'Solicitud de Reserva',
-        roles: [4],
+        roles: [4, 6],
         icon: 'list-alt',
         link: '/app/booker/solicitude'
       },

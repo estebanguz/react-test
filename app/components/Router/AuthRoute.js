@@ -3,9 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 import { isAuth } from 'site-auth';
 
 export const AuthRoute = ({
-  Component, path, exact = false, role
+  Component, path, exact = false, roles
 }) => {
-  const isAuthed = isAuth(role);
+  const isAuthed = isAuth(roles);
 
   return (
     <Route
