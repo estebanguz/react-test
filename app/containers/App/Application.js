@@ -20,6 +20,7 @@ import {
   PaymentLink,
   HotelDetails,
   LeadDetail,
+  CreateLead, 
 } from "../pageListAsync";
 
 class Application extends React.Component {
@@ -46,6 +47,12 @@ class Application extends React.Component {
             path="/app/leads"
             Component={LeadsList}
             roles={[ADMIN]}
+          />
+          <AuthRoute 
+            exact
+            path="/app/leads/new"
+            Component={CreateLead}  
+            roles={[ADMIN,GERENTE]}          
           />
           <AuthRoute
             exact

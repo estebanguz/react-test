@@ -45,3 +45,6 @@ export AutoCompleteSelect from './HotelSelect/index.js';
 export NewCoupon from './Coupon/NewCoupon.js';
 
 export TableCoupon from './Coupon/TableCoupon.js';
+
+// leads
+export NewLead from './Leads/CreateLeads/index.js';

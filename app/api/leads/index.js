@@ -45,8 +45,36 @@ export const updateLeadStatus = async ({ leadId, status }) => {
   } catch (err) {
     console.log(err.response);
     return {
-      status: err.response.data.payload.statusCode,
-      message: err.response.data.payload.message,
+      status: err,
+      message: err
     };
   }
 };
+
+export const createLead = async ({data}) => {
+  try 
+  {
+      const token = getJWTCrm();
+      return await axios.post (
+        `${config.hostname}/lead/create`,
+          {
+              nombre : data.nombre,
+              edad: data.edad,
+              telefono: data.telefono,            
+              mensaje: data.mensaje,
+              estado: data.estado,
+              ciudad: data.ciudad,
+              municipio: data.municipio,
+          },
+          {
+              headers:{
+                Authorization: `Bearer: ${token}`,
+              }
+          }
+      )
+  } 
+  catch (error) 
+  {
+    console.log(error)    
+  }
+}
