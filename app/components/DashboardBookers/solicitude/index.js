@@ -1,65 +1,65 @@
-import React, { useState, useEffect } from "react";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import { NewReservation } from "./newreservation";
-import { GuestData } from "./guestdata";
-import { CoupleData } from "./coupledata";
-import { PaymentMethod } from "./paymentmethod";
-import { ContactData } from "./contactdata";
-import { PooledIncome } from "./pooledincome";
-import { Companions } from "./companions";
-import { RoomDescription } from "./roomdescription";
-import { Redirect } from "react-router";
+import React, { useState, useEffect } from 'react';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import { Redirect } from 'react-router';
+import { NewReservationSchema } from 'site-schemas/newReservation';
+import { GuestDataSchema } from 'site-schemas/guesData';
+import { PaymentMethodSchema } from 'site-schemas/paymentMethod';
+import { ContactInfoSchema } from 'site-schemas/contactInfo';
+import { NewReservation } from './newreservation';
+import { GuestData } from './guestdata';
+import { CoupleData } from './coupledata';
+import { PaymentMethod } from './paymentmethod';
+import { ContactData } from './contactdata';
+import { PooledIncome } from './pooledincome';
+import { Companions } from './companions';
+import { RoomDescription } from './roomdescription';
 
-//custom hooks
-import { useNewReservation } from "../hooks/useNewReservation";
-import { useGuestData } from "../hooks/useGuestData";
-import { useCoupleData } from "../hooks/useCoupleData";
-import { usePaymentMethod } from "../hooks/usePaymentMethod";
-import { useContactData } from "../hooks/useContactData";
-import { usePooledIncoming } from "../hooks/usePooledIncome";
-import { useCompanion } from "../hooks/useCompanions";
-import { useRoomDescription } from "../hooks/useRoomDescription";
-import { useReservation } from "../hooks/useReservation";
+// custom hooks
+import { useNewReservation } from '../hooks/useNewReservation';
+import { useGuestData } from '../hooks/useGuestData';
+import { useCoupleData } from '../hooks/useCoupleData';
+import { usePaymentMethod } from '../hooks/usePaymentMethod';
+import { useContactData } from '../hooks/useContactData';
+import { usePooledIncoming } from '../hooks/usePooledIncome';
+import { useCompanion } from '../hooks/useCompanions';
+import { useRoomDescription } from '../hooks/useRoomDescription';
+import { useReservation } from '../hooks/useReservation';
 
-//schema validation
-import { validationHandler } from "./validations";
-import { NewReservationSchema } from "site-schemas/newReservation";
-import { GuestDataSchema } from "site-schemas/guesData";
-import { PaymentMethodSchema } from "site-schemas/paymentMethod";
-import { ContactInfoSchema } from "site-schemas/contactInfo";
+// schema validation
+import { validationHandler } from './validations';
 
 const styles = (theme) => ({
   root: {
-    width: "90%",
+    width: '90%',
   },
   button: {
-    marginTop: "5px",
-    marginRight: "5px",
+    marginTop: '5px',
+    marginRight: '5px',
   },
   actionsContainer: {
-    marginBottom: "5px",
+    marginBottom: '5px',
   },
   resetContainer: {
-    padding: "5px",
+    padding: '5px',
   },
 });
 
 function getSteps() {
   return [
-    "Nueva Reservación",
-    "Datos del Huésped",
-    "Datos de la Pareja",
-    "Métodos de pago",
-    "Información de Contacto",
-    "Ingresos mancomunados",
-    "Acompañantes",
-    "Descripción de la Habitación",
+    'Nueva Reservación',
+    'Datos del Huésped',
+    'Datos de la Pareja',
+    'Métodos de pago',
+    'Información de Contacto',
+    'Ingresos mancomunados',
+    'Acompañantes',
+    'Descripción de la Habitación',
   ];
 }
 
@@ -352,7 +352,7 @@ export const SolicitudeStepper = () => {
           />
         );
       default:
-        return "Unknown step";
+        return 'Unknown step';
     }
   };
 
@@ -406,7 +406,7 @@ export const SolicitudeStepper = () => {
         }
         break;
       case 4:
-        console.log("Contact Info");
+        console.log('Contact Info');
         const validateCI = validationHandler({
           data: {
             phone1,
@@ -517,19 +517,17 @@ export const SolicitudeStepper = () => {
                           setActiveStep(activeStep + 1);
                           setRedirect(true);
                         }
+                      } else if (validateComponent({ step: activeStep })) {
+                        setActiveStep(activeStep + 1);
                       } else {
-                        if (validateComponent({ step: activeStep })) {
-                          setActiveStep(activeStep + 1);
-                        } else {
-                          console.log("Error");
-                        }
+                        console.log('Error');
                       }
                     }}
                     className={classes.button}
                   >
                     {activeStep === steps.length - 1
-                      ? "Agregar Solicitud de Reserva"
-                      : "Siguiente"}
+                      ? 'Agregar Solicitud de Reserva'
+                      : 'Siguiente'}
                   </Button>
                 </div>
               </div>

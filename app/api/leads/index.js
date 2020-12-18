@@ -1,23 +1,23 @@
-import axios from "axios";
-import config from "../config";
-import { getJWTCrm } from "../../utils/auth";
-import base64 from "base-64";
+import axios from 'axios';
+import base64 from 'base-64';
+import config from '../config';
+import { getJWTCrm } from '../../utils/auth';
 
 export const getLeads = async ({
   page,
   size,
-  initialDate = " ",
-  finalDate = " ",
+  initialDate = ' ',
+  finalDate = ' ',
   status = null,
 }) => {
-  console.log("Leads normales");
+  console.log('Leads normales');
   try {
     const token = getJWTCrm();
     return await axios.get(
       `${config.hostname}/leads?page=${page}&size=${size}${
-        initialDate ? "&initial_date=" : ""
-      }${initialDate}${finalDate ? "&final_date=" : ""}${finalDate}${
-        status == null ? "" : "&status=" + status
+        initialDate ? '&initial_date=' : ''
+      }${initialDate}${finalDate ? '&final_date=' : ''}${finalDate}${
+        status == null ? '' : '&status=' + status
       }`,
       {
         headers: {

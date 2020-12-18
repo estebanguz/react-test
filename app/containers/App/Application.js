@@ -1,9 +1,11 @@
-import React from "react";
-import { PropTypes } from "prop-types";
-import { Switch, Route } from "react-router-dom";
-import { ADMIN, VENTAS, AGENCIA, GERENTE } from "site-auth";
-import Dashboard from "../Templates/Dashboard";
-import { AuthRoute } from "../../components/Router/AuthRoute";
+import React from 'react';
+import { PropTypes } from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+import {
+  ADMIN, VENTAS, AGENCIA, GERENTE
+} from 'site-auth';
+import Dashboard from '../Templates/Dashboard';
+import { AuthRoute } from '../../components/Router/AuthRoute';
 import {
   DashboardPage,
   Error,
@@ -20,8 +22,8 @@ import {
   PaymentLink,
   HotelDetails,
   LeadDetail,
-  CreateLead, 
-} from "../pageListAsync";
+  CreateLead,
+} from '../pageListAsync';
 
 class Application extends React.Component {
   render() {
@@ -48,11 +50,11 @@ class Application extends React.Component {
             Component={LeadsList}
             roles={[ADMIN]}
           />
-          <AuthRoute 
+          <AuthRoute
             exact
             path="/app/leads/new"
-            Component={CreateLead}  
-            roles={[ADMIN,GERENTE]}          
+            Component={CreateLead}
+            roles={[ADMIN, GERENTE]}
           />
           <AuthRoute
             exact

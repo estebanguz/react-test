@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
-import { PapperBlock, NewLead} from 'enl-components';
+import { PapperBlock, NewLead } from 'enl-components';
 import { injectIntl } from 'react-intl';
 
 class CreateLead extends React.Component {
@@ -23,7 +23,7 @@ class CreateLead extends React.Component {
           icon="account_box"
           desc="Módulo de la creacion de nuevos Leads"
         >
-        <NewLead />
+          <NewLead />
         </PapperBlock>
       </div>
     );
