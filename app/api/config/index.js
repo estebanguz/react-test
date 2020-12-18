@@ -1,7 +1,7 @@
 export default
 {
-  hostname: 'http://localhost:8000/api',
-  // hostname: 'http://apicrmcancun.gq/api',
+  //hostname: 'http://localhost:8000/api',
+  hostname: 'http://apicrmcancun.gq/api',
   agency: {
     hostname: 'http://api-sitio.com',
     hostnameProduction: 'https://agenciaonline.tk',

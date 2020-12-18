@@ -7,7 +7,7 @@ export { createUserAgency, createUserComision } from './users';
 export const getJWT = async () => {
   try {
     const response = await axios.post(
-      `${config.agency.hostname}/login`,
+      `${config.agency.hostnameProduction}/login`,
       {
         public_key: config.agency.public_key,
         secret_key: config.agency.secret_key,
