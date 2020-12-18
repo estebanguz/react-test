@@ -12,11 +12,25 @@ import {
 } from "@material-ui/core";
 import MuiPhoneNumber from "material-ui-phone-number";
 import { tabPanel } from "./styles/tabsStyles";
+import { useUpdateLead } from "./hooks/useUpdateLead";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
 export const Detail = ({ lead }) => {
   const classes = useStyles();
+  const [
+    phone,
+    email,
+    status,
+    campania,
+    comments,
+    setPhone,
+    setEmail,
+    setStatus,
+    setCampania,
+    setComments,
+    setLeadData,
+  ] = useUpdateLead({ lead });
 
   return (
     <Grid container spacing={2}>
@@ -27,9 +41,9 @@ export const Detail = ({ lead }) => {
         <FormControl className={classes.formControl}>
           <MuiPhoneNumber
             label="Teléfono"
-            value={lead.telefono}
+            value={phone}
             defaultCountry="mx"
-            onChange={(e) => console.log(e)}
+            onChange={(e) => setPhone(e)}
           />
         </FormControl>
       </Grid>
@@ -39,7 +53,8 @@ export const Detail = ({ lead }) => {
             InputLabelProps={{
               shrink: true,
             }}
-            value={lead.email}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             label="Correo Electrónico"
           />
         </FormControl>
@@ -48,7 +63,8 @@ export const Detail = ({ lead }) => {
         <FormControl className={classes.formControl}>
           <InputLabel>Estatus</InputLabel>
           <Select
-            value={lead.status}
+            value={status}
+            setStatus={(e) => setStatus(e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
@@ -75,8 +91,9 @@ export const Detail = ({ lead }) => {
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
           <TextField
-            value={lead.campania}
+            value={campania}
             label="De dónde nos vio"
+            onChange={(e) => setCampania(e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
@@ -89,14 +106,15 @@ export const Detail = ({ lead }) => {
             InputLabelProps={{
               shrink: true,
             }}
-            value={lead.observacion}
+            onChange={(e) => setComments(e.target.value)}
+            value={comments}
             label="Observaciones"
           />
         </FormControl>
       </Grid>
       <Grid item md={12} xs={12}>
         <FormControl className={classes.formControl}>
-          <Button variant="contained" color="primary">
+          <Button onClick={() => setLeadData()} variant="contained" color="primary">
             Actualizar
           </Button>
         </FormControl>

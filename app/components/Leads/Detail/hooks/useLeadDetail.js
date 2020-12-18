@@ -15,5 +15,5 @@ export const useLeadDetail = ({ leadId }) => {
     setResponse(_resp.data.data);
   };
 
-  return [lead];
+  return [lead, setResponse];
 };

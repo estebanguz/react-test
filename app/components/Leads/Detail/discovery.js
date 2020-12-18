@@ -12,16 +12,24 @@ import {
 } from "@material-ui/core";
 import { tabPanel } from "./styles/tabsStyles";
 import { RoomComponent } from "./Discovery/roomComponent";
+import { createDiscovery } from "../../../api/discovery/index";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const Discovery = () => {
+export const Discovery = ({ lead }) => {
   const classes = useStyles();
 
   const [rooms, setRooms] = useState(1);
   const [roomArray, setRoomArray] = useState([1]);
   const [pax, setPax] = useState([]);
   const [fetch, setFetch] = useState(false);
+  const [price, setPrice] = useState();
+  const [marital, setMarital] = useState("Casado/a");
+  const [status, setStatus] = useState(0);
+  const [dates, setDates] = useState(false);
+  const [arrival, setArrival] = useState("");
+  const [departure, setDeparture] = useState("");
+  const [save, setSave] = useState(false);
 
   useEffect(() => {
     if (rooms === 0) {
@@ -37,8 +45,27 @@ export const Discovery = () => {
 
     setRoomArray(_temp);
     setFetch(false);
-    console.log(pax);
+
+    if (save) {
+      _createDiscovery({
+        phone: lead.telefono,
+        id_lead: lead.id,
+        rooms,
+        arrival,
+        departure,
+        comments: lead.observacion,
+        price,
+        status,
+        marital,
+        pax,
+      });
+      setSave(false);
+    }
   }, [rooms, fetch]);
+
+  const _createDiscovery = async (data) => {
+    const resp = await createDiscovery({ data });
+  };
 
   const setRoom = ({ data, room, type }) => {
     console.log(room);
@@ -70,13 +97,18 @@ export const Discovery = () => {
       </Grid>
       <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
-          <TextField label="Precio de la habitación" type="number" />
+          <TextField
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            label="Precio de la habitación"
+            type="number"
+          />
         </FormControl>
       </Grid>
       <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Estado Civil</InputLabel>
-          <Select>
+          <Select value={marital} onChange={(e) => setMarital(e.target.value)}>
             <MenuItem value="Casado/a">Casado/a</MenuItem>
             <MenuItem value="Soltero/a">Soltero/a</MenuItem>
             <MenuItem value="Unión Libre">Unión Libre</MenuItem>
@@ -88,9 +120,9 @@ export const Discovery = () => {
       <Grid item md={4} xs={12}>
         <FormControl className={classes.formControl}>
           <InputLabel>Estado del Lead</InputLabel>
-          <Select>
-            <MenuItem value="Primera Vez">Primera Vez</MenuItem>
-            <MenuItem value="Ya conocía">Ya conocía</MenuItem>
+          <Select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <MenuItem value={0}>Primera Vez</MenuItem>
+            <MenuItem value={1}>Ya conocía</MenuItem>
           </Select>
         </FormControl>
       </Grid>
@@ -110,10 +142,9 @@ export const Discovery = () => {
       <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Fechas</InputLabel>
-          <Select>
-            <MenuItem value="Fechas Cerradas">Fechas Cerradas</MenuItem>
-            <MenuItem value="Fechas Abiertas">Fechas Abiertas</MenuItem>
-            <MenuItem value="Fechas por mes">Fechas por mes</MenuItem>
+          <Select value={dates} onChange={(e) => setDates(e.target.value)}>
+            <MenuItem value={true}>Fechas Cerradas</MenuItem>
+            <MenuItem value={false}>Fechas Abiertas</MenuItem>
           </Select>
         </FormControl>
       </Grid>
@@ -134,7 +165,14 @@ export const Discovery = () => {
       )}
       <Grid item md={12} xs={12}>
         <FormControl className={classes.formControl}>
-          <Button variant="contained" color="primary">
+          <Button
+            onClick={() => {
+              setSave(true);
+              setFetch(true);
+            }}
+            variant="contained"
+            color="primary"
+          >
             Guardar
           </Button>
         </FormControl>
