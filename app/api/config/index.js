@@ -1,6 +1,6 @@
 export default 
 {
-  hostname: 'http://192.168.1.143:8000/api',
+  hostname: 'http://localhost:8000/api',
   // hostname: 'http://apicrmcancun.gq/api',
   agency: {
     hostname: 'http://api-sitio.test:8888',

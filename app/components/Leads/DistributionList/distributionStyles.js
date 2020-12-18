@@ -8,4 +8,10 @@ export const distributionStyles = (theme) => ({
   button: {
     width: "100%",
   },
+  modalArea: {
+    width: '100%'    
+  },
+  titleSize: {
+    width: '50vw'
+  }
 });

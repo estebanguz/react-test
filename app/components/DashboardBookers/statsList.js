@@ -18,7 +18,7 @@ export const StatsList = ({ stats, filterByStatus }) => {
         xs={6}
         onClick={() => filterByStatus(0)}
       >
-        <StatsItem stat={{ status: 0, count: '' }} />
+        <StatsItem stat={{ status: null, count: '' }} />
         </Grid>
       {stats.map((value, index) => {
         return (

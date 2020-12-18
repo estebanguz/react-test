@@ -52,7 +52,12 @@ export const setLeadsByArray = async ({ data }) => {
   }
 };
 
-export const getFreeLeads = async ({ page, size, initialDate, finalDate }) => {
+export const getFreeLeads = async ({
+  page,
+  size,
+  initialDate,
+  finalDate,
+}) => {
   try {
     const token = getJWTCrm();
     return await axios.get(

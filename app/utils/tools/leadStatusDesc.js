@@ -16,5 +16,6 @@ export const leadStatusDesc = ({ status }) => {
         case 303: return 'NIP'; break;
         case 403: return 'Autorización'; break;
         case 503: return 'Motivos'; break;
+        case 603: return 'Apartado'; break;
     }
 }

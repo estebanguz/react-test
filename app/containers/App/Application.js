@@ -55,12 +55,6 @@ class Application extends React.Component {
           />
           <AuthRoute
             exact
-            path="/app/lead"
-            Component={LeadDetails}
-            roles={[ADMIN]}
-          />
-          <AuthRoute
-            exact
             path="/app/booker/solicitude"
             Component={Solicitude}
             roles={[VENTAS, GERENTE]}
@@ -72,14 +66,15 @@ class Application extends React.Component {
           />
           <AuthRoute
             path="/app/booker/leads"
+            exact
             Component={BookerLeadsList}
             roles={[VENTAS, GERENTE]}
           />
           <AuthRoute
             exact
-            path="/app/booker/lead"
+            path="/app/booker/leads/:leadId"
             Component={LeadDetail}
-            roles={[VENTAS, GERENTE]}
+            roles={[ADMIN, GERENTE, VENTAS]}
           />
           {/* Agency */}
           <AuthRoute

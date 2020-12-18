@@ -14,6 +14,7 @@ export const AdultsComponent = ({ room, setPax }) => {
     if (fetch) {
       addAge();
     }
+    console.log(age);
   }, [fetch]);
 
   const addAge = () => {
@@ -31,25 +32,19 @@ export const AdultsComponent = ({ room, setPax }) => {
   };
 
   const _addAge = ({ ageValue, index }) => {
-    const _temp = [];
-
-    for (let i = 0; i < age.length; i++) {
-      if (i == index) {
-        _temp[index] = parseInt(ageValue);
-      } else {
-        _temp[i] = age[i];
-      }
-    }
+    const _temp = age; 
+    _temp[index] = ageValue;   
 
     setAge(_temp);
 
-    const _room = [];
-    _room[room] = {
-      adults,
-      age,
+    const _room = {
+      adults: {
+        quantity: adults,
+        age
+      }      
     };
 
-    setPax({ data: _room, room });
+    setPax({ data: _room, room, type: 1 });
   };
 
   return (

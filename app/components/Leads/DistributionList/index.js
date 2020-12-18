@@ -14,6 +14,13 @@ import { distributionStyles } from "./distributionStyles";
 import { AutoCompleteSitio } from "../../AutocompleteSitio";
 import { useSearchUser } from "./hooks/useSearchUser";
 import { getFreeLeads } from "../../../api/distribution";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { useUpdateComments } from "./hooks/useUpdateComments";
 
 const useStyles = makeStyles((theme) => distributionStyles(theme));
 
@@ -45,6 +52,16 @@ export const DistributionList = () => {
   const [openSnack, setOpenSnack] = React.useState(false);
   const [snackMessage, setSnackMessage] = React.useState();
   const [openError, setOpenError] = React.useState(false);
+
+  const [openComments, setOpenComments] = useState(false);
+  const [
+    currentComment,
+    setCurrentComment,
+    setCurrentId,
+    setUpdateCommentAction,
+    newComment,
+    setNewComment,
+  ] = useUpdateComments({ setForceUpdate: setForceSearch });
 
   const handleCloseStyle = (event, reason) => {
     if (reason === "clickaway") {
@@ -181,6 +198,9 @@ export const DistributionList = () => {
           type="distribution"
           array={selectedLeads}
           pageChange={setPage}
+          commentsClick={setOpenComments}
+          setCurrentComment={setCurrentComment}
+          setCurrentId={setCurrentId}
           setSearch={setSearch}
         />
       ) : (
@@ -218,6 +238,33 @@ export const DistributionList = () => {
           onClose={handleCloseStyle}
         />
       </Snackbar>
+      <Dialog open={openComments} onClose={() => setOpenComments(false)}>
+        <DialogTitle className={classes.titleSize} id="alert-dialog-title">
+          {"Editar Comentario"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <TextareaAutosize
+              className={classes.modalArea}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Observación"
+              defaultValue={newComment}
+            />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              setOpenComments(false);
+              setUpdateCommentAction(true);
+            }}
+            color="primary"
+            autoFocus
+          >
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

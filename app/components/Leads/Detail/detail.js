@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Button,
   makeStyles,
 } from "@material-ui/core";
 import MuiPhoneNumber from "material-ui-phone-number";
@@ -14,7 +15,7 @@ import { tabPanel } from "./styles/tabsStyles";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const Detail = () => {
+export const Detail = ({ lead }) => {
   const classes = useStyles();
 
   return (
@@ -26,6 +27,7 @@ export const Detail = () => {
         <FormControl className={classes.formControl}>
           <MuiPhoneNumber
             label="Teléfono"
+            value={lead.telefono}
             defaultCountry="mx"
             onChange={(e) => console.log(e)}
           />
@@ -33,13 +35,24 @@ export const Detail = () => {
       </Grid>
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
-          <TextField label="Correo Electrónico" />
+          <TextField
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={lead.email}
+            label="Correo Electrónico"
+          />
         </FormControl>
       </Grid>
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
           <InputLabel>Estatus</InputLabel>
-          <Select>
+          <Select
+            value={lead.status}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          >
             <MenuItem value={1}>Ventas</MenuItem>
             <MenuItem value={2}>Reservas sin pago</MenuItem>
             <MenuItem value={5}>Control de calidad</MenuItem>
@@ -61,17 +74,31 @@ export const Detail = () => {
       </Grid>
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
-          <TextField label="De dónde nos vio" />
+          <TextField
+            value={lead.campania}
+            label="De dónde nos vio"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
         </FormControl>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={8}>
         <FormControl className={classes.formControl}>
-          <TextField label="IP donde se registró" />
+          <TextField
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={lead.observacion}
+            label="Observaciones"
+          />
         </FormControl>
       </Grid>
-      <Grid item md={12}>
+      <Grid item md={12} xs={12}>
         <FormControl className={classes.formControl}>
-          <TextField label="Observaciones" />
+          <Button variant="contained" color="primary">
+            Actualizar
+          </Button>
         </FormControl>
       </Grid>
     </Grid>

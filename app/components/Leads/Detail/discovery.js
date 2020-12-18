@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Button,
   makeStyles,
 } from "@material-ui/core";
 import { tabPanel } from "./styles/tabsStyles";
@@ -36,28 +37,43 @@ export const Discovery = () => {
 
     setRoomArray(_temp);
     setFetch(false);
+    console.log(pax);
   }, [rooms, fetch]);
 
-  const setRoom = ({ data, room }) => {
-    let _pax = [];
-    _pax = data;
-    const _temp = _pax.concat()
+  const setRoom = ({ data, room, type }) => {
+    console.log(room);
+    let _pax = pax;
+    if (pax.length <= 0) {
+      _pax[room] = data;
+    } else {
+      if (type == 1) {
+        if (_pax[room]) {
+          _pax[room].adults = data.adults;
+        } else {
+          _pax.push(data);
+        }
+      } else {
+        if (_pax[room]) {
+          _pax[room].childs = data.childs;
+        }
+      }
+    }
 
-    console.log(_pax);
-
+    setPax(_pax);
+    setFetch(true);
   };
 
   return (
     <Grid container spacing={2}>
-      <Grid item md={12}>
+      <Grid item md={12} xs={12}>
         <Typography variant="h6">Discovery</Typography>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <TextField label="Precio de la habitación" type="number" />
         </FormControl>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Estado Civil</InputLabel>
           <Select>
@@ -69,7 +85,7 @@ export const Discovery = () => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={4} xs={12}>
         <FormControl className={classes.formControl}>
           <InputLabel>Estado del Lead</InputLabel>
           <Select>
@@ -78,7 +94,7 @@ export const Discovery = () => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <TextField
             value={rooms}
@@ -91,7 +107,7 @@ export const Discovery = () => {
           />
         </FormControl>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Fechas</InputLabel>
           <Select>
@@ -105,7 +121,7 @@ export const Discovery = () => {
         roomArray.map((value, index) => {
           return (
             <>
-              <Grid item md={6}>
+              <Grid item md={6} xs={12}>
                 <FormControl className={classes.formControl}>
                   <RoomComponent room={index} setPax={setRoom} />
                 </FormControl>
@@ -116,6 +132,13 @@ export const Discovery = () => {
       ) : (
         <></>
       )}
+      <Grid item md={12} xs={12}>
+        <FormControl className={classes.formControl}>
+          <Button variant="contained" color="primary">
+            Guardar
+          </Button>
+        </FormControl>
+      </Grid>
     </Grid>
   );
 };

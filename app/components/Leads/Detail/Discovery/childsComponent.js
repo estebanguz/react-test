@@ -31,25 +31,19 @@ export const ChildsComponent = ({ room, setPax }) => {
   };
 
   const _addAge = ({ ageValue, index }) => {
-    const _temp = [];
-
-    for (let i = 0; i < age.length; i++) {
-      if (i == index) {
-        _temp[index] = parseInt(ageValue);
-      } else {
-        _temp[i] = age[i];
-      }
-    }
+    const _temp = age; 
+    _temp[index] = ageValue;   
 
     setAge(_temp);
 
-    const _room = [];
-    _room[room] = {
-      childs,
-      age,
+    const _room = {
+      childs: {
+        quantity: childs,
+        age
+      }      
     };
 
-    setPax({ data: _room });
+    setPax({ data: _room, room, type: 2 });
   };
 
   return (

@@ -10,6 +10,8 @@ import EmailIcon from "@material-ui/icons/Email";
 import { leadsTableStyles } from "./styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import base64 from "base-64";
 
 const classes = makeStyles((theme) => leadsTableStyles(theme));
 
@@ -23,6 +25,9 @@ export const columns = ({
   viewAction,
   ActionRowComponent,
   setForceSearch,
+  commentsClick,
+  setCurrentComment,
+  setCurrentId,
 }) => {
   let _array = [];
 
@@ -93,7 +98,10 @@ export const columns = ({
       customBodyRender: (value) => {
         return (
           <div className={classes.buttonsIcons}>
-            <IconButton onClick={() => emailAction({ mail: value })} aria-label="view">
+            <IconButton
+              onClick={() => emailAction({ mail: value })}
+              aria-label="view"
+            >
               <EmailIcon />
             </IconButton>
           </div>
@@ -169,13 +177,36 @@ export const columns = ({
         filter: false,
         customBodyRender: (value) => {
           return (
-            <IconButton
-              onClick={() => viewAction()}
-              color="primary"
-              aria-label="view"
-            >
-              <VisibilityIcon />
-            </IconButton>
+            <Link to={`/app/booker/leads/${base64.encode(value)}`}>
+              <IconButton
+                onClick={() => viewAction()}
+                color="primary"
+                aria-label="view"
+              >
+                <VisibilityIcon />
+              </IconButton>
+            </Link>
+          );
+        },
+      },
+    });
+  }
+
+  if (type == "distribution") {
+    _array.push({
+      name: "observacion",
+      label: "Observación",
+      options: {
+        filter: false,
+        customBodyRender: (value) => {
+          return (
+            <TextField
+              value={value.comments}
+              onClick={(e) => {
+                commentsClick(true);
+                setCurrentComment(value);
+              }}
+            />
           );
         },
       },

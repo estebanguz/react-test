@@ -26,7 +26,10 @@ export const LeadsMuiTable = ({
     console.log("");
   },
   actionRowComponent,
-  setForceSearch
+  setForceSearch,
+  commentsClick,
+  setCurrentComment,
+  setCurrentId,
 }) => {
   const classes = useStyles();
 
@@ -39,7 +42,10 @@ export const LeadsMuiTable = ({
     whatsappAction,
     viewAction,
     ActionRowComponent: actionRowComponent,
-    setForceSearch
+    setForceSearch,
+    commentsClick,
+    setCurrentComment,
+    setCurrentId
   });
 
   const options = {

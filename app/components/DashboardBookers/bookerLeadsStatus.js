@@ -35,6 +35,7 @@ export const BookerLeadsStatus = ({ lead = 0, setForceSearch, className }) => {
         >
           <MenuItem value={1}>Ventas</MenuItem>
           <MenuItem value={2}>Reservas sin pago</MenuItem>
+          <MenuItem value={603}>Apartado</MenuItem>
           <MenuItem value={5}>Control de calidad</MenuItem>
           <MenuItem value={6}>Fuera de Servicio</MenuItem>
           <MenuItem value={7}>Número inválido</MenuItem>

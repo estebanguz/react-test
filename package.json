@@ -105,6 +105,7 @@
     "acorn": "^6.1.1",
     "autosuggest-highlight": "^3.1.1",
     "axios": "^0.19.2",
+    "base-64": "^1.0.0",
     "bourbon": "^5.1.0",
     "bourbon-neat": "^3.0.0",
     "chalk": "^2.4.1",
