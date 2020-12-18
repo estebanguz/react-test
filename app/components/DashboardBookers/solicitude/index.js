@@ -433,7 +433,7 @@ export const SolicitudeStepper = () => {
 
   return (
     <div className={classes.root}>
-      {redirect ? <Redirect to="/booker/leads" /> : null}
+      {redirect ? <Redirect to="/app/booker/leads" /> : null}
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
