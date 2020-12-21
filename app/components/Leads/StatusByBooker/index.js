@@ -10,8 +10,8 @@ export const StatusByBookerComponent = () => {
   });
   return (
     <h1>
-      Reporte de Ventas{" "}
-      {_bookerId.bookerId ? `Asesor Id: ${_bookerId.bookerId}` : ""}
+      Reporte de Ventas
+      {_bookerId.bookerId ? ` Asesor Id: ${_bookerId.bookerId}` : ""}
     </h1>
   );
 };

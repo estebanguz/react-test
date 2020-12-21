@@ -2,11 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import moment from "moment";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -20,18 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CoupleData = ({
-  coupleName,
-  coupleAge,
-  coupleOcupation,
-  coupleCompany,
-  couplePosition,
-  setCoupleName,
-  setCoupleAge,
-  setCoupleOcupation,
-  setCoupleCompany,
-  setCouplePosition,
-}) => {
+export const CoupleData = (props) => {
   const classes = useStyles();
 
   return (
@@ -41,8 +26,8 @@ export const CoupleData = ({
           <Grid item xs={12} md={4}>
             <FormControl className={classes.formControl}>
               <TextField
-                value={coupleName}
-                onInput={(e) => setCoupleName(e.target.value)}
+                value={props.coupleName}
+                onInput={(e) => props.setCoupleName(e.target.value)}
                 label="Nombre de la Pareja"
               />
             </FormControl>
@@ -51,8 +36,8 @@ export const CoupleData = ({
             <FormControl className={classes.formControl}>
               <TextField
                 label="Edad"
-                value={coupleAge}
-                onInput={(e) => setCoupleAge(e.target.value)}
+                value={props.coupleAge}
+                onInput={(e) => props.setCoupleAge(e.target.value)}
                 type="number"
               />
             </FormControl>
@@ -60,8 +45,8 @@ export const CoupleData = ({
           <Grid item xs={12} md={4}>
             <FormControl className={classes.formControl}>
               <TextField
-                value={coupleOcupation}
-                onInput={(e) => setCoupleOcupation(e.target.value)}
+                value={props.coupleOcupation}
+                onInput={(e) => props.setCoupleOcupation(e.target.value)}
                 label="Profesión del huesped"
               />
             </FormControl>
@@ -69,8 +54,8 @@ export const CoupleData = ({
           <Grid item xs={12} md={4}>
             <FormControl className={classes.formControl}>
               <TextField
-                value={coupleCompany}
-                onInput={(e) => setCoupleCompany(e.target.value)}
+                value={props.coupleCompany}
+                onInput={(e) => props.setCoupleCompany(e.target.value)}
                 label="Empresa en donde labora"
               />
             </FormControl>
@@ -78,8 +63,8 @@ export const CoupleData = ({
           <Grid item xs={12} md={4}>
             <FormControl className={classes.formControl}>
               <TextField
-                value={couplePosition}
-                onInput={(e) => setCouplePosition(e.target.value)}
+                value={props.couplePosition}
+                onInput={(e) => props.setCouplePosition(e.target.value)}
                 label="Cargo"
               />
             </FormControl>

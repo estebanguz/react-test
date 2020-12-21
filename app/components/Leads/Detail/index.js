@@ -16,7 +16,8 @@ export const DetailLead = () => {
   const params = useParams();
   const [tabStatus, setTabStatus] = useState(0);
   const [solicitude, setSolicitude] = useState(false);
-  const [lead, setResponse] = useLeadDetail({ leadId: params.leadId });
+  const [lead, setResponse] = useLeadDetail({ leadId: params.leadId });  
+
   return (
     <Grid container>
       {solicitude ? <Redirect to="/app/booker/solicitude" /> : <></>}

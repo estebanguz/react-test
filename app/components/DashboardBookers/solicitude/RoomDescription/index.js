@@ -15,8 +15,8 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import MomentUtils from "@date-io/moment";
-import AutoCompleteSelect from "../../../components/HotelSelect/index";
-import { useBanks } from "../hooks/useBanks";
+import AutoCompleteSelect from "../../../../components/HotelSelect/index";
+import { useBanks } from "../../hooks/useBanks";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

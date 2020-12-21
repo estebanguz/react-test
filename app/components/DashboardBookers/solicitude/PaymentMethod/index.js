@@ -9,8 +9,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-import AutoCompleteSelect from "../../../components/HotelSelect/index";
-import { useBanks } from "../hooks/useBanks";
+import AutoCompleteSelect from "../../../../components/HotelSelect/index";
+import { useBanks } from "../../hooks/useBanks";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,24 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const PaymentMethod = ({
-  cardNumber,
-  cardName,
-  cardExp,
-  cardCvc,
-  cardType,
-  cardBank,
-  cardConcept,
-  quantity,
-  setCardNumber,
-  setCardName,
-  setCardExp,
-  setCardCvc,
-  setCardType,
-  setCardBank,
-  setCardConcept,
-  setQuantity,
-}) => {
+export const PaymentMethod = (props) => {
+  console.log(props);
   const classes = useStyles();
   const [focus, setFocus] = useState();
   const [banks] = useBanks();
@@ -49,19 +33,19 @@ export const PaymentMethod = ({
     <Grid container spacing={2} className={classes.marginBottom}>
       <Grid item xs={12}>
         <Cards
-          cvc={cardCvc}
-          expiry={cardExp}
+          cvc={props.cardCvc}
+          expiry={props.cardExp}
           focused={focus}
-          name={cardName}
-          number={cardNumber}
+          name={props.cardName}
+          number={props.cardNumber}
         />
       </Grid>
       <Grid item xs={12} md={6}>
         <FormControl className={classes.formControl}>
           <TextField
-            value={cardNumber}
+            value={props.cardNumber}
             onInput={(e) => {
-              setCardNumber(e.target.value);
+              props.setCardNumber(e.target.value);
               setFocus(e.target);
             }}
             label="Número de tarjeta"
@@ -73,9 +57,9 @@ export const PaymentMethod = ({
         <FormControl className={classes.formControl}>
           <TextField
             label="Titular de la tarjeta"
-            value={cardName}
+            value={props.cardName}
             onInput={(e) => {
-              setCardName(e.target.value);
+              props.setCardName(e.target.value);
               setFocus(e.target);
             }}
           />
@@ -85,10 +69,10 @@ export const PaymentMethod = ({
         <FormControl className={classes.formControl}>
           <TextField
             label="Exp"
-            value={cardExp}
+            value={props.cardExp}
             placeholder="12/22"
             onInput={(e) => {
-              setCardExp(e.target.value);
+              props.setCardExp(e.target.value);
               setFocus(e.target);
             }}
           />
@@ -98,10 +82,10 @@ export const PaymentMethod = ({
         <FormControl className={classes.formControl}>
           <TextField
             label="CVC"
-			value={cardCvc}			
+            value={props.cardCvc}
             onInput={(e) => {
-              setCardCvc(e.target.value);
-              setFocus('cvc');
+              props.setCardCvc(e.target.value);
+              setFocus("cvc");
             }}
             type="number"
           />
@@ -112,8 +96,8 @@ export const PaymentMethod = ({
           <InputLabel id="demo-simple-select-label">Tipo de Tarjeta</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
-            value={cardType}
-            onChange={(e) => setCardType(e.target.value)}
+            value={props.cardType}
+            onChange={(e) => props.setCardType(e.target.value)}
           >
             <MenuItem value="">
               <em>None</em>
@@ -128,8 +112,8 @@ export const PaymentMethod = ({
           <AutoCompleteSelect
             title="Banco"
             options={banks}
-            option={cardBank}
-            callBack={(e) => setCardBank(e)}
+            option={props.cardBank}
+            callBack={(e) => props.setCardBank(e)}
           />
         </FormControl>
       </Grid>
@@ -138,8 +122,8 @@ export const PaymentMethod = ({
           <InputLabel id="demo-simple-select-label">Concepto</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
-            value={cardConcept}
-            onChange={(e) => setCardConcept(e.target.value)}
+            value={props.cardConcept}
+            onChange={(e) => props.setCardConcept(e.target.value)}
           >
             <MenuItem value="">
               <em>None</em>
@@ -154,8 +138,8 @@ export const PaymentMethod = ({
         <FormControl className={classes.formControl}>
           <TextField
             placeholder="Monto escrito en MXN"
-            value={quantity}
-            onInput={(e) => setQuantity(e.target.value)}
+            value={props.quantity}
+            onInput={(e) => props.setQuantity(e.target.value)}
             label="Monto a cargar en la tarjeta"
             type="number"
           />
