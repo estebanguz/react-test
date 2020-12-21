@@ -23,6 +23,7 @@ import {
   HotelDetails,
   LeadDetail,
   CreateLead,
+  StatusByBookerContainer,
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -60,6 +61,18 @@ class Application extends React.Component {
             exact
             path="/app/leads/distribution"
             Component={Distribution}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute          
+            exact
+            path="/app/leads/report"
+            Component={StatusByBookerContainer}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/leads/report/:bookerId"
+            Component={StatusByBookerContainer}
             roles={[ADMIN, GERENTE]}
           />
           <AuthRoute
