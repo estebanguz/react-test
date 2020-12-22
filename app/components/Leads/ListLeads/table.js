@@ -32,7 +32,6 @@ export const LeadsMuiTable = ({
   setCurrentId,
 }) => {
   const classes = useStyles();
-
   const _columns = columns({
     type,
     actionCheckbox,
@@ -56,7 +55,7 @@ export const LeadsMuiTable = ({
     serverSide: true,
     search: false,
     filter: false,
-    count: 16,
+    count: leads.total_pages,
     download: false,
     selectableRows: "none",
     onTableChange: (action, tableState) => {

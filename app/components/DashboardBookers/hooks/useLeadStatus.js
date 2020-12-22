@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { updateLeadStatus } from "../../../api/leads";
 
-export const useLeadStatus = ({ leadId, status }) => {
+export const useLeadStatus = ({ leadId, status, setForceSearch }) => {
   const [statusLead, setStatusLead] = useState(status);
   const [resp, setResp] = useState([]);
   const [fetch, setFetch] = useState(false);
@@ -10,6 +10,7 @@ export const useLeadStatus = ({ leadId, status }) => {
   const updateStatus = async () => {
     const res = await updateLeadStatus({ leadId, status: statusLead });
     setResp(res);
+    setForceSearch(true);
   };
 
   useEffect(() => {
