@@ -96,7 +96,7 @@ export const uploadExcelLeads = async({data})=>{
     return await axios.post(
       `${config.hostname}/lead/create`,
       {
-        dato : datos
+        data : datos
       },
       {
         headers: {
