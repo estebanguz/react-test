@@ -94,7 +94,7 @@ export const uploadExcelLeads = async({data})=>{
     const datos = ConvertExcelToJson(data);
     const token = getJWTCrm();
     return await axios.post(
-      `${config.hostname}/lead/excel`,
+      `${config.hostname}/lead/create`,
       {
         dato : datos
       },
