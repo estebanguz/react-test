@@ -4,34 +4,30 @@ import { tabPanel } from "../styles/tabsStyles";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const AdultsComponent = ({ room, setPax }) => {
+export const AdultsComponent = ({ room, setPax, adultos,ageAdultos}) => {
   const classes = useStyles();
-  const [adults, setAdults] = useState(1);
-  const [age, setAge] = useState([20]);
-  const [fetch, setFetch] = useState(false);
+  const [adults, setAdults] = useState(adultos);
+  const [age, setAge] = useState([]);
+  const [fetch, setFetch] = useState(true);
+  const [edadDiscovery, setAgeDiscovery] = useState(ageAdultos)
 
-  useEffect(() => {
+  useEffect(() => {  
     if (fetch) {
       addAge();
     }
     console.log(age);
   }, [fetch]);
-
-  const addAge = () => {
-    const _temp = [];
-    const _age = [];
-
-    for (let i = 0; i < adults; i++) {
-      _temp.push(20);
-    }
-
-    _temp.concat(_age);
-
-    setAge(_temp);
+  
+  const addAge = () => {   
+    setAge(edadDiscovery);
     setFetch(false);
   };
 
-  const _addAge = ({ ageValue, index }) => {
+  const groupEdad = () => {
+
+  }
+
+  const _addAge = ({ ageValue, index }) => {   
     const _temp = age; 
     _temp[index] = ageValue;   
 
@@ -41,7 +37,7 @@ export const AdultsComponent = ({ room, setPax }) => {
       adults: {
         quantity: adults,
         age
-      }      
+      }
     };
 
     setPax({ data: _room, room, type: 1 });

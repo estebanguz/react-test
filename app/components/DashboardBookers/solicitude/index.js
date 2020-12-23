@@ -74,6 +74,7 @@ export const SolicitudeStepper = () => {
   const steps = getSteps();
   const [addReservation] = useReservation();
 
+
   useEffect(() => {
     console.log(`Index ${companions}`);
   }, [companions]);

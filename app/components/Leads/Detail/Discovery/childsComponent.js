@@ -4,29 +4,20 @@ import { tabPanel } from "../styles/tabsStyles";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const ChildsComponent = ({ room, setPax }) => {
+export const ChildsComponent = ({ room, setPax, noChilds, ageChilds }) => {
   const classes = useStyles();
-  const [childs, setChilds] = useState(0);
+  const [childs, setChilds] = useState(noChilds);
   const [age, setAge] = useState([]);
-  const [fetch, setFetch] = useState(false);
-
-  useEffect(() => {
+  const [fetch, setFetch] = useState(true);
+  const [ageDiscovery,setAgeDiscovery] = useState(ageChilds)
+  useEffect(() => {    
     if (fetch) {
       addAge();
     }
   }, [fetch]);
 
-  const addAge = () => {
-    const _temp = [];
-    const _age = [];
-
-    for (let i = 0; i < childs; i++) {
-      _temp.push(0);
-    }
-
-    _temp.concat(_age);
-
-    setAge(_temp);
+  const addAge = () => {    
+    setAge(ageDiscovery);
     setFetch(false);
   };
 

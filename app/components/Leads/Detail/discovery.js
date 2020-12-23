@@ -16,9 +16,8 @@ import { createDiscovery } from "../../../api/discovery/index";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const Discovery = ({ lead }) => {
+export const Discovery = ({ lead , discovery }) => {
   const classes = useStyles();
-
   const [rooms, setRooms] = useState(1);
   const [roomArray, setRoomArray] = useState([1]);
   const [pax, setPax] = useState([]);
@@ -30,6 +29,14 @@ export const Discovery = ({ lead }) => {
   const [arrival, setArrival] = useState("");
   const [departure, setDeparture] = useState("");
   const [save, setSave] = useState(false);
+  const [habitaciones ,setHabitaciones] = useState([])
+
+  useEffect (()=>{
+      setPrice(discovery.discovery.precio)
+      setRooms(discovery.discovery.cuartos)
+      setMarital(discovery.discovery.estado_civil)
+      setHabitaciones(discovery.discoveryHabitacion)       
+  },[discovery])
 
   useEffect(() => {
     if (rooms === 0) {
@@ -90,6 +97,7 @@ export const Discovery = ({ lead }) => {
     setFetch(true);
   };
 
+
   return (
     <Grid container spacing={2}>
       <Grid item md={12} xs={12}>
@@ -149,12 +157,19 @@ export const Discovery = ({ lead }) => {
         </FormControl>
       </Grid>
       {roomArray.length > 0 ? (
-        roomArray.map((value, index) => {
+        habitaciones.map((value, index) => {                    
           return (
             <>
               <Grid item md={6} xs={12}>
                 <FormControl className={classes.formControl}>
-                  <RoomComponent room={index} setPax={setRoom} />
+                  <RoomComponent 
+                    room = {index}
+                    setPax={setRoom}
+                    adultos = {value.adultos}
+                    childs = {value.childs}
+                    ageAdultos = {value.ageAdult}                                
+                    ageChilds = {value.ageChild}
+                  />
                 </FormControl>
               </Grid>
             </>

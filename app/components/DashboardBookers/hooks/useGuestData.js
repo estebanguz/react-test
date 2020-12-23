@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useGetDiscovery } from "../hooks/useGetDiscovery"
 
 export const useGuestData = () => {
+  const [discovery] = useGetDiscovery()
   const [guestName, setGuestName] = useState("");
   const [guestAge, setGuestAge] = useState("");
   const [guestProffession, setGuestProfession] = useState("");
   const [guestCompany, setGuestCompany] = useState("");
   const [guestPosition, setGuestPosition] = useState("");
-  const [guestMartialStatus, setGuestMaritalStatus] = useState("");
+  const [guestMartialStatus, setGuestMaritalStatus] = useState(discovery.estado_civil);
   const [guestAddress, setGuestAddress] = useState("");
   const [guestCity, setGuestCity] = useState("");
   const [guestState, setGuestState] = useState("");
