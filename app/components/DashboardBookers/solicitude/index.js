@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router';
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -72,7 +73,10 @@ export const SolicitudeStepper = () => {
   const [aprox, realQty, setAprox, setRealQty] = usePooledIncoming();
   const classes = styles();
   const steps = getSteps();
+  const params = useParams();
   const [addReservation] = useReservation();
+
+  console.log(params);
 
   useEffect(() => {
     console.log(`Index ${companions}`);

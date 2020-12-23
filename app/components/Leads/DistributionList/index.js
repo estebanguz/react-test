@@ -21,6 +21,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { useUpdateComments } from "./hooks/useUpdateComments";
+import { LogTable } from "../../Events";
 
 const useStyles = makeStyles((theme) => distributionStyles(theme));
 
@@ -148,49 +149,6 @@ export const DistributionList = () => {
         setFinalDate={setFinalDate}
         setSearch={setSearch}
       />
-      <Paper className={classes.paper} elevation={4}>
-        <AutoCompleteSitio
-          query={query}
-          setQuery={setQuery}
-          data={usersSearch}
-          label="Selecciona el Asesor"
-          selectedItem={selectedUser}
-          setSelectedItem={setSelectedUser}
-        />
-        <Grid
-          container
-          alignItems="flex-start"
-          justify="space-around"
-          row="row"
-          spacing={3}
-        >
-          <Grid item md={6} xs={12}>
-            <TextField
-              id="outlined-password-input"
-              label="Leads a Distribuir"
-              className={classes.textField}
-              type="number"
-              margin="normal"
-              variant="outlined"
-              value={cantidad}
-              onInput={(res) => {
-                setCantidad(res.target.value);
-              }}
-            />
-          </Grid>
-          <Grid item md={6} xs={12}>
-            <br />
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={handleDistribution}
-            >
-              Distribuir
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
       {leads ? (
         <LeadsMuiTable
           leads={leads}
@@ -206,6 +164,40 @@ export const DistributionList = () => {
       ) : (
         <></>
       )}
+
+      <Paper className={classes.paper} elevation={4}>
+        <Grid container spacing={3}>
+          <Grid item md={8} xs={12}>
+            <AutoCompleteSitio
+              query={query}
+              setQuery={setQuery}
+              data={usersSearch}
+              label="Selecciona el Asesor"
+              selectedItem={selectedUser}
+              setSelectedItem={setSelectedUser}
+            />
+          </Grid>
+          <Grid item md={4} xs={12}>
+            <br />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={handleDistribution}
+            >
+              Distribuir
+            </Button>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <Paper className={classes.paper} elevation={4}>
+        <Grid container spacing={3}>
+          <Grid item md={12} xs={12}>
+            <LogTable />
+          </Grid>
+        </Grid>
+      </Paper>
 
       <Snackbar
         anchorOrigin={{

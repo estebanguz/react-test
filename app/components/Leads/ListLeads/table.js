@@ -44,7 +44,7 @@ export const LeadsMuiTable = ({
     setForceSearch,
     commentsClick,
     setCurrentComment,
-    setCurrentId
+    setCurrentId,
   });
 
   const options = {
@@ -55,7 +55,7 @@ export const LeadsMuiTable = ({
     serverSide: true,
     search: false,
     filter: false,
-    count: leads.total_pages,
+    count: leads.total_rows,
     download: false,
     selectableRows: "none",
     onTableChange: (action, tableState) => {
@@ -72,7 +72,11 @@ export const LeadsMuiTable = ({
   return (
     <MUIDataTable
       className={classes.table}
-      title="Leads Recientes"
+      title={`${
+        type == "leads"
+          ? "Leads Recientes"
+          : "Paso 1: Seleccione los leads a distribuir"
+      }`}
       data={leads.data}
       columns={_columns}
       options={options}
