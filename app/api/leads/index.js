@@ -1,5 +1,5 @@
 import axios from "axios";
-import base64 from "base-64";
+import { get } from "api-calls/customs";
 import config from "../config";
 import { getJWTCrm } from "../../utils/auth";
 
@@ -31,6 +31,16 @@ export const getLeads = async ({
       message: err.response.data.payload.message,
     };
   }
+};
+
+export const filterUser = async (data) => {
+  const url = `/filter_user?id=${data.idBooker}&initial_date=${
+    data.initialDate
+  }&final_date=${data.finalDate}&page=${data.page}&size=${data.size}`;
+
+  const response = await get(url);
+
+  return response;
 };
 
 export const updateLeadStatus = async ({ leadId, status }) => {

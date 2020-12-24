@@ -75,7 +75,7 @@ export const LeadsMuiTable = ({
       title={`${
         type == "leads"
           ? "Leads Recientes"
-          : "Paso 1: Seleccione los leads a distribuir"
+          : "Seleccione los leads a afectar"
       }`}
       data={leads.data}
       columns={_columns}
