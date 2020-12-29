@@ -16,7 +16,7 @@ import { createDiscovery } from "../../../api/discovery/index";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const Discovery = ({ lead , discovery }) => {
+export const Discovery = ({ lead, discovery }) => {
   const classes = useStyles();
   const [rooms, setRooms] = useState(1);
   const [roomArray, setRoomArray] = useState([]);
@@ -28,30 +28,48 @@ export const Discovery = ({ lead , discovery }) => {
   const [dates, setDates] = useState(false);
   const [arrival, setArrival] = useState("");
   const [departure, setDeparture] = useState("");
-  const [save, setSave] = useState(false);  
-  const [reset,setReset] = useState(false)
+  const [save, setSave] = useState(false);
+  const [reset, setReset] = useState(false);
 
-  useEffect (()=>{ 
+  useEffect(() => {
     if (rooms === 0) {
-      setRooms(1);    
-    }       
-    const _temp = [];   
-    for (let i = 0; i < rooms; i++) 
-    {             
-        _temp.push({id:0, adultos: 0, childs: 0, ageAdult: [0], ageChild: [0]})            
-    }        
-    setRoomArray(_temp);                   
-    setReset(false)
-    
-  },[reset,rooms])
+      setRooms(1);
+    }
+    const _temp = [];
+    for (let i = 0; i < rooms; i++) {
+      _temp.push({
+        id: 0,
+        adultos: 0,
+        childs: 0,
+        ageAdult: [0],
+        ageChild: [0],
+      });
+    }
+    setRoomArray(_temp);
+    setReset(false);
+  }, [reset, rooms]);
 
-  useEffect(() => {    
-    if(discovery.discovery !== undefined){
-      setPrice(discovery.discovery.precio)
-      setRooms(discovery.discovery.cuartos)
-      setMarital(discovery.discovery.estado_civil)    
-      setRoomArray(discovery.discoveryHabitacion)     
-     }
+  useEffect(() => {
+    if (discovery.discovery !== undefined) {
+      setPrice(discovery.discovery.precio);
+      setRooms(discovery.discovery.cuartos);
+      setMarital(discovery.discovery.estado_civil);
+      setRoomArray(discovery.discoveryHabitacion);
+      const _paxTemp = [];
+      discovery.discoveryHabitacion.map((r, i) => {
+        _paxTemp.push({
+          adults: {
+            age: r.ageAdult,
+            quantity: r.adultos,
+          },
+          childs: {
+            age: r.ageChild,
+            quantity: r.childs,
+          },
+        });
+      });
+      setPax(_paxTemp);
+    }
 
     if (save) {
       _createDiscovery({
@@ -68,14 +86,15 @@ export const Discovery = ({ lead , discovery }) => {
       });
       setSave(false);
     }
-  }, [fetch , discovery]);
+  }, [save, fetch, discovery]);
 
   const _createDiscovery = async (data) => {
     const resp = await createDiscovery({ data });
+    console.log(resp);
   };
 
-  const setRoom = ({ data, room, type }) => {   
-    console.log(room);    
+  const setRoom = ({ data, room, type }) => {
+    console.log(room);
     let _pax = pax;
     if (pax.length <= 0) {
       _pax[room] = data;
@@ -95,7 +114,7 @@ export const Discovery = ({ lead , discovery }) => {
 
     setPax(_pax);
     setFetch(true);
-    setReset(true)
+    setReset(true);
   };
 
   return (
@@ -139,8 +158,8 @@ export const Discovery = ({ lead , discovery }) => {
           <TextField
             value={rooms}
             onChange={(e) => {
-              setReset(true)
-              setRooms(e.target.value);          
+              setReset(true);
+              setRooms(e.target.value);
             }}
             label="Número de Habitaciones"
             type="number"
@@ -157,18 +176,18 @@ export const Discovery = ({ lead , discovery }) => {
         </FormControl>
       </Grid>
       {roomArray.length > 0 ? (
-          roomArray.map((value, index) => {               
+        roomArray.map((value, index) => {
           return (
             <>
               <Grid item md={6} xs={12}>
                 <FormControl className={classes.formControl}>
-                  <RoomComponent 
-                    room = {index}
+                  <RoomComponent
+                    room={index}
                     setPax={setRoom}
-                    adultos = {value.adultos}
-                    childs = {value.childs}
-                    ageAdultos = {value.ageAdult}                                
-                    ageChilds = {value.ageChild}
+                    adultos={value.adultos}
+                    childs={value.childs}
+                    ageAdultos={value.ageAdult}
+                    ageChilds={value.ageChild}
                   />
                 </FormControl>
               </Grid>

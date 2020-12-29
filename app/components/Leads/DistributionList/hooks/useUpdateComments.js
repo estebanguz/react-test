@@ -11,7 +11,6 @@ export const useUpdateComments = ({
 
   useEffect(() => {
     if (updateCommentAction) {
-      console.log(newComment);
       updateComment();
     }
     

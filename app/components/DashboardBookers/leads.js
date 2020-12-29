@@ -13,7 +13,7 @@ import { WhatsApp } from "@material-ui/icons";
 import { isMobile } from "react-device-detect";
 
 //const socket = io('http://io.apicrmcancun.gq/');
-const socket = io("http://localhost:1234");
+//const socket = io("http://localhost:1234");
 
 const useStyles = makeStyles((theme) => customStyles(theme));
 

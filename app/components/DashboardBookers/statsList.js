@@ -65,7 +65,7 @@ export const StatsList = ({ stats, callback }) => {
             }}
             item
             md={3}
-            xs={6}
+            xs={12}
           >
             <StatsItem stat={stat} />
           </Grid>

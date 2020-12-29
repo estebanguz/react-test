@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { filterUser } from "enl-api/leads";
 
-export const useGetLeads = ({ selectedItem }) => {
+export const useGetLeads = ({ selectedItem, setSelectedLeads }) => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
+  const [status, setStatus] = useState();
   const [initialDate, setInitalDate] = useState(
     moment()
       .startOf("month")
@@ -21,16 +22,18 @@ export const useGetLeads = ({ selectedItem }) => {
   useEffect(() => {
     if (selectedItem && search) {
       getLeads();
+      setSelectedLeads([]);
     }
   }, [selectedItem, search]);
 
   const getLeads = async () => {
     const data = {
-      idBooker: selectedItem.id,
+      idBooker: selectedItem.id_user,
       page,
       size,
-      initialDate,
-      finalDate,
+      initialDate: moment(initialDate).format("YYYY-MM-DD"),
+      finalDate: moment(finalDate).format("YYYY-MM-DD"),
+      status,
     };
     const resp = await filterUser(data);
 
@@ -49,5 +52,5 @@ export const useGetLeads = ({ selectedItem }) => {
     };
   };
 
-  return [getPropsLeads, response];
+  return [getPropsLeads, response, setSearch, setStatus, setPage];
 };

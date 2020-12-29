@@ -90,55 +90,48 @@ export const columns = ({
   });
 
   _array.push({
-    name: "email",
-    label: "Email",
+    name: "telefono",
+    label: "Teléfono",
     options: {
       filter: true,
       sort: false,
       customBodyRender: (value) => {
-        return (
-          <div className={classes.buttonsIcons}>
-            <IconButton
-              onClick={() => emailAction({ mail: value })}
-              aria-label="view"
-            >
-              <EmailIcon />
-            </IconButton>
-          </div>
-        );
+        return value;
       },
     },
   });
 
-  _array.push({
-    name: "telefono",
-    label: "Telefono",
-    options: {
-      filter: true,
-      sort: false,
-      customBodyRender: (value) => {
-        const phone = value;
-        return (
-          <div className={classes.buttonsIcons}>
-            <IconButton
-              onClick={() => phoneAction({ phone })}
-              color="primary"
-              aria-label="view"
-            >
-              <CallIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => whatsappAction({ phone })}
-              color="secondary"
-              aria-label="view"
-            >
-              <WhatsAppIcon />
-            </IconButton>
-          </div>
-        );
+  if (type == "leads") {
+    _array.push({
+      name: "telefono",
+      label: "Telefono",
+      options: {
+        filter: true,
+        sort: false,
+        customBodyRender: (value) => {
+          const phone = value;
+          return (
+            <div className={classes.buttonsIcons}>
+              <IconButton
+                onClick={() => phoneAction({ phone })}
+                color="primary"
+                aria-label="view"
+              >
+                <CallIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => whatsappAction({ phone })}
+                color="secondary"
+                aria-label="view"
+              >
+                <WhatsAppIcon />
+              </IconButton>
+            </div>
+          );
+        },
       },
-    },
-  });
+    });
+  }
 
   _array.push({
     name: "ciudad",
@@ -186,27 +179,6 @@ export const columns = ({
                 <VisibilityIcon />
               </IconButton>
             </Link>
-          );
-        },
-      },
-    });
-  }
-
-  if (type == "distribution") {
-    _array.push({
-      name: "observacion",
-      label: "Observación",
-      options: {
-        filter: false,
-        customBodyRender: (value) => {
-          return (
-            <TextField
-              value={value.comments}
-              onClick={(e) => {
-                commentsClick(true);
-                setCurrentComment(value);
-              }}
-            />
           );
         },
       },

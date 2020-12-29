@@ -34,5 +34,5 @@ export const useGetAutocomplete = ({ repository }) => {
     };
   };
 
-  return [getProps, selectedItem];
+  return [getProps, selectedItem, setSearch];
 };

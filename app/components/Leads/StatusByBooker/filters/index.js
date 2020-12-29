@@ -27,7 +27,7 @@ export const Filters = ({ getPropsAutoComplete, getPropsLeads }) => {
                 label="Fecha Inicial"
                 value={props.initialDate}
                 onChange={(d) => {
-                  props.setInitialDate(d);
+                  props.setInitalDate(d);
                 }}
                 animateYearScrolling={false}
               />
@@ -53,7 +53,7 @@ export const Filters = ({ getPropsAutoComplete, getPropsLeads }) => {
               variant="contained"
               color="primary"
             >
-              Primary
+              Buscar
             </Button>
           </Grid>
         </Grid>

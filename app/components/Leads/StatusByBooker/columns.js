@@ -3,7 +3,12 @@ import { Checkbox, TextField } from "@material-ui/core";
 import { leadStatusDesc } from "../../../utils/tools/leadStatusDesc";
 import moment from "moment";
 
-export const getColumns = () => {
+export const getColumns = ({
+  selectLead,
+  selectedLeads,
+  setOpenComments,
+  setCurrentComment,
+}) => {
   return [
     {
       name: "id",
@@ -14,7 +19,8 @@ export const getColumns = () => {
         customBodyRender: (value) => {
           return (
             <Checkbox
-              onClick={() => console.log(value)}
+              checked={selectedLeads.includes(value)}
+              onClick={() => selectLead(value)}
               color="primary"
               inputProps={{ "aria-label": "secondary checkbox" }}
             />
@@ -68,9 +74,10 @@ export const getColumns = () => {
         customBodyRender: (value) => {
           return (
             <TextField
-              value={value}
+              value={value.comments}
               onClick={(e) => {
-                console.log(e);
+                setOpenComments(true);
+                setCurrentComment(value);
               }}
             />
           );

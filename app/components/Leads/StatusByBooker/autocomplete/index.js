@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
   divContainer: {
     position: "absolute",
     zIndex: 1000,
-    [theme.breakpoints.up('md')]: {
-      width: '22%'
+    [theme.breakpoints.up("md")]: {
+      width: "22%",
     },
-    [theme.breakpoints.up('xs')]: {
-      width: '87%'
+    [theme.breakpoints.up("xs")]: {
+      width: "87%",
     },
   },
 }));
@@ -47,13 +47,13 @@ export const AutocompleteUser = (props) => {
               <Paper
                 onClick={() => {
                   props.setSelectedItem(prediction);
-                  props.setQuery(prediction.username);
+                  props.setQuery(prediction.nombre);
                   props.setSearch(false);
                 }}
                 className={classes.paper}
                 elevation={3}
               >
-                {prediction.username}
+                {prediction.nombre}
               </Paper>
             );
           })
