@@ -47,34 +47,7 @@ export const GuestData = (props) => {
                 type="number"
               />
             </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                label="Profesión"
-                value={props.guestProffession}
-                onInput={(e) => props.setGuestProfession(e.target.value)}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.guestCompany}
-                onInput={(e) => props.setGuestCompany(e.target.value)}
-                label="Empresa donde labora"
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.guestPosition}
-                onInput={(e) => props.setGuestPosition(e.target.value)}
-                label="Cargo"
-              />
-            </FormControl>
-          </Grid>
+          </Grid>                             
           <Grid item xs={12} md={3}>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">
@@ -95,16 +68,7 @@ export const GuestData = (props) => {
                 <MenuItem value="Viudo/a">Viudo/a</MenuItem>
               </Select>
             </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.guestAddress}
-                onInput={(e) => props.setGuestAddress(e.target.value)}
-                label="Domicilio"
-              />
-            </FormControl>
-          </Grid>
+          </Grid>          
           <Grid item xs={12} md={3}>
             <FormControl className={classes.formControl}>
               <TextField
@@ -122,17 +86,7 @@ export const GuestData = (props) => {
                 label="Estado"
               />
             </FormControl>
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.guestCp}
-                onInput={(e) => props.setGuestCp(e.target.value)}
-                label="Código postal"
-                type="number"
-              />
-            </FormControl>
-          </Grid>
+          </Grid>         
         </Grid>
       </Grid>
     </Grid>

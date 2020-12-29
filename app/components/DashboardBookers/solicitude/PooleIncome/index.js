@@ -44,19 +44,7 @@ export const PooledIncome = ({ aprox, realQty, setAprox, setRealQty }) => {
             <MenuItem value="3">Mayor a 90,000</MenuItem>
           </Select>
         </FormControl>
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <FormControl className={classes.formControl}>
-          <TextField
-            id="filled-password-input"
-            label="Cantidad Real"
-            value={realQty}
-            onInput={(e) => setRealQty(e.target.value)}
-            placeholder="Cantidad en MXN"
-            type="number"
-          />
-        </FormControl>
-      </Grid>
+      </Grid>      
     </Grid>
   );
 };

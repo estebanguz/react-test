@@ -41,34 +41,7 @@ export const CoupleData = (props) => {
                 type="number"
               />
             </FormControl>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.coupleOcupation}
-                onInput={(e) => props.setCoupleOcupation(e.target.value)}
-                label="Profesión del huesped"
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.coupleCompany}
-                onInput={(e) => props.setCoupleCompany(e.target.value)}
-                label="Empresa en donde labora"
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <FormControl className={classes.formControl}>
-              <TextField
-                value={props.couplePosition}
-                onInput={(e) => props.setCouplePosition(e.target.value)}
-                label="Cargo"
-              />
-            </FormControl>
-          </Grid>
+          </Grid>                            
         </Grid>
       </Grid>
     </Grid>

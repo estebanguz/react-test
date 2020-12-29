@@ -85,6 +85,7 @@ export const RoomDescription = ({
   const hotelOptions = hotels.map((suggestion) => ({
     value: suggestion.id,
     label: suggestion.nombre,
+    destino : suggestion.nombre_destino
   }));
 
   return (
@@ -95,8 +96,7 @@ export const RoomDescription = ({
             label="Destino"
             value={destination}
             onInput={(e) => setDestination(e.target.value)}
-            disabled
-            value="Cancun"
+            disabled       
           />
         </FormControl>
       </Grid>
@@ -106,7 +106,11 @@ export const RoomDescription = ({
             title="Hotel"
             options={hotelOptions}
             option={hotel}
-            callBack={(e) => setHotel(e)}
+            callBack={(e) => {
+                setHotel(e)                
+                setDestination(e.destino)
+              }
+            }
           />
         </FormControl>
       </Grid>

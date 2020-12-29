@@ -33,13 +33,13 @@ export const useRoomDescription = ({leadId}) => {
     let _final = [];
     _final.push({
       id: 1,
-      nombre: "Otro",
+      nombre: "Otro",     
     });
     _options.map((_hotel) => {
       _final.push(_hotel);
     });
 
-    setHotels(_final);
+    setHotels(_final);   
   };
   useEffect(()=>{
     if(discovery.discovery !== undefined){                
@@ -56,7 +56,7 @@ export const useRoomDescription = ({leadId}) => {
 
 
   useEffect(() => {
-    console.log(hotel);
+    console.log(hotel);   
     if (hotels.length <= 0) {
       _getOldHotels();
     }
