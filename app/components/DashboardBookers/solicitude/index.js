@@ -162,7 +162,7 @@ export const SolicitudeStepper = () => {
                           getValidationContactData,
                         })                        
                       ) {
-                        setActiveStep(activeStep + 7);
+                        setActiveStep(activeStep + 1);
                       } else {
                         console.log("Error");
                       }

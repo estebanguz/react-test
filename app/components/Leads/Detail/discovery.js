@@ -29,21 +29,20 @@ export const Discovery = ({ lead , discovery }) => {
   const [arrival, setArrival] = useState("");
   const [departure, setDeparture] = useState("");
   const [save, setSave] = useState(false);  
-  const [reset,setReeset] = useState(false)
+  const [reset,setReset] = useState(false)
 
   useEffect (()=>{ 
     if (rooms === 0) {
-      setRooms(1);
+      setRooms(1);    
     }       
-    if(reset){    
-      const _temp = [];   
-        for (let i = 0; i < rooms; i++) 
-        {             
-           _temp.push({id:0, adultos: 0, childs: 0, ageAdult: [0], ageChild: [0]})            
-        }        
-      setRoomArray(_temp);              
-      console.log(roomArray)
-    }
+    const _temp = [];   
+    for (let i = 0; i < rooms; i++) 
+    {             
+        _temp.push({id:0, adultos: 0, childs: 0, ageAdult: [0], ageChild: [0]})            
+    }        
+    setRoomArray(_temp);                   
+    setReset(false)
+    
   },[reset,rooms])
 
   useEffect(() => {    
@@ -96,6 +95,7 @@ export const Discovery = ({ lead , discovery }) => {
 
     setPax(_pax);
     setFetch(true);
+    setReset(true)
   };
 
   return (
@@ -139,7 +139,7 @@ export const Discovery = ({ lead , discovery }) => {
           <TextField
             value={rooms}
             onChange={(e) => {
-              setReeset(true)
+              setReset(true)
               setRooms(e.target.value);          
             }}
             label="Número de Habitaciones"

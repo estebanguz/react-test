@@ -9,12 +9,26 @@ export const ChildsComponent = ({ room, setPax, noChilds, ageChilds }) => {
   const [childs, setChilds] = useState(noChilds);
   const [age, setAge] = useState([]);
   const [fetch, setFetch] = useState(true);
+  const [reset,setReset] = useState(false)
   const [ageDiscovery,setAgeDiscovery] = useState(ageChilds)
+  
   useEffect(() => {    
     if (fetch) {
       addAge();
     }
   }, [fetch]);
+
+  useEffect(()=>{
+    if(reset)
+    {
+      const _temp = [];
+      for(let i = 0 ; i < childs ; i ++)
+      { 
+          _temp.push(0)
+      }
+      setAge(_temp)
+    }
+  },[childs,reset])
 
   const addAge = () => {    
     setAge(ageDiscovery);
@@ -46,8 +60,8 @@ export const ChildsComponent = ({ room, setPax, noChilds, ageChilds }) => {
             label="Menores"
             type="number"
             onChange={(e) => {
-              setChilds(parseInt(e.target.value));
-              setFetch(true);
+              setReset(true)
+              setChilds(parseInt(e.target.value));             
             }}
           />
         </FormControl>
