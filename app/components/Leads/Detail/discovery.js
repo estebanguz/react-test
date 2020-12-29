@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 import {
   Typography,
   Grid,
@@ -47,10 +49,18 @@ export const Discovery = ({ lead , discovery }) => {
 
   useEffect(() => {    
     if(discovery.discovery !== undefined){
-      setPrice(discovery.discovery.precio)
-      setRooms(discovery.discovery.cuartos)
-      setMarital(discovery.discovery.estado_civil)    
-      setRoomArray(discovery.discoveryHabitacion)     
+        const _discovery =  discovery.discovery;   
+        setPrice(_discovery.precio)
+        setRooms(_discovery.cuartos)
+        setMarital(_discovery.estado_civil)    
+        setRoomArray(discovery.discoveryHabitacion)               
+        const status = (_discovery.fecha_llegada == 'ABIERTO' && _discovery.fecha_salida == 'ABIERTO')? false : true
+        if(status)
+        {                
+          setArrival(_discovery.fecha_llegada)     // M-D-A  O A-D-M
+          setDeparture(_discovery.fecha_salida)    // M-D-A  O A-D-M
+        }
+        setDates(status)
      }
 
     if (save) {
@@ -150,12 +160,44 @@ export const Discovery = ({ lead , discovery }) => {
       <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Fechas</InputLabel>
-          <Select value={dates} onChange={(e) => setDates(e.target.value)}>
+          <Select  value={dates} onChange = {(e) => { setDates(e.target.value)}}>
             <MenuItem value={true}>Fechas Cerradas</MenuItem>
             <MenuItem value={false}>Fechas Abiertas</MenuItem>
           </Select>
         </FormControl>
       </Grid>
+      {dates ? (
+        <Grid item md={6} xs={6} >
+          <FormControl className={classes.formControl}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                label="Fecha de Llegada"
+                value={arrival}
+                onChange={(d) => setArrival(d.toISOString().slice(0, 10))}
+                animateYearScrolling={false}
+              />              
+            </MuiPickersUtilsProvider>
+          </FormControl>
+        </Grid>
+      ) : (
+        ""
+      )}
+      {dates ? (
+        <Grid item md={6} xs={6}>
+          <FormControl className={classes.formControl}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                label="Fecha de Salida"
+                value={departure}
+                onChange={(d) => setDeparture(d.toISOString().slice(0, 10))}
+                animateYearScrolling={false}
+              />
+            </MuiPickersUtilsProvider>
+          </FormControl>
+        </Grid>
+      ) : (
+        ""
+      )}
       {roomArray.length > 0 ? (
           roomArray.map((value, index) => {               
           return (
