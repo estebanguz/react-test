@@ -9,30 +9,36 @@ export const AdultsComponent = ({ room, setPax, adultos,ageAdultos}) => {
   const [adults, setAdults] = useState(adultos);
   const [age, setAge] = useState([]);
   const [fetch, setFetch] = useState(true);
+  const [reset,setReset] = useState(false)
   const [edadDiscovery, setAgeDiscovery] = useState(ageAdultos)
 
-  useEffect(() => {  
+  useEffect(() => {      
     if (fetch) {
       addAge();
-    }
-    console.log(age);
+    }   
   }, [fetch]);
   
+  useEffect(()=>{
+    if(reset)
+    {
+      const _temp = [];
+      for(let i = 0 ; i < adults ; i ++)
+      { 
+          _temp.push(0)
+      }
+      setAge(_temp)
+    }
+  },[adults,reset])
+
   const addAge = () => {   
     setAge(edadDiscovery);
-    setFetch(false);
+    setFetch(false);    
   };
-
-  const groupEdad = () => {
-
-  }
 
   const _addAge = ({ ageValue, index }) => {   
     const _temp = age; 
     _temp[index] = ageValue;   
-
-    setAge(_temp);
-
+    setAge(_temp);  
     const _room = {
       adults: {
         quantity: adults,
@@ -52,14 +58,14 @@ export const AdultsComponent = ({ room, setPax, adultos,ageAdultos}) => {
             label="Adultos"
             type="number"
             onChange={(e) => {
-              setAdults(parseInt(e.target.value));
-              setFetch(true);
+              setReset(true);
+              setAdults(parseInt(e.target.value));             
             }}
           />
         </FormControl>
       </Grid>
       <Grid item md={6} spacing={2}>
-        {age.map((value, index) => {
+        {age.map((value, index) => {         
           return (
             <FormControl className={classes.formControl}>
               <TextField

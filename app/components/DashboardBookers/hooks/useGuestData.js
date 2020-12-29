@@ -1,18 +1,24 @@
-import { useState } from "react";
-import { useGetDiscovery } from "../hooks/useGetDiscovery"
+import { useState ,useEffect} from "react";
+import { useGetDiscovery } from "./useGetDiscovery"
 
-export const useGuestData = () => {
-  const [discovery] = useGetDiscovery()
+export const useGuestData = ({leadId}) => {
+  const [discovery] = useGetDiscovery({leadId})
   const [guestName, setGuestName] = useState("");
   const [guestAge, setGuestAge] = useState("");
   const [guestProffession, setGuestProfession] = useState("");
   const [guestCompany, setGuestCompany] = useState("");
   const [guestPosition, setGuestPosition] = useState("");
-  const [guestMartialStatus, setGuestMaritalStatus] = useState(discovery.estado_civil);
+  const [guestMartialStatus, setGuestMaritalStatus] = useState();
   const [guestAddress, setGuestAddress] = useState("");
   const [guestCity, setGuestCity] = useState("");
   const [guestState, setGuestState] = useState("");
   const [guestCp, setGuestCp] = useState("");
+
+  useEffect(()=>{          
+    if(discovery.discovery !== undefined){          
+      setGuestMaritalStatus(discovery.discovery.estado_civil)
+    }     
+  },[discovery])
 
   const getPropsGuesData = () => {
     return {

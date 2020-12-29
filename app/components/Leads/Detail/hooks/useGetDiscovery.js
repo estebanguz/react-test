@@ -1,7 +1,7 @@
 import {useState,useEffect} from 'react'
 import {getDiscovery} from '../../../../api/discovery/index'
 
-export const useGetDiscovery = ({id_lead}) => {
+export const useGetDiscovery = ({leadId}) => {
     const[discovery,setDiscovery] = useState([])    
     useEffect(() => {
         if (discovery.length <= 0) {
@@ -10,7 +10,7 @@ export const useGetDiscovery = ({id_lead}) => {
     },[discovery])
 
     const getData = async () => {
-        const data = await getDiscovery()        
+        const data = await getDiscovery({leadId})        
         setDiscovery(data.data.message)      
     };     
     return [discovery]

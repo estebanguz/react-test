@@ -72,7 +72,7 @@ export const LeadsBooker = () => {
   };
 
   useEffect(() => {
-    if (!socketConnect) {
+    /*if (!socketConnect) {
       socket.on("connect", () => {
         console.log("Socket on");
         setSocketConnect(true);
@@ -82,7 +82,7 @@ export const LeadsBooker = () => {
           console.log(data);
         });
       });
-    }
+    }*/
   }, []);
 
   return (
@@ -113,7 +113,7 @@ export const LeadsBooker = () => {
         </div>
       )}
       {leads ? (
-        <StatsList stats={leads.stats} filterByStatus={filterByStatus} />
+        <StatsList stats={leads.stats} callback={filterByStatus} />
       ) : (
         <></>
       )}

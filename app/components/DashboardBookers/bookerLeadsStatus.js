@@ -17,6 +17,7 @@ export const BookerLeadsStatus = ({ lead = 0, setForceSearch, className }) => {
   const [fetch, loading, statusLead, setStatusLead, setFetch, setLoading] = useLeadStatus({
     leadId: parseInt(lead.booker_id),
     status: parseInt(lead.status),
+    setForceSearch
   });
 
   return (
@@ -28,8 +29,7 @@ export const BookerLeadsStatus = ({ lead = 0, setForceSearch, className }) => {
           value={statusLead}
           onChange={(e) => {
             setStatusLead(e.target.value);
-            setFetch(true);
-            setForceSearch(true);
+            setFetch(true);            
             setLoading(true);
           }}
         >

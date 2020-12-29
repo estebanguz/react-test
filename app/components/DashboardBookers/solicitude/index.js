@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router';
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
@@ -60,18 +61,19 @@ function getSteps() {
 }
 
 export const SolicitudeStepper = () => {
+  const params = useParams();
   const [activeStep, setActiveStep] = useState(0);
   const [getPropsReservation, getValidateData] = useNewReservation();
-  const [getPropsGuesData, getValidateGuestData] = useGuestData();
+  const [getPropsGuesData, getValidateGuestData] = useGuestData({ leadId: params.leadId });
   const [getPropsCouple] = useCoupleData();
   const [getPropsPaymentMethod, getValidationPaymentData] = usePaymentMethod();
-  const [getPropsContactData, getValidationContactData] = useContactData();
+  const [getPropsContactData, getValidationContactData] = useContactData({ leadId: params.leadId });
   const [companions, addCompanion] = useCompanion();
-  const [getPropsRoom] = useRoomDescription();
+  const [getPropsRoom] = useRoomDescription({ leadId: params.leadId });
   const [redirect, setRedirect] = useState(false);
   const [aprox, realQty, setAprox, setRealQty] = usePooledIncoming();
   const classes = styles();
-  const steps = getSteps();
+  const steps = getSteps();  
   const [addReservation] = useReservation();
 
 
@@ -158,9 +160,9 @@ export const SolicitudeStepper = () => {
                           getValidateGuestData,
                           getValidationPaymentData,
                           getValidationContactData,
-                        })
+                        })                        
                       ) {
-                        setActiveStep(activeStep + 1);
+                        setActiveStep(activeStep + 7);
                       } else {
                         console.log("Error");
                       }

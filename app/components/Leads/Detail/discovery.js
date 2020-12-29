@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => tabPanel(theme));
 export const Discovery = ({ lead , discovery }) => {
   const classes = useStyles();
   const [rooms, setRooms] = useState(1);
-  const [roomArray, setRoomArray] = useState([1]);
+  const [roomArray, setRoomArray] = useState([]);
   const [pax, setPax] = useState([]);
   const [fetch, setFetch] = useState(false);
   const [price, setPrice] = useState();
@@ -28,30 +28,31 @@ export const Discovery = ({ lead , discovery }) => {
   const [dates, setDates] = useState(false);
   const [arrival, setArrival] = useState("");
   const [departure, setDeparture] = useState("");
-  const [save, setSave] = useState(false);
-  const [habitaciones ,setHabitaciones] = useState([])
+  const [save, setSave] = useState(false);  
+  const [reset,setReeset] = useState(false)
 
-  useEffect (()=>{
-      setPrice(discovery.discovery.precio)
-      setRooms(discovery.discovery.cuartos)
-      setMarital(discovery.discovery.estado_civil)
-      setHabitaciones(discovery.discoveryHabitacion)       
-  },[discovery])
-
-  useEffect(() => {
+  useEffect (()=>{ 
     if (rooms === 0) {
       setRooms(1);
+    }       
+    if(reset){    
+      const _temp = [];   
+        for (let i = 0; i < rooms; i++) 
+        {             
+           _temp.push({id:0, adultos: 0, childs: 0, ageAdult: [0], ageChild: [0]})            
+        }        
+      setRoomArray(_temp);              
+      console.log(roomArray)
     }
+  },[reset,rooms])
 
-    const _array = [];
-    const _temp = [];
-    for (let i = 0; i < rooms; i++) {
-      _temp.push(1);
-    }
-    _array.concat(_temp);
-
-    setRoomArray(_temp);
-    setFetch(false);
+  useEffect(() => {    
+    if(discovery.discovery !== undefined){
+      setPrice(discovery.discovery.precio)
+      setRooms(discovery.discovery.cuartos)
+      setMarital(discovery.discovery.estado_civil)    
+      setRoomArray(discovery.discoveryHabitacion)     
+     }
 
     if (save) {
       _createDiscovery({
@@ -68,14 +69,14 @@ export const Discovery = ({ lead , discovery }) => {
       });
       setSave(false);
     }
-  }, [rooms, fetch]);
+  }, [fetch , discovery]);
 
   const _createDiscovery = async (data) => {
     const resp = await createDiscovery({ data });
   };
 
-  const setRoom = ({ data, room, type }) => {
-    console.log(room);
+  const setRoom = ({ data, room, type }) => {   
+    console.log(room);    
     let _pax = pax;
     if (pax.length <= 0) {
       _pax[room] = data;
@@ -96,7 +97,6 @@ export const Discovery = ({ lead , discovery }) => {
     setPax(_pax);
     setFetch(true);
   };
-
 
   return (
     <Grid container spacing={2}>
@@ -139,8 +139,8 @@ export const Discovery = ({ lead , discovery }) => {
           <TextField
             value={rooms}
             onChange={(e) => {
-              setRooms(e.target.value);
-              setFetch(true);
+              setReeset(true)
+              setRooms(e.target.value);          
             }}
             label="Número de Habitaciones"
             type="number"
@@ -157,7 +157,7 @@ export const Discovery = ({ lead , discovery }) => {
         </FormControl>
       </Grid>
       {roomArray.length > 0 ? (
-        habitaciones.map((value, index) => {                    
+          roomArray.map((value, index) => {               
           return (
             <>
               <Grid item md={6} xs={12}>

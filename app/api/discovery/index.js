@@ -40,11 +40,11 @@ export const createDiscovery = async ({ data }) => {
   }
 };
 
-export const getDiscovery = async () =>{ 
+export const getDiscovery = async ({leadId}) =>{ 
     try {
       const token = getJWTCrm();
       const data = await axios.get(
-        `${config.hostname}/data/1`,
+        `${config.hostname}/data/${leadId}`,
         {
             headers: {
               Authorization: `Bearer: ${token}`,

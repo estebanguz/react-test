@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { getOldHotels } from "../../../api/hotels";
+import { useGetDiscovery } from "./useGetDiscovery"
 
-export const useRoomDescription = () => {
+export const useRoomDescription = ({leadId}) => {
+  const [discovery] = useGetDiscovery({leadId});
   const [hotel, setHotel] = useState("");
   const [hotels, setHotels] = useState("");
   const [destination, setDestination] = useState("");
   const [type, setType] = useState("");
   const [nights, setNights] = useState("");
   const [room, setRoom] = useState("");
-  const [openDates, setOpenDates] = useState("");
+  const [openDates, setOpenDates] = useState();
   const [arrivalDate, setArrivalDate] = useState("");
   const [departureDate, setDepartureDate] = useState();
   const [pax, setPax] = useState("");
@@ -39,6 +41,19 @@ export const useRoomDescription = () => {
 
     setHotels(_final);
   };
+  useEffect(()=>{
+    if(discovery.discovery !== undefined){                
+      const _discovery =  discovery.discovery;     
+      const status = (_discovery.fecha_llegada == 'ABIERTO' && _discovery.fecha_salida == 'ABIERTO')? 1 : 2
+      if(status == 2)
+      {                
+        setArrivalDate(_discovery.fecha_llegada)     // M-D-A  O A-D-M
+        setDepartureDate(_discovery.fecha_salida)    // M-D-A  O A-D-M
+      }
+      setOpenDates(status)      
+    } 
+  },[discovery])
+
 
   useEffect(() => {
     console.log(hotel);

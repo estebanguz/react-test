@@ -80,7 +80,7 @@ export const RoomDescription = ({
   setTotal,
 }) => {
   const classes = useStyles();
-  const [openDate, setOpenDate] = useState(1);
+  const [openDate, setOpenDate] = useState(openDates);
   const [banks] = useBanks();
   const hotelOptions = hotels.map((suggestion) => ({
     value: suggestion.id,
@@ -173,11 +173,11 @@ export const RoomDescription = ({
           </InputLabel>
           <Select
             labelId="demo-simple-select-helper-label3"
-            value={openDate}
-            onChange={(e) => setOpenDate(e.target.value)}
+            value={openDate}           
+            onChange={(e) => setOpenDate(e.target.value)} 
           >
             <MenuItem value="1">Si</MenuItem>
-            <MenuItem value="2">No</MenuItem>
+            <MenuItem value="2">No</MenuItem>            
           </Select>
         </FormControl>
       </Grid>
@@ -190,7 +190,7 @@ export const RoomDescription = ({
                 value={arrivalDate}
                 onChange={(d) => setArrivalDate(d.toISOString().slice(0, 10))}
                 animateYearScrolling={false}
-              />
+              />              
             </MuiPickersUtilsProvider>
           </FormControl>
         </Grid>

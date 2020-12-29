@@ -18,10 +18,10 @@ export const DetailLead = () => {
   const [tabStatus, setTabStatus] = useState(0);
   const [solicitude, setSolicitude] = useState(false);
   const [lead, setResponse] = useLeadDetail({ leadId: params.leadId }); 
-  const [discovery] =  useGetDiscovery({id_lead:1})
+  const [discovery] =  useGetDiscovery({leadId: params.leadId})
   return (
     <Grid container>        
-      {solicitude ? <Redirect to="/app/booker/solicitude" /> : <></>}
+      { solicitude ? <Redirect to={`/app/booker/solicitude/${params.leadId}`} /> : <></>}
       <Grid item md={12} xs={12}>
         <Paper className={classes.root}>
           <Tabs

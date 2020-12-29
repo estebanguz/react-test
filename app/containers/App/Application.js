@@ -1,11 +1,9 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
-import {
-  ADMIN, VENTAS, AGENCIA, GERENTE
-} from 'site-auth';
-import Dashboard from '../Templates/Dashboard';
-import { AuthRoute } from '../../components/Router/AuthRoute';
+import React from "react";
+import { PropTypes } from "prop-types";
+import { Switch, Route } from "react-router-dom";
+import { ADMIN, VENTAS, AGENCIA, GERENTE } from "site-auth";
+import Dashboard from "../Templates/Dashboard";
+import { AuthRoute } from "../../components/Router/AuthRoute";
 import {
   DashboardPage,
   Error,
@@ -24,7 +22,7 @@ import {
   LeadDetail,
   CreateLead,
   StatusByBookerContainer,
-} from '../pageListAsync';
+} from "../pageListAsync";
 
 class Application extends React.Component {
   render() {
@@ -63,7 +61,7 @@ class Application extends React.Component {
             Component={Distribution}
             roles={[ADMIN, GERENTE]}
           />
-          <AuthRoute          
+          <AuthRoute
             exact
             path="/app/leads/report"
             Component={StatusByBookerContainer}
@@ -78,6 +76,12 @@ class Application extends React.Component {
           <AuthRoute
             exact
             path="/app/booker/solicitude"
+            Component={Solicitude}
+            roles={[VENTAS, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/booker/solicitude/:leadId"
             Component={Solicitude}
             roles={[VENTAS, GERENTE]}
           />
