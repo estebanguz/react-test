@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 import {
   Typography,
   Grid,
@@ -9,10 +11,10 @@ import {
   InputLabel,
   Button,
   makeStyles,
-} from "@material-ui/core";
-import { tabPanel } from "./styles/tabsStyles";
-import { RoomComponent } from "./Discovery/roomComponent";
-import { createDiscovery } from "../../../api/discovery/index";
+} from '@material-ui/core';
+import { tabPanel } from './styles/tabsStyles';
+import { RoomComponent } from './Discovery/roomComponent';
+import { createDiscovery } from '../../../api/discovery/index';
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
@@ -23,11 +25,11 @@ export const Discovery = ({ lead, discovery }) => {
   const [pax, setPax] = useState([]);
   const [fetch, setFetch] = useState(false);
   const [price, setPrice] = useState();
-  const [marital, setMarital] = useState("Casado/a");
+  const [marital, setMarital] = useState('Casado/a');
   const [status, setStatus] = useState(0);
   const [dates, setDates] = useState(false);
-  const [arrival, setArrival] = useState("");
-  const [departure, setDeparture] = useState("");
+  const [arrival, setArrival] = useState('');
+  const [departure, setDeparture] = useState('');
   const [save, setSave] = useState(false);
   const [reset, setReset] = useState(false);
 
@@ -95,21 +97,17 @@ export const Discovery = ({ lead, discovery }) => {
 
   const setRoom = ({ data, room, type }) => {
     console.log(room);
-    let _pax = pax;
+    const _pax = pax;
     if (pax.length <= 0) {
       _pax[room] = data;
-    } else {
-      if (type == 1) {
-        if (_pax[room]) {
-          _pax[room].adults = data.adults;
-        } else {
-          _pax.push(data);
-        }
+    } else if (type == 1) {
+      if (_pax[room]) {
+        _pax[room].adults = data.adults;
       } else {
-        if (_pax[room]) {
-          _pax[room].childs = data.childs;
-        }
+        _pax.push(data);
       }
+    } else if (_pax[room]) {
+      _pax[room].childs = data.childs;
     }
 
     setPax(_pax);
@@ -169,31 +167,61 @@ export const Discovery = ({ lead, discovery }) => {
       <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Fechas</InputLabel>
-          <Select value={dates} onChange={(e) => setDates(e.target.value)}>
-            <MenuItem value={true}>Fechas Cerradas</MenuItem>
+          <Select value={dates} onChange={(e) => { setDates(e.target.value); }}>
+            <MenuItem value>Fechas Cerradas</MenuItem>
             <MenuItem value={false}>Fechas Abiertas</MenuItem>
           </Select>
         </FormControl>
       </Grid>
+      {dates ? (
+        <Grid item md={6} xs={6}>
+          <FormControl className={classes.formControl}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                label="Fecha de Llegada"
+                value={arrival}
+                onChange={(d) => setArrival(d.toISOString().slice(0, 10))}
+                animateYearScrolling={false}
+              />
+            </MuiPickersUtilsProvider>
+          </FormControl>
+        </Grid>
+      ) : (
+        ''
+      )}
+      {dates ? (
+        <Grid item md={6} xs={6}>
+          <FormControl className={classes.formControl}>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <DatePicker
+                label="Fecha de Salida"
+                value={departure}
+                onChange={(d) => setDeparture(d.toISOString().slice(0, 10))}
+                animateYearScrolling={false}
+              />
+            </MuiPickersUtilsProvider>
+          </FormControl>
+        </Grid>
+      ) : (
+        ''
+      )}
       {roomArray.length > 0 ? (
-        roomArray.map((value, index) => {
-          return (
-            <>
-              <Grid item md={6} xs={12}>
-                <FormControl className={classes.formControl}>
-                  <RoomComponent
-                    room={index}
-                    setPax={setRoom}
-                    adultos={value.adultos}
-                    childs={value.childs}
-                    ageAdultos={value.ageAdult}
-                    ageChilds={value.ageChild}
-                  />
-                </FormControl>
-              </Grid>
-            </>
-          );
-        })
+        roomArray.map((value, index) => (
+          <>
+            <Grid item md={6} xs={12}>
+              <FormControl className={classes.formControl}>
+                <RoomComponent
+                  room={index}
+                  setPax={setRoom}
+                  adultos={value.adultos}
+                  childs={value.childs}
+                  ageAdultos={value.ageAdult}
+                  ageChilds={value.ageChild}
+                />
+              </FormControl>
+            </Grid>
+          </>
+        ))
       ) : (
         <></>
       )}
