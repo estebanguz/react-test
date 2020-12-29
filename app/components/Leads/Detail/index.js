@@ -5,7 +5,6 @@ import { Redirect } from "react-router";
 import { tabPanel } from "./styles/tabsStyles";
 import { Detail } from "./detail";
 import { Discovery } from "./discovery";
-import { History } from "./history";
 import { useParams } from "react-router";
 import { useLeadDetail } from "./hooks/useLeadDetail";
 import { useGetDiscovery} from "./hooks/useGetDiscovery";
