@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
+import React, { useState, useEffect } from "react";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
 import {
   Typography,
   Grid,
@@ -11,10 +11,10 @@ import {
   InputLabel,
   Button,
   makeStyles,
-} from '@material-ui/core';
-import { tabPanel } from './styles/tabsStyles';
-import { RoomComponent } from './Discovery/roomComponent';
-import { createDiscovery } from '../../../api/discovery/index';
+} from "@material-ui/core";
+import { tabPanel } from "./styles/tabsStyles";
+import { RoomComponent } from "./Discovery/roomComponent";
+import { createDiscovery } from "../../../api/discovery/index";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
@@ -25,11 +25,11 @@ export const Discovery = ({ lead, discovery }) => {
   const [pax, setPax] = useState([]);
   const [fetch, setFetch] = useState(false);
   const [price, setPrice] = useState();
-  const [marital, setMarital] = useState('Casado/a');
+  const [marital, setMarital] = useState("Casado/a");
   const [status, setStatus] = useState(0);
   const [dates, setDates] = useState(false);
-  const [arrival, setArrival] = useState('');
-  const [departure, setDeparture] = useState('');
+  const [arrival, setArrival] = useState("");
+  const [departure, setDeparture] = useState("");
   const [save, setSave] = useState(false);
   const [reset, setReset] = useState(false);
 
@@ -65,11 +65,12 @@ export const Discovery = ({ lead, discovery }) => {
             quantity: r.adultos,
           },
           childs: {
-            age: r.ageChild,
+            age: r.ageChild ? r.ageChild : [0],
             quantity: r.childs,
           },
         });
       });
+      console.log(_paxTemp);
       setPax(_paxTemp);
     }
 
@@ -167,7 +168,12 @@ export const Discovery = ({ lead, discovery }) => {
       <Grid item md={4} xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel>Fechas</InputLabel>
-          <Select value={dates} onChange={(e) => { setDates(e.target.value); }}>
+          <Select
+            value={dates}
+            onChange={(e) => {
+              setDates(e.target.value);
+            }}
+          >
             <MenuItem value>Fechas Cerradas</MenuItem>
             <MenuItem value={false}>Fechas Abiertas</MenuItem>
           </Select>
@@ -187,7 +193,7 @@ export const Discovery = ({ lead, discovery }) => {
           </FormControl>
         </Grid>
       ) : (
-        ''
+        ""
       )}
       {dates ? (
         <Grid item md={6} xs={6}>
@@ -203,7 +209,7 @@ export const Discovery = ({ lead, discovery }) => {
           </FormControl>
         </Grid>
       ) : (
-        ''
+        ""
       )}
       {roomArray.length > 0 ? (
         roomArray.map((value, index) => (

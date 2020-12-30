@@ -51,7 +51,7 @@ export const reDistribution = async (data) => {
   const response = await post(url, data);
 
   return response;
-}
+};
 
 export const updateLeadStatus = async ({ leadId, status }) => {
   try {
@@ -117,15 +117,17 @@ export const createLead = async ({ data }) => {
     const token = getJWTCrm();
     return await axios.post(
       `${config.hostname}/lead/create`,
-      {
-        nombre: data.nombre,
-        edad: data.edad,
-        telefono: data.telefono,
-        mensaje: data.mensaje,
-        estado: data.estado,
-        ciudad: data.ciudad,
-        municipio: data.municipio,
-      },
+      [
+        {
+          nombre: data.nombre,
+          edad: data.edad,
+          telefono: data.telefono,
+          mensaje: data.mensaje,
+          estado: data.estado,
+          ciudad: data.ciudad,
+          municipio: data.municipio,
+        },
+      ],
       {
         headers: {
           Authorization: `Bearer: ${token}`,

@@ -22,6 +22,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { useUpdateComments } from "./hooks/useUpdateComments";
 import { LogTable } from "../../Events";
+import { searchUser } from "enl-api/users";
+import { AutocompleteUser } from "../../Leads/StatusByBooker/autocomplete";
+import { useGetAutocomplete } from "../../Leads/StatusByBooker/autocomplete/hooks/useGetAutocomplete";
 
 const useStyles = makeStyles((theme) => distributionStyles(theme));
 
@@ -40,13 +43,9 @@ export const DistributionList = () => {
     setSearch,
     setForceSearch,
   ] = useSearchLeads({ repository: getFreeLeads });
-  const [
-    query,
-    usersSearch,
-    selectedUser,
-    setQuery,
-    setSelectedUser,
-  ] = useSearchUser();
+  const [getProps, selectedItem] = useGetAutocomplete({
+    repository: searchUser,
+  });
   const [selectedLeads, setSelectedLeads] = useState([]);
   const [cantidad, setCantidad] = React.useState();
   const [selectAll, setSelectAll] = React.useState();
@@ -89,10 +88,10 @@ export const DistributionList = () => {
   };
 
   const handleDistribution = () => {
-    if (selectedUser.id) {
+    if (selectedItem.id_user) {
       if (cantidad > 0) {
         const data = {
-          broker: selectedUser.id,
+          broker: selectedItem.id_user,
           quantity: cantidad,
           initial_date: initialDate,
           final_date: finalDate,
@@ -105,7 +104,7 @@ export const DistributionList = () => {
         });
       } else if (selectedLeads.length > 0) {
         const data = {
-          broker: selectedUser.id,
+          broker: selectedItem.id_user,
           leads: selectedLeads,
         };
         setLeadsByArray({ data }).then(() => {
@@ -168,14 +167,7 @@ export const DistributionList = () => {
       <Paper className={classes.paper} elevation={4}>
         <Grid container spacing={3}>
           <Grid item md={8} xs={12}>
-            <AutoCompleteSitio
-              query={query}
-              setQuery={setQuery}
-              data={usersSearch}
-              label="Selecciona el Asesor"
-              selectedItem={selectedUser}
-              setSelectedItem={setSelectedUser}
-            />
+            <AutocompleteUser {...getProps()} />
           </Grid>
           <Grid item md={4} xs={12}>
             <br />
