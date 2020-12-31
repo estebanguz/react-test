@@ -17,8 +17,11 @@ export const useReDistribution = ({
   }, [originalUser]);
 
   const setNewLeads = async ({ booker, leads, status }) => {
+    console.log({
+      user
+    });
     const data = {
-      id_colabolador: status == 999 ? booker.id : user.id,
+      id_colabolador: status == 999 ? booker.id_user : user.id_user,
       id_lead: leads,
       status: status == 999 ? 11 : status,
     };

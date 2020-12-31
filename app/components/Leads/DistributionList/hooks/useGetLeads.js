@@ -13,19 +13,21 @@ export const useGetLeads = () => {
   );
   const [finalDate, setFinalDate] = useState(
     moment()
-      .endOf("month")
+      .add(1, "M")
+      .startOf("month")
       .format("YYYY-MM-DD")
   );
   const [search, setSearch] = useState(true);
 
   useEffect(() => {
+    console.log(finalDate);
     if (search) {
       searchLeads();
     }
   }, [search, page]);
 
   const searchLeads = async () => {
-    console.log('Here');
+    console.log("Here");
     const response = await getFreeLeads({
       page,
       size,
