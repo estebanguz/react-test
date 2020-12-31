@@ -6,7 +6,6 @@ export const PaymentMethodSchema = Joi.object({
   cardExp: Joi.string().required(),
   cardCvc: Joi.number().required(),
   cardType: Joi.string().required(),
-  cardBank: Joi.string().required(),
   cardConcept: Joi.string().required(),
   quantity: Joi.number().required(),
 });

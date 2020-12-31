@@ -1,6 +1,6 @@
-import axios from "axios";
-import config from "../config";
-import { getJWTCrm } from "../../utils/auth";
+import axios from 'axios';
+import config from '../config';
+import { getJWTCrm } from '../../utils/auth';
 
 export const setLeadsByQuantity = async ({ data }) => {
   try {
@@ -28,6 +28,22 @@ export const setLeadsByQuantity = async ({ data }) => {
   }
 };
 
+export const deleteLead = async ({ id }) => {
+  try {
+    const token = getJWTCrm();
+    return await axios.delete(`${config.hostname}/distribution/lead/${id}`, {
+      headers: {
+        Authorization: `Bearer: ${token}`,
+      },
+    });
+  } catch (err) {
+    console.log(err.response);
+    return {
+      status: err.response.data.payload.statusCode,
+      message: err.response.data.payload.message,
+    };
+  }
+};
 export const setLeadsByArray = async ({ data }) => {
   try {
     const token = getJWTCrm();
@@ -52,7 +68,9 @@ export const setLeadsByArray = async ({ data }) => {
   }
 };
 
-export const getFreeLeads = async ({ page, size, initialDate, finalDate }) => {
+export const getFreeLeads = async ({
+  page, size, initialDate, finalDate
+}) => {
   try {
     const token = getJWTCrm();
     return await axios.get(

@@ -192,6 +192,7 @@ module.exports = (options) => ({
       "site-agency": path.resolve(__dirname, "../../app/api/agency/"),
       "site-schemas": path.resolve(__dirname, "../../app/utils/schemas"),
       "site-auth": path.resolve(__dirname, "../../app/utils/auth"),
+      "api-calls": path.resolve(__dirname, "../../app/api/config"),
       "enl-containers": path.resolve(__dirname, "../../app/containers/"),
       "enl-styles": path.resolve(__dirname, "../../app/styles/components/"),
       "enl-api": path.resolve(__dirname, "../../app/api/"),

@@ -20,6 +20,8 @@ import {
   PaymentLink,
   HotelDetails,
   LeadDetail,
+  CreateLead,
+  StatusByBookerContainer,
 } from "../pageListAsync";
 
 class Application extends React.Component {
@@ -49,19 +51,37 @@ class Application extends React.Component {
           />
           <AuthRoute
             exact
+            path="/app/leads/new"
+            Component={CreateLead}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
             path="/app/leads/distribution"
             Component={Distribution}
             roles={[ADMIN, GERENTE]}
           />
           <AuthRoute
             exact
-            path="/app/lead"
-            Component={LeadDetails}
-            roles={[ADMIN]}
+            path="/app/leads/report"
+            Component={StatusByBookerContainer}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/leads/report/:bookerId"
+            Component={StatusByBookerContainer}
+            roles={[ADMIN, GERENTE]}
           />
           <AuthRoute
             exact
             path="/app/booker/solicitude"
+            Component={Solicitude}
+            roles={[VENTAS, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/booker/solicitude/:leadId"
             Component={Solicitude}
             roles={[VENTAS, GERENTE]}
           />
@@ -72,14 +92,15 @@ class Application extends React.Component {
           />
           <AuthRoute
             path="/app/booker/leads"
+            exact
             Component={BookerLeadsList}
             roles={[VENTAS, GERENTE]}
           />
           <AuthRoute
             exact
-            path="/app/booker/lead"
+            path="/app/booker/leads/:leadId"
             Component={LeadDetail}
-            roles={[VENTAS, GERENTE]}
+            roles={[ADMIN, GERENTE, VENTAS]}
           />
           {/* Agency */}
           <AuthRoute

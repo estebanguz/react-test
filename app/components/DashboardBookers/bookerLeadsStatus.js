@@ -17,6 +17,7 @@ export const BookerLeadsStatus = ({ lead = 0, setForceSearch, className }) => {
   const [fetch, loading, statusLead, setStatusLead, setFetch, setLoading] = useLeadStatus({
     leadId: parseInt(lead.booker_id),
     status: parseInt(lead.status),
+    setForceSearch
   });
 
   return (
@@ -28,13 +29,13 @@ export const BookerLeadsStatus = ({ lead = 0, setForceSearch, className }) => {
           value={statusLead}
           onChange={(e) => {
             setStatusLead(e.target.value);
-            setFetch(true);
-            setForceSearch(true);
+            setFetch(true);            
             setLoading(true);
           }}
         >
           <MenuItem value={1}>Ventas</MenuItem>
           <MenuItem value={2}>Reservas sin pago</MenuItem>
+          <MenuItem value={603}>Apartado</MenuItem>
           <MenuItem value={5}>Control de calidad</MenuItem>
           <MenuItem value={6}>Fuera de Servicio</MenuItem>
           <MenuItem value={7}>Número inválido</MenuItem>

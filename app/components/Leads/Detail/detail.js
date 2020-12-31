@@ -7,15 +7,30 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  Button,
   makeStyles,
 } from "@material-ui/core";
 import MuiPhoneNumber from "material-ui-phone-number";
 import { tabPanel } from "./styles/tabsStyles";
+import { useUpdateLead } from "./hooks/useUpdateLead";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const Detail = () => {
+export const Detail = ({ lead }) => {
   const classes = useStyles();
+  const [
+    phone,
+    email,
+    status,
+    campania,
+    comments,
+    setPhone,
+    setEmail,
+    setStatus,
+    setCampania,
+    setComments,
+    setLeadData,
+  ] = useUpdateLead({ lead });
 
   return (
     <Grid container spacing={2}>
@@ -26,20 +41,34 @@ export const Detail = () => {
         <FormControl className={classes.formControl}>
           <MuiPhoneNumber
             label="Teléfono"
+            value={phone}
             defaultCountry="mx"
-            onChange={(e) => console.log(e)}
+            onChange={(e) => setPhone(e)}
           />
         </FormControl>
       </Grid>
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
-          <TextField label="Correo Electrónico" />
+          <TextField
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Correo Electrónico"
+          />
         </FormControl>
       </Grid>
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
           <InputLabel>Estatus</InputLabel>
-          <Select>
+          <Select
+            value={status}
+            setStatus={(e) => setStatus(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          >
             <MenuItem value={1}>Ventas</MenuItem>
             <MenuItem value={2}>Reservas sin pago</MenuItem>
             <MenuItem value={5}>Control de calidad</MenuItem>
@@ -61,17 +90,33 @@ export const Detail = () => {
       </Grid>
       <Grid item md={4}>
         <FormControl className={classes.formControl}>
-          <TextField label="De dónde nos vio" />
+          <TextField
+            value={campania}
+            label="De dónde nos vio"
+            onChange={(e) => setCampania(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
         </FormControl>
       </Grid>
-      <Grid item md={4}>
+      <Grid item md={8}>
         <FormControl className={classes.formControl}>
-          <TextField label="IP donde se registró" />
+          <TextField
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => setComments(e.target.value)}
+            value={comments}
+            label="Observaciones"
+          />
         </FormControl>
       </Grid>
-      <Grid item md={12}>
+      <Grid item md={12} xs={12}>
         <FormControl className={classes.formControl}>
-          <TextField label="Observaciones" />
+          <Button onClick={() => setLeadData()} variant="contained" color="primary">
+            Actualizar
+          </Button>
         </FormControl>
       </Grid>
     </Grid>

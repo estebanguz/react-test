@@ -1,35 +1,38 @@
-import React from "react";
-import MUIDataTable from "mui-datatables";
-import { makeStyles } from "@material-ui/core/styles";
-import { leadsTableStyles } from "./styles";
-import { columns } from "./columns";
+import React from 'react';
+import MUIDataTable from 'mui-datatables';
+import { makeStyles } from '@material-ui/core/styles';
+import { leadsTableStyles } from './styles';
+import { columns } from './columns';
 
 const useStyles = makeStyles((theme) => leadsTableStyles(theme));
 
 export const LeadsMuiTable = ({
   leads,
-  type = "leads",
+  type = 'leads',
   actionCheckbox,
   pageChange,
-  array = "",
+  array = '',
   setSearch,
   emailAction = () => {
-    console.log("");
+    console.log('');
   },
   phoneAction = () => {
-    console.log("");
+    console.log('');
   },
   whatsappAction = () => {
-    console.log("");
+    console.log('');
   },
   viewAction = () => {
-    console.log("");
+    console.log('');
   },
   actionRowComponent,
-  setForceSearch
+  setForceSearch,
+  commentsClick,
+  setCurrentComment,
+  setCurrentId,
+  actionDelete
 }) => {
   const classes = useStyles();
-
   const _columns = columns({
     type,
     actionCheckbox,
@@ -39,23 +42,27 @@ export const LeadsMuiTable = ({
     whatsappAction,
     viewAction,
     ActionRowComponent: actionRowComponent,
-    setForceSearch
+    setForceSearch,
+    commentsClick,
+    setCurrentComment,
+    setCurrentId,
+    actionDelete
   });
 
   const options = {
-    filterType: "dropdown",
-    responsive: "stacked",
+    filterType: 'dropdown',
+    responsive: 'stacked',
     print: false,
     rowsPerPage: 10,
     serverSide: true,
     search: false,
     filter: false,
-    count: 16,
+    count: leads.total_rows,
     download: false,
-    selectableRows: "none",
+    selectableRows: 'none',
     onTableChange: (action, tableState) => {
       switch (action) {
-        case "changePage":
+        case 'changePage':
           console.log(tableState);
           pageChange(tableState.page + 1);
           setSearch(true);
@@ -67,7 +74,11 @@ export const LeadsMuiTable = ({
   return (
     <MUIDataTable
       className={classes.table}
-      title="Leads Recientes"
+      title={`${
+        type == 'leads'
+          ? 'Leads Recientes'
+          : 'Seleccione los leads a afectar'
+      }`}
       data={leads.data}
       columns={_columns}
       options={options}

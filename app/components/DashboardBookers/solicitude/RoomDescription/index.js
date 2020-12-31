@@ -1,36 +1,36 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
-import moment from "moment";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import Button from "@material-ui/core/Button";
+import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import moment from 'moment';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import {
   DatePicker,
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-import MomentUtils from "@date-io/moment";
-import AutoCompleteSelect from "../../../components/HotelSelect/index";
-import { useBanks } from "../hooks/useBanks";
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import MomentUtils from '@date-io/moment';
+import AutoCompleteSelect from '../../../HotelSelect/index';
+import { useBanks } from '../../hooks/useBanks';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    width: "100%",
+    width: '100%',
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
   gridItem: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
   },
   marginBootom: {
-    marginBottom: "25px",
+    marginBottom: '25px',
   },
 }));
 
@@ -80,11 +80,12 @@ export const RoomDescription = ({
   setTotal,
 }) => {
   const classes = useStyles();
-  const [openDate, setOpenDate] = useState(1);
+  const [openDate, setOpenDate] = useState(openDates);
   const [banks] = useBanks();
   const hotelOptions = hotels.map((suggestion) => ({
     value: suggestion.id,
     label: suggestion.nombre,
+    destino: suggestion.nombre_destino,
   }));
 
   return (
@@ -96,7 +97,6 @@ export const RoomDescription = ({
             value={destination}
             onInput={(e) => setDestination(e.target.value)}
             disabled
-            value="Cancun"
           />
         </FormControl>
       </Grid>
@@ -106,7 +106,11 @@ export const RoomDescription = ({
             title="Hotel"
             options={hotelOptions}
             option={hotel}
-            callBack={(e) => setHotel(e)}
+            callBack={(e) => {
+              console.log(e);
+              setHotel(e);
+              setDestination(e.destino);
+            }}
           />
         </FormControl>
       </Grid>
@@ -195,7 +199,7 @@ export const RoomDescription = ({
           </FormControl>
         </Grid>
       ) : (
-        ""
+        ''
       )}
       {openDate == 2 ? (
         <Grid item xs={openDate == 1 ? 6 : 6} md={openDate == 1 ? 6 : 3}>
@@ -211,7 +215,7 @@ export const RoomDescription = ({
           </FormControl>
         </Grid>
       ) : (
-        ""
+        ''
       )}
       <Grid item xs={6} md={6}>
         <FormControl className={classes.formControl}>
@@ -234,23 +238,11 @@ export const RoomDescription = ({
       </Grid>
       <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
-            <DatePicker
-              label="Vigencia de la reservación"
-              value={validity}
-              onChange={(d) => setValidity(d.toISOString().slice(0, 10))}
-              animateYearScrolling={false}
-            />
-          </MuiPickersUtilsProvider>
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} md={3}>
-        <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label4">ID Check In</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label4"
-            value={typeId}
-            onChange={(e) => setTypeId(e.target.value)}
+            value={validity}
+            onChange={(e) => setValidity(e.target.value)}
           >
             <MenuItem value="IFE MATCH">IFE MATCH</MenuItem>
             <MenuItem value="Acta de Matrimonio">Acta de Matrimonio</MenuItem>
@@ -324,7 +316,7 @@ export const RoomDescription = ({
           >
             <MenuItem value="4">NO INCLUIDA</MenuItem>
             <MenuItem value="1">AEROPUERTO - HOTEL</MenuItem>
-            <MenuItem value="2">HOETL - AEROPUERTO</MenuItem>
+            <MenuItem value="2">HOTEL - AEROPUERTO</MenuItem>
             <MenuItem value="3">REDONDO</MenuItem>
           </Select>
         </FormControl>

@@ -33,6 +33,7 @@ export const useSearchLeads = ({ repository }) => {
       const _tempConcat = _temp.concat(response.data.message);
       setLeads(_tempConcat[0]);
       setForceSearch(false);
+      setSearch(false);
     } else {
       console.log(response);
     }

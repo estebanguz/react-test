@@ -1,20 +1,23 @@
-import axios from 'axios';
-import config from '../config';
-import { getJWTCrm } from '../../utils/auth';
+import axios from "axios";
+import { get, post } from "api-calls/customs";
+import config from "../config";
+import { getJWTCrm } from "../../utils/auth";
 
 export const getLeads = async ({
   page,
   size,
-  initialDate = ' ',
-  finalDate = ' ',
-  status = null
+  initialDate = " ",
+  finalDate = " ",
+  status = null,
 }) => {
   try {
     const token = getJWTCrm();
     return await axios.get(
       `${config.hostname}/leads?page=${page}&size=${size}${
-        initialDate ? '&initial_date=' : ''
-      }${initialDate}${finalDate ? '&final_date=' : ''}${finalDate}${status == null ? '' : '&status='+status}`,
+        initialDate ? "&initial_date=" : ""
+      }${initialDate}${finalDate ? "&final_date=" : ""}${finalDate}${
+        status == null ? "" : "&status=" + status
+      }`,
       {
         headers: {
           Authorization: `Bearer: ${token}`,
@@ -28,6 +31,26 @@ export const getLeads = async ({
       message: err.response.data.payload.message,
     };
   }
+};
+
+export const filterUser = async (data) => {
+  const url = `/filter_user?id=${data.idBooker}&initial_date=${
+    data.initialDate
+  }&final_date=${data.finalDate}&page=${data.page}&size=${data.size}${
+    data.status == null ? "" : "&status=" + data.status
+  }`;
+
+  const response = await get(url);
+
+  return response;
+};
+
+export const reDistribution = async (data) => {
+  const url = `/lead/modifyLead`;
+
+  const response = await post(url, data);
+
+  return response;
 };
 
 export const updateLeadStatus = async ({ leadId, status }) => {
@@ -45,59 +68,18 @@ export const updateLeadStatus = async ({ leadId, status }) => {
   } catch (err) {
     console.log(err.response);
     return {
-      status: err.response.data.payload.statusCode,
-      message: err.response.data.payload.message,
+      status: err,
+      message: err,
     };
   }
 };
 
-export const ConvertExcelToJson = ({data})=>{
-  const excel = xlsx.readFile(url);
-  var nombreHoja = excel.SheetNames;
-  let datos = xlsx.utils.sheet_to_json(excel.Sheets[nombreHoja[0]]);
-// console.log(datos);
-const jdatos = [];
-for(i=0;i < datos.length; i++){
-   const dato = datos[i];
-   jdatos.push({
-       ...dato,
-       fecha: new Date((dato.fecha)),
-       nombre: dato.nombre,
-       edad: dato.edad,
-       email: dato.email,
-       telefono: dato.telefono,
-       compania: dato.compania,
-       tipo: dato.tipo,
-       mensaje: dato.mensaje,
-       estado: dato.estado,
-       ciudad: dato.ciudad,
-       municipio: dato.municipio,
-       ip: dato.ip,
-       estado_lead: dato.estado_lead,
-       asignacion: dato.asignacion,
-       observacion: dato.observacion,
-       status: dato.status,
-       compania: dato.compania_lead,
-       status_envio: dato.status_envio,
-       facebook: dato.facebook,
-       verificado: dato.verificado,
-       avatar: dato.avatar,
-       mail_marketing: dato.mail_marketing,
-       wa_send: dato.wa_send
-   });
-}
-return jdatos;
-};
-
-export const uploadExcelLeads = async({data})=>{
+export const updateCommentsLead = async ({ leadId, comments }) => {
   try {
-    const datos = ConvertExcelToJson(data);
     const token = getJWTCrm();
-    return await axios.post(
-      `${config.hostname}/lead/create`,
-      {
-        data : datos
-      },
+    return await axios.put(
+      `${config.hostname}/lead/comments/${leadId}`,
+      { comments },
       {
         headers: {
           Authorization: `Bearer: ${token}`,
@@ -110,5 +92,63 @@ export const uploadExcelLeads = async({data})=>{
       status: err.response.data.payload.statusCode,
       message: err.response.data.payload.message,
     };
+  }
+};
+
+export const getLead = async ({ leadId }) => {
+  try {
+    const token = getJWTCrm();
+    return await axios.get(`${config.hostname}/lead/${leadId}`, {
+      headers: {
+        Authorization: `Bearer: ${token}`,
+      },
+    });
+  } catch (err) {
+    console.log(err.response);
+    return {
+      status: err.response.data.payload.statusCode,
+      message: err.response.data.payload.message,
+    };
+  }
+};
+
+export const createLead = async ({ data }) => {
+  try {
+    const token = getJWTCrm();
+    return await axios.post(
+      `${config.hostname}/lead/create`,
+      [
+        {
+          nombre: data.nombre,
+          edad: data.edad,
+          telefono: data.telefono,
+          mensaje: data.mensaje,
+          estado: data.estado,
+          ciudad: data.ciudad,
+          municipio: data.municipio,
+        },
+      ],
+      {
+        headers: {
+          Authorization: `Bearer: ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createLeadsByFile = async (formData) => {
+  try {
+    const token = getJWTCrm();
+    return await axios.post(`${config.hostname}/leads/file`, formData, {
+      headers: {
+        Authorization: `Bearer: ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

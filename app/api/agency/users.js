@@ -6,7 +6,7 @@ export const loginUserCommision = async (valuesForm) => {
   try {
     const token = await getJWTAgency();
     const response = await axios.post(
-      `${config.agency.hostname}/users/login_user_comision`,
+      `${config.agency.hostnameProduction}/users/login_user_comision`,
       {
         user: valuesForm.get('email'),
         password: valuesForm.get('password'),
@@ -28,7 +28,7 @@ export const loginUserCommision = async (valuesForm) => {
 export const createUserAgency = async (data) => {
   try {
     const response = await axios.post(
-      `${config.agency.hostname}/users/create-user`,
+      `${config.agency.hostnameProduction}/users/create-user`,
       {
         name: data.name,
         email: data.email,
@@ -51,7 +51,7 @@ export const createUserComision = async (data) => {
   try {
     const token = await getJWTAgency();
     const response = await axios.post(
-      `${config.agency.hostname}/users/create_user_comision`,
+      `${config.agency.hostnameProduction}/users/create_user_comision`,
       data,
       {
         headers: {

@@ -25,7 +25,14 @@ export const useGetLeads = () => {
   }, [search, page]);
 
   const searchLeads = async () => {
-    const response = await getFreeLeads({ page, size, initialDate, finalDate });
+    console.log('Here');
+    const response = await getFreeLeads({
+      page,
+      size,
+      initialDate,
+      finalDate,
+      type: "distribution",
+    });
     if (response.data.message) {
       setLeads(response.data.message);
       setSearch(false);
@@ -44,6 +51,6 @@ export const useGetLeads = () => {
     setInitialDate,
     finalDate,
     setFinalDate,
-    setSearch
+    setSearch,
   ];
 };

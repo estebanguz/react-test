@@ -4,52 +4,51 @@ import { tabPanel } from "../styles/tabsStyles";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const ChildsComponent = ({ room, setPax }) => {
+export const ChildsComponent = ({ room, setPax, noChilds, ageChilds }) => {
   const classes = useStyles();
-  const [childs, setChilds] = useState(0);
+  const [childs, setChilds] = useState(noChilds);
   const [age, setAge] = useState([]);
-  const [fetch, setFetch] = useState(false);
-
-  useEffect(() => {
+  const [fetch, setFetch] = useState(true);
+  const [reset,setReset] = useState(false)
+  const [ageDiscovery,setAgeDiscovery] = useState(ageChilds)
+  
+  useEffect(() => {    
     if (fetch) {
       addAge();
     }
   }, [fetch]);
 
-  const addAge = () => {
-    const _temp = [];
-    const _age = [];
-
-    for (let i = 0; i < childs; i++) {
-      _temp.push(0);
+  useEffect(()=>{
+    if(reset)
+    {
+      const _temp = [];
+      for(let i = 0 ; i < childs ; i ++)
+      { 
+          _temp.push(0)
+      }
+      setAge(_temp)
     }
+  },[childs,reset])
 
-    _temp.concat(_age);
-
-    setAge(_temp);
+  const addAge = () => {    
+    setAge(ageDiscovery);
     setFetch(false);
   };
 
   const _addAge = ({ ageValue, index }) => {
-    const _temp = [];
-
-    for (let i = 0; i < age.length; i++) {
-      if (i == index) {
-        _temp[index] = parseInt(ageValue);
-      } else {
-        _temp[i] = age[i];
-      }
-    }
+    const _temp = age; 
+    _temp[index] = ageValue;   
 
     setAge(_temp);
 
-    const _room = [];
-    _room[room] = {
-      childs,
-      age,
+    const _room = {
+      childs: {
+        quantity: childs,
+        age
+      }      
     };
 
-    setPax({ data: _room });
+    setPax({ data: _room, room, type: 2 });
   };
 
   return (
@@ -61,8 +60,8 @@ export const ChildsComponent = ({ room, setPax }) => {
             label="Menores"
             type="number"
             onChange={(e) => {
-              setChilds(parseInt(e.target.value));
-              setFetch(true);
+              setReset(true)
+              setChilds(parseInt(e.target.value));             
             }}
           />
         </FormControl>

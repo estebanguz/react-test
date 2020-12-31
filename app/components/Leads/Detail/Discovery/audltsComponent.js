@@ -4,52 +4,49 @@ import { tabPanel } from "../styles/tabsStyles";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
-export const AdultsComponent = ({ room, setPax }) => {
+export const AdultsComponent = ({ room, setPax, adultos,ageAdultos}) => {
   const classes = useStyles();
-  const [adults, setAdults] = useState(1);
-  const [age, setAge] = useState([20]);
-  const [fetch, setFetch] = useState(false);
+  const [adults, setAdults] = useState(adultos);
+  const [age, setAge] = useState([]);
+  const [fetch, setFetch] = useState(true);
+  const [reset,setReset] = useState(false)
+  const [edadDiscovery, setAgeDiscovery] = useState(ageAdultos)
 
-  useEffect(() => {
+  useEffect(() => {      
     if (fetch) {
       addAge();
-    }
+    }   
   }, [fetch]);
-
-  const addAge = () => {
-    const _temp = [];
-    const _age = [];
-
-    for (let i = 0; i < adults; i++) {
-      _temp.push(20);
+  
+  useEffect(()=>{
+    if(reset)
+    {
+      const _temp = [];
+      for(let i = 0 ; i < adults ; i ++)
+      { 
+          _temp.push(0)
+      }
+      setAge(_temp)
     }
+  },[adults,reset])
 
-    _temp.concat(_age);
-
-    setAge(_temp);
-    setFetch(false);
+  const addAge = () => {   
+    setAge(edadDiscovery);
+    setFetch(false);    
   };
 
-  const _addAge = ({ ageValue, index }) => {
-    const _temp = [];
-
-    for (let i = 0; i < age.length; i++) {
-      if (i == index) {
-        _temp[index] = parseInt(ageValue);
-      } else {
-        _temp[i] = age[i];
+  const _addAge = ({ ageValue, index }) => {   
+    const _temp = age; 
+    _temp[index] = ageValue;   
+    setAge(_temp);  
+    const _room = {
+      adults: {
+        quantity: adults,
+        age
       }
-    }
-
-    setAge(_temp);
-
-    const _room = [];
-    _room[room] = {
-      adults,
-      age,
     };
 
-    setPax({ data: _room, room });
+    setPax({ data: _room, room, type: 1 });
   };
 
   return (
@@ -61,14 +58,14 @@ export const AdultsComponent = ({ room, setPax }) => {
             label="Adultos"
             type="number"
             onChange={(e) => {
-              setAdults(parseInt(e.target.value));
-              setFetch(true);
+              setReset(true);
+              setAdults(parseInt(e.target.value));             
             }}
           />
         </FormControl>
       </Grid>
       <Grid item md={6} spacing={2}>
-        {age.map((value, index) => {
+        {age.map((value, index) => {         
           return (
             <FormControl className={classes.formControl}>
               <TextField

@@ -1,20 +1,26 @@
 import React, { useState } from "react";
 import { Grid, Paper, Tabs, Tab, makeStyles } from "@material-ui/core";
 import { TabPanel } from "./tabPanel";
+import { Redirect } from "react-router";
 import { tabPanel } from "./styles/tabsStyles";
-
 import { Detail } from "./detail";
 import { Discovery } from "./discovery";
-import { History } from "./history";
+import { useParams } from "react-router";
+import { useLeadDetail } from "./hooks/useLeadDetail";
+import { useGetDiscovery} from "./hooks/useGetDiscovery";
 
 const useStyles = makeStyles((theme) => tabPanel(theme));
 
 export const DetailLead = () => {
   const classes = useStyles();
+  const params = useParams();
   const [tabStatus, setTabStatus] = useState(0);
-
+  const [solicitude, setSolicitude] = useState(false);
+  const [lead, setResponse] = useLeadDetail({ leadId: params.leadId }); 
+  const [discovery] =  useGetDiscovery({leadId: params.leadId})
   return (
-    <Grid container>
+    <Grid container>        
+      { solicitude ? <Redirect to={`/app/booker/solicitude/${params.leadId}`} /> : <></>}
       <Grid item md={12} xs={12}>
         <Paper className={classes.root}>
           <Tabs
@@ -26,17 +32,24 @@ export const DetailLead = () => {
           >
             <Tab label="Información" />
             <Tab label="Discovery" />
-            <Tab label="Historial del Lead" />
+            <Tab
+              onClick={() => setSolicitude(true)}
+              label="Solicitud de Reserva"
+            />
+           
           </Tabs>
-          <TabPanel value={tabStatus} index={0}>
-            <Detail />
-          </TabPanel>
-          <TabPanel value={tabStatus} index={1}>
-            <Discovery />
-          </TabPanel>
-          <TabPanel value={tabStatus} index={2}>
-            <History />
-          </TabPanel>
+          {lead ? (
+            <>
+              <TabPanel value={tabStatus} index={0}>
+                <Detail lead={lead} setLead={setResponse} />
+              </TabPanel>
+              <TabPanel value={tabStatus} index={1}>
+                <Discovery lead={lead} discovery = {discovery}/>
+              </TabPanel>
+            </>
+          ) : (
+            <></>
+          )}
         </Paper>
       </Grid>
     </Grid>
