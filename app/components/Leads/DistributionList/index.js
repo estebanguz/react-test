@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect } from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { TextField } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import { searchUser } from 'enl-api/users';
 import { setLeadsByQuantity, setLeadsByArray } from "../../../api/distribution";
 import { FiltersLeads } from "../LeadsFilters";
 import { LeadsMuiTable } from "../ListLeads/table";
-import Grid from "@material-ui/core/Grid";
-import { TextField } from "@material-ui/core";
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackBarCustom from "../../../utils/tools/SnackBarCustom";
-import { useSearchLeads } from "../ListLeads/hooks/useSearchLeads";
-import { distributionStyles } from "./distributionStyles";
-import { AutoCompleteSitio } from "../../AutocompleteSitio";
-import { useSearchUser } from "./hooks/useSearchUser";
-import { getFreeLeads } from "../../../api/distribution";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { useUpdateComments } from "./hooks/useUpdateComments";
-import { LogTable } from "../../Events";
-import { searchUser } from "enl-api/users";
-import { AutocompleteUser } from "../../Leads/StatusByBooker/autocomplete";
-import { useGetAutocomplete } from "../../Leads/StatusByBooker/autocomplete/hooks/useGetAutocomplete";
+import SnackBarCustom from '../../../utils/tools/SnackBarCustom';
+import { useSearchLeads } from '../ListLeads/hooks/useSearchLeads';
+import { distributionStyles } from './distributionStyles';
+import { AutoCompleteSitio } from '../../AutocompleteSitio';
+import { useSearchUser } from './hooks/useSearchUser';
+import { getFreeLeads } from '../../../api/distribution';
+import { useUpdateComments } from './hooks/useUpdateComments';
+import { LogTable } from '../../Events';
+import { AutocompleteUser } from '../StatusByBooker/autocomplete';
+import { useGetAutocomplete } from '../StatusByBooker/autocomplete/hooks/useGetAutocomplete';
+import { useDeleteLead } from './hooks/useDeleteLead';
 
 const useStyles = makeStyles((theme) => distributionStyles(theme));
 
@@ -63,8 +64,9 @@ export const DistributionList = () => {
     setNewComment,
   ] = useUpdateComments({ setForceUpdate: setForceSearch });
 
+  const [deleteLead] = useDeleteLead({ setSearch });
   const handleCloseStyle = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
     setOpenSnack(false);
@@ -97,7 +99,7 @@ export const DistributionList = () => {
           final_date: finalDate,
         };
         setLeadsByQuantity({ data }).then(() => {
-          setSnackMessage("Leads asignados");
+          setSnackMessage('Leads asignados');
           setOpenSnack(true);
           setForceSearch(true);
           setCantidad(0);
@@ -108,16 +110,16 @@ export const DistributionList = () => {
           leads: selectedLeads,
         };
         setLeadsByArray({ data }).then(() => {
-          setSnackMessage("Leads asignados");
+          setSnackMessage('Leads asignados');
           setOpenSnack(true);
           setForceSearch(true);
         });
       } else {
-        setSnackMessage("Debes seleccionar leads antes de distribuirlos.");
+        setSnackMessage('Debes seleccionar leads antes de distribuirlos.');
         setOpenError(true);
       }
     } else {
-      setSnackMessage("Selecciona un Asesor.");
+      setSnackMessage('Selecciona un Asesor.');
       setOpenError(true);
     }
   };
@@ -127,7 +129,7 @@ export const DistributionList = () => {
       setSelectedLeads([]);
       setSelectAll(false);
     } else {
-      let _selectedLeads = [];
+      const _selectedLeads = [];
       leads.data.map((lead) => {
         _selectedLeads.push(lead.id);
       });
@@ -159,6 +161,7 @@ export const DistributionList = () => {
           setCurrentComment={setCurrentComment}
           setCurrentId={setCurrentId}
           setSearch={setSearch}
+          actionDelete={deleteLead}
         />
       ) : (
         <></>
@@ -193,8 +196,8 @@ export const DistributionList = () => {
 
       <Snackbar
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
         open={openSnack}
         autoHideDuration={6000}
@@ -208,8 +211,8 @@ export const DistributionList = () => {
       </Snackbar>
       <Snackbar
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
         open={openError}
         autoHideDuration={6000}
@@ -224,7 +227,7 @@ export const DistributionList = () => {
       </Snackbar>
       <Dialog open={openComments} onClose={() => setOpenComments(false)}>
         <DialogTitle className={classes.titleSize} id="alert-dialog-title">
-          {"Editar Comentario"}
+          {'Editar Comentario'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
