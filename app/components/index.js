@@ -14,6 +14,7 @@ export GuideSlider from "./GuideSlider";
 export Notification from "./Notification/Notification";
 export LoginForm from "./Forms/LoginForm";
 export RegisterForm from "./Forms/RegisterForm";
+export MaterialDropZone from './Forms/MaterialDropZone';
 export ResetForm from "./Forms/ResetForm";
 export LoginFormFirebase from "./Forms/LoginFormFirebase";
 export RegisterFormFirebase from "./Forms/RegisterFormFirebase";
