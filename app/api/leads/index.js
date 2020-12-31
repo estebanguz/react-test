@@ -138,3 +138,17 @@ export const createLead = async ({ data }) => {
     console.log(error);
   }
 };
+
+export const createLeadsByFile = async (formData) => {
+  try {
+    const token = getJWTCrm();
+    return await axios.post(`${config.hostname}/leads/file`, formData, {
+      headers: {
+        Authorization: `Bearer: ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
