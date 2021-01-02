@@ -90,10 +90,10 @@ export const DistributionList = () => {
   };
 
   const handleDistribution = () => {
-    if (selectedItem.id_user) {
+    if (selectedItem.id) {
       if (cantidad > 0) {
         const data = {
-          broker: selectedItem.id_user,
+          broker: selectedItem.id,
           quantity: cantidad,
           initial_date: initialDate,
           final_date: finalDate,
@@ -106,7 +106,7 @@ export const DistributionList = () => {
         });
       } else if (selectedLeads.length > 0) {
         const data = {
-          broker: selectedItem.id_user,
+          broker: selectedItem.id,
           leads: selectedLeads,
         };
         setLeadsByArray({ data }).then(() => {
