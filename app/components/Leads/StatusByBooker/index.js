@@ -160,7 +160,7 @@ export const StatusByBookerComponent = () => {
         {response ? (
           <MUIDataTable
             className={classes.table}
-            title="Leads de Asesor"
+            title={`Leads asignados a Asesor. Seleccionados: ${selectedLeads.length}`}
             data={response.data}
             columns={columns}
             options={options}

@@ -27,7 +27,6 @@ export const useGetLeads = () => {
   }, [search, page]);
 
   const searchLeads = async () => {
-    console.log("Here");
     const response = await getFreeLeads({
       page,
       size,

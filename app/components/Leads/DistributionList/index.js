@@ -103,6 +103,7 @@ export const DistributionList = () => {
           setOpenSnack(true);
           setForceSearch(true);
           setCantidad(0);
+          setSelectedLeads([]);
         });
       } else if (selectedLeads.length > 0) {
         const data = {
@@ -113,6 +114,7 @@ export const DistributionList = () => {
           setSnackMessage('Leads asignados');
           setOpenSnack(true);
           setForceSearch(true);
+          setSelectedLeads([]);
         });
       } else {
         setSnackMessage('Debes seleccionar leads antes de distribuirlos.');
@@ -153,6 +155,7 @@ export const DistributionList = () => {
       {leads ? (
         <LeadsMuiTable
           leads={leads}
+          label={`Seleccione los leads a afectar. Seleccionados ${selectedLeads.length}`}
           actionCheckbox={selectLead}
           type="distribution"
           array={selectedLeads}

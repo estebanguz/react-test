@@ -20,15 +20,11 @@ export const columns = ({
   type,
   actionCheckbox,
   array,
-  emailAction,
   phoneAction,
   whatsappAction,
   viewAction,
   ActionRowComponent,
   setForceSearch,
-  commentsClick,
-  setCurrentComment,
-  setCurrentId,
   actionDelete,
 }) => {
   const _array = [];
