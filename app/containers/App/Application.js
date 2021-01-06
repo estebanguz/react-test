@@ -1,9 +1,11 @@
-import React from "react";
-import { PropTypes } from "prop-types";
-import { Switch, Route } from "react-router-dom";
-import { ADMIN, VENTAS, AGENCIA, GERENTE } from "site-auth";
-import Dashboard from "../Templates/Dashboard";
-import { AuthRoute } from "../../components/Router/AuthRoute";
+import React from 'react';
+import { PropTypes } from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+import {
+  ADMIN, VENTAS, AGENCIA, GERENTE
+} from 'site-auth';
+import Dashboard from '../Templates/Dashboard';
+import { AuthRoute } from '../../components/Router/AuthRoute';
 import {
   DashboardPage,
   Error,
@@ -13,7 +15,7 @@ import {
   LeadsList,
   Distribution,
   BookerLeadsList,
-  LeadDetails,
+  // LeadDetails,
   Solicitude,
   HotelList,
   CouponsView,
@@ -22,7 +24,8 @@ import {
   LeadDetail,
   CreateLead,
   StatusByBookerContainer,
-} from "../pageListAsync";
+  DetalleReservacion
+} from '../pageListAsync';
 
 class Application extends React.Component {
   render() {
@@ -129,6 +132,11 @@ class Application extends React.Component {
             path="/app/agency/paymentlink"
             Component={PaymentLink}
             roles={[AGENCIA]}
+          />
+          <AuthRoute
+            path=""
+            component={DetalleReservacion}
+            roles={[ADMIN]}
           />
           <Route path="/app/not-found" component={NotFound} />
           <Route path="/app/error" component={Error} />
