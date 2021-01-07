@@ -60,6 +60,12 @@ class Application extends React.Component {
           />
           <AuthRoute
             exact
+            path="/app/stats/booker"
+            Component={BookerStats}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
             path="/app/leads/distribution"
             Component={Distribution}
             roles={[ADMIN, GERENTE]}

@@ -1,12 +1,14 @@
-import React from "react";
-import { Grid, Card, CardContent, Button, makeStyles } from "@material-ui/core";
-import { AutocompleteUser } from "../autocomplete";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
+import React from 'react';
+import {
+  Grid, Card, CardContent, Button, makeStyles, Typography
+} from '@material-ui/core';
+import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+import { AutocompleteUser } from '../autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   widthCien: {
-    width: "100%",
+    width: '100%',
   },
 }));
 
@@ -17,6 +19,9 @@ export const Filters = ({ getPropsAutoComplete, getPropsLeads }) => {
     <Card>
       <CardContent>
         <Grid container alignItems="center" spacing={3}>
+          <Grid item md={12}>
+            <Typography>Estadísticas Por Asesor</Typography>
+          </Grid>
           <Grid item lg={3} md={3} sm={3} xs={12}>
             <AutocompleteUser {...getPropsAutoComplete()} />
           </Grid>

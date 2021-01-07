@@ -133,7 +133,12 @@ export const StatusByBookerContainer = Loadable({
   loading: Loading,
 });
 
+export const BookerStats = Loadable({
+  loader: () => import('./Pages/BookerStats/index'),
+  loading: Loading,
+});
+
 export const DetalleReservacion = Loadable({
   loader: () => import('./Pages/ReservacionDetalle/index'),
-  loading: Loading,
+  Loading:Loading,
 });
