@@ -49,13 +49,6 @@ module.exports = [
         link: '/app/leads/report',
       },
       {
-        key: 'bookerStats',
-        name: 'Estadisticas por Asesor',
-        roles: [1, 6],
-        icon: 'list',
-        link: '/app/stats/booker',
-      },
-      {
         key: 'solicitude',
         name: 'Solicitud de Reserva',
         roles: [6],

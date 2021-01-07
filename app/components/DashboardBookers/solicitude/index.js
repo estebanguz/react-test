@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router';
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+import { useParams } from "react-router";
+import {
+  makeStyles,
+  Stepper,
+  Step,
+  StepLabel,
+  StepContent,
+  Button,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { Redirect } from "react-router";
 import { NewReservation } from "./NewReservation";
 import { GuestData } from "./GuestData";
@@ -45,7 +48,13 @@ const styles = (theme) => ({
   resetContainer: {
     padding: "5px",
   },
+  typo: {
+    padding: "16px",
+    fontWeight: "bold",
+  },
 });
+
+const usStyles = makeStyles((theme) => styles(theme));
 
 function getSteps() {
   return [
@@ -64,21 +73,24 @@ export const SolicitudeStepper = () => {
   const params = useParams();
   const [activeStep, setActiveStep] = useState(0);
   const [getPropsReservation, getValidateData] = useNewReservation();
-  const [getPropsGuesData, getValidateGuestData] = useGuestData({ leadId: params.leadId });
+  const [getPropsGuesData, getValidateGuestData] = useGuestData({
+    leadId: params.leadId,
+  });
   const [getPropsCouple] = useCoupleData();
   const [getPropsPaymentMethod, getValidationPaymentData] = usePaymentMethod();
-  const [getPropsContactData, getValidationContactData] = useContactData({ leadId: params.leadId });
+  const [getPropsContactData, getValidationContactData] = useContactData({
+    leadId: params.leadId,
+  });
   const [companions, addCompanion] = useCompanion();
   const [getPropsRoom] = useRoomDescription({ leadId: params.leadId });
   const [redirect, setRedirect] = useState(false);
   const [aprox, realQty, setAprox, setRealQty] = usePooledIncoming();
-  const classes = styles();
-  const steps = getSteps();  
+  const classes = usStyles();
+  const steps = getSteps();
   const [addReservation] = useReservation();
 
-
   useEffect(() => {
-    console.log(`Index ${companions}`);
+    console.log(getPropsRoom().lead);
   }, [companions]);
 
   const getStepContent = (step) => {
@@ -116,6 +128,14 @@ export const SolicitudeStepper = () => {
   return (
     <div className={classes.root}>
       {redirect ? <Redirect to="/app/booker/leads" /> : null}
+      {getPropsRoom().lead ? (
+        <Paper>
+          <Typography className={classes.typo}>
+            Solicitud para cliente: {getPropsRoom().lead.nombre}
+          </Typography>
+        </Paper>
+      ) : null}
+
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
@@ -160,7 +180,7 @@ export const SolicitudeStepper = () => {
                           getValidateGuestData,
                           getValidationPaymentData,
                           getValidationContactData,
-                        })                        
+                        })
                       ) {
                         setActiveStep(activeStep + 1);
                       } else {

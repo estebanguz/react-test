@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import moment from 'moment';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
-import {
-  DatePicker,
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import MomentUtils from '@date-io/moment';
-import AutoCompleteSelect from '../../../HotelSelect/index';
-import { useBanks } from '../../hooks/useBanks';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
+import AutoCompleteSelect from "../../../HotelSelect/index";
+import { useBanks } from "../../hooks/useBanks";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    width: '100%',
+    width: "100%",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
   gridItem: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   marginBootom: {
-    marginBottom: '25px',
+    marginBottom: "25px",
+  },
+  textArea: {
+    padding: "10px",
+    height: "78px",
+    borderRadius: "10px",
+    border: "1px solid rgba(0,0,0,0.32)",
   },
 }));
 
@@ -78,6 +78,8 @@ export const RoomDescription = ({
   setExternalNotes,
   setQuantityCards,
   setTotal,
+  destinationString,
+  setDestinationString,
 }) => {
   const classes = useStyles();
   const [openDate, setOpenDate] = useState(openDates);
@@ -92,12 +94,7 @@ export const RoomDescription = ({
     <Grid container spacing={2} className={classes.marginBottom}>
       <Grid item xs={12}>
         <FormControl className={classes.formControl}>
-          <TextField
-            label="Destino"
-            value={destination}
-            onInput={(e) => setDestination(e.target.value)}
-            disabled
-          />
+          <TextField label="Destino" value={destinationString} disabled />
         </FormControl>
       </Grid>
       <Grid item xs={12}>
@@ -109,7 +106,8 @@ export const RoomDescription = ({
             callBack={(e) => {
               console.log(e);
               setHotel(e);
-              setDestination(e.destino);
+              setDestinationString(e.destino);
+              setDestination(e.value);
             }}
           />
         </FormControl>
@@ -199,7 +197,7 @@ export const RoomDescription = ({
           </FormControl>
         </Grid>
       ) : (
-        ''
+        ""
       )}
       {openDate == 2 ? (
         <Grid item xs={openDate == 1 ? 6 : 6} md={openDate == 1 ? 6 : 3}>
@@ -215,7 +213,7 @@ export const RoomDescription = ({
           </FormControl>
         </Grid>
       ) : (
-        ''
+        ""
       )}
       <Grid item xs={6} md={6}>
         <FormControl className={classes.formControl}>
@@ -321,35 +319,7 @@ export const RoomDescription = ({
           </Select>
         </FormControl>
       </Grid>
-      <Grid item md={3} xs={12}>
-        <FormControl className={classes.formControl}>
-          <TextField
-            value={internalNotes}
-            onInput={(e) => setInternalNotes(e.target.value)}
-            label="Notas Importantes (Internas)"
-          />
-        </FormControl>
-      </Grid>
-      <Grid item md={3} xs={12}>
-        <FormControl className={classes.formControl}>
-          <TextField
-            label="Notas Importantes (Externas)"
-            value={externalNotes}
-            onInput={(e) => setExternalNotes(e.target.value)}
-          />
-        </FormControl>
-      </Grid>
-      <Grid item md={3} xs={12}>
-        <FormControl className={classes.formControl}>
-          <TextField
-            label="Número de Tarjetas"
-            value={quantityCards}
-            onInput={(e) => setQuantityCards(e.target.value)}
-            type="number"
-          />
-        </FormControl>
-      </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={3}>
         <FormControl className={classes.formControl}>
           <TextField
             label="Total de Venta"
@@ -357,6 +327,32 @@ export const RoomDescription = ({
             onInput={(e) => setTotal(e.target.value)}
             placeholder="Cantidad en MXN"
             type="number"
+          />
+        </FormControl>
+      </Grid>
+      <Grid item md={12} xs={12}>
+        <FormControl className={classes.formControl}>
+          <TextareaAutosize
+            className={classes.textArea}
+            value={internalNotes}
+            onInput={(e) => setInternalNotes(e.target.value)}
+            label="Notas Importantes (Internas)"
+            aria-label="minimum height"
+            rowsMin={3}
+            placeholder="Notas Importantes (Internas)"
+          />
+        </FormControl>
+      </Grid>
+      <Grid item md={12} xs={12}>
+        <FormControl className={classes.formControl}>
+          <TextareaAutosize
+            className={classes.textArea}
+            value={externalNotes}
+            onInput={(e) => setExternalNotes(e.target.value)}
+            label="Notas Importantes (Externas)"
+            aria-label="minimum height"
+            rowsMin={3}
+            placeholder="Notas Importantes (Externas)"
           />
         </FormControl>
       </Grid>
