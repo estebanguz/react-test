@@ -49,3 +49,5 @@ export TableCoupon from "./Coupon/TableCoupon.js";
 
 // leads
 export NewLead from "./Leads/CreateLeads/index.js";
+
+export ListReservation from "./Reservation/listReservation.js";

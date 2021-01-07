@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from '../config';
 import { getJWTCrm } from '../../utils/auth';
+import { get ,post} from "api-calls/customs";
 
 export const newReservation = async ({ data }) => {
   try {
@@ -34,4 +35,12 @@ export const nextFolio = async () => {
       message: err.response.data.payload.message,
     };
   }
+};
+
+export const getReservation = async ({ page, size }) => {
+  return await get(`/reservas?page=${page}&size=${size}`);
+};
+
+export const getSaearchReservation = async ({filtro}) => {  
+  return await post(`/find`,{filtro : filtro});
 };

@@ -132,3 +132,9 @@ export const StatusByBookerContainer = Loadable({
   loader: () => import("./Pages/Leads/statusByBooker"),
   loading: Loading,
 });
+
+export const Reservation = Loadable({
+  loader: () => import("./Reservas/index"),
+  loading: Loading,
+});
+
