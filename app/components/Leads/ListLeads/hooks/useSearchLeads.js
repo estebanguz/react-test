@@ -40,6 +40,7 @@ export const useSearchLeads = ({ repository }) => {
       finalDate,
       status,
     });
+
     const response = await repository({
       page,
       size,
