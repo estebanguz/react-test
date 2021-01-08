@@ -6,7 +6,7 @@ import { injectIntl } from 'react-intl';
 
 class DetalleReservacion extends React.Component {
   render() {
-    const title = brand.name + '- Reservacion';
+    const title = brand.name + ' - Leads';
     const description = brand.desc;
     return (
       <div>
@@ -18,12 +18,17 @@ class DetalleReservacion extends React.Component {
           <meta property="twitter:title" content={title} />
           <meta property="twitter:description" content={description} />
         </Helmet>
-        <PapperBlock />
+        <PapperBlock
+          title="Distribución de Leads"
+          icon="account_box"
+          desc="Módulo de distribución de leads. Distribuye leads de manera masiva o seleccionando algunos."
+        >
+          <h1>Hola Mundo</h1>
+        </PapperBlock>
       </div>
     );
   }
 }
-
 
 DetalleReservacion.propTypes = {};
 

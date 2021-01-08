@@ -140,5 +140,5 @@ export const BookerStats = Loadable({
 
 export const DetalleReservacion = Loadable({
   loader: () => import('./Pages/ReservacionDetalle/index'),
-  Loading:Loading,
+  loading: Loading,
 });
