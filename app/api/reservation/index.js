@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import axios from 'axios';
 import config from '../config';
 import { getJWTCrm } from '../../utils/auth';
-import { get ,post} from "api-calls/customs";
-=======
-import axios from "axios";
-import config from "../config";
-import { put } from "api-calls/customs";
-import { getJWTCrm } from "../../utils/auth";
->>>>>>> master
+import { post,put} from "api-calls/customs";
 
 export const newReservation = async ({ data }) => {
   try {
@@ -44,11 +37,9 @@ export const nextFolio = async () => {
   }
 };
 
-<<<<<<< HEAD
 export const getReservation = async ({ page, size ,filtro}) => {
   return await post(`/reservas?page=${page}&size=${size}`,{filtro : filtro});
 };
-=======
 export const updateGuestDescription = async ({ data, bookingCode }) => {
   try {
     const url = `/reservations/guest_description/${bookingCode}`;
@@ -63,4 +54,3 @@ export const updateGuestDescription = async ({ data, bookingCode }) => {
     };
   }
 };
->>>>>>> master

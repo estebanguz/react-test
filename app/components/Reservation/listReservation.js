@@ -19,6 +19,7 @@ import Select from '@material-ui/core/Select';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import IconButton from '@material-ui/core/IconButton';
+import { Redirect } from "react-router";
 
 import {useGetReservation} from "./hooks/useGetReservation"
 
@@ -49,7 +50,7 @@ const ListReservation = (props) => {
     }   
     return (
         <React.Fragment>                   
-            {/* { redirect ? <Redirect to={`/app/booker/solicitude/${parametro}`} /> : null}                     */}                       
+            { redirect? <Redirect to={`/app/bookings/details/${parametro}`} /> : null}                                           
             <Box className = {styles.search}>
                 <Box className = {styles.searchIcon}>
                      <SearchIcon />

@@ -149,7 +149,7 @@ class Application extends React.Component {
           <AuthRoute
             path="/app/bookings/details/:bookingCode"
             Component={DetalleReservacion}
-            roles={[ADMIN]}
+            roles={[ADMIN,GERENTE]}
           />
           <Route path="/app/not-found" component={NotFound} />
           <Route path="/app/error" component={Error} />
