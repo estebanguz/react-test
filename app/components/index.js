@@ -14,7 +14,7 @@ export GuideSlider from "./GuideSlider";
 export Notification from "./Notification/Notification";
 export LoginForm from "./Forms/LoginForm";
 export RegisterForm from "./Forms/RegisterForm";
-export MaterialDropZone from './Forms/MaterialDropZone';
+export MaterialDropZone from "./Forms/MaterialDropZone";
 export ResetForm from "./Forms/ResetForm";
 export LoginFormFirebase from "./Forms/LoginFormFirebase";
 export RegisterFormFirebase from "./Forms/RegisterFormFirebase";
@@ -50,4 +50,12 @@ export TableCoupon from "./Coupon/TableCoupon.js";
 // leads
 export NewLead from "./Leads/CreateLeads/index.js";
 
+<<<<<<< HEAD
 export ListReservation from "./Reservation/listReservation.js";
+=======
+export { BookerStatsComponent } from "./BookerStatsComponent/index.js";
+
+export { ChartCRM } from "./helpers/chartCRM.js";
+
+export { DescriptionGuest } from "./DescriptionGuest/index.js";
+>>>>>>> master

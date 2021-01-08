@@ -1,38 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
-import { getOldHotels } from '../../../api/hotels';
-import { useGetDiscovery } from './useGetDiscovery';
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import { getOldHotels } from "../../../api/hotels";
+import { useGetDiscovery } from "./useGetDiscovery";
 
 export const useRoomDescription = ({ leadId }) => {
-  const [discovery] = useGetDiscovery({ leadId });
-  const [hotel, setHotel] = useState('');
-  const [hotels, setHotels] = useState('');
-  const [destination, setDestination] = useState('');
-  const [type, setType] = useState('');
-  const [nights, setNights] = useState('');
-  const [room, setRoom] = useState('');
+  const [discovery, lead] = useGetDiscovery({ leadId });
+  const [hotel, setHotel] = useState("");
+  const [hotels, setHotels] = useState("");
+  const [destination, setDestination] = useState(0);
+  const [destinationString, setDestinationString] = useState("");
+  const [type, setType] = useState("");
+  const [nights, setNights] = useState("");
+  const [room, setRoom] = useState("");
   const [openDates, setOpenDates] = useState(
     moment()
-      .startOf('month')
-      .format('YYYY-MM-DD')
+      .startOf("month")
+      .format("YYYY-MM-DD")
   );
-  const [arrivalDate, setArrivalDate] = useState(
-    moment()
-      .startOf('month')
-      .format('YYYY-MM-DD')
-  );
+  const [arrivalDate, setArrivalDate] = useState();
   const [departureDate, setDepartureDate] = useState();
-  const [pax, setPax] = useState('');
+  const [pax, setPax] = useState("");
   const [presentation, setPresentation] = useState();
   const [validity, setValidity] = useState();
-  const [typeId, setTypeId] = useState('');
-  const [cardType1, setTypeCard1] = useState('');
-  const [bank1, setBank1] = useState('');
-  const [cardType2, setTypeCard2] = useState('');
-  const [bank2, setBank2] = useState('');
-  const [transportation, setTransportation] = useState('');
-  const [internalNotes, setInternalNotes] = useState('');
-  const [externalNotes, setExternalNotes] = useState('');
+  const [typeId, setTypeId] = useState("");
+  const [cardType1, setTypeCard1] = useState("");
+  const [bank1, setBank1] = useState("");
+  const [cardType2, setTypeCard2] = useState("");
+  const [bank2, setBank2] = useState("");
+  const [transportation, setTransportation] = useState("");
+  const [internalNotes, setInternalNotes] = useState("");
+  const [externalNotes, setExternalNotes] = useState("");
   const [quantityCards, setQuantityCards] = useState(0);
   const [total, setTotal] = useState(0);
 
@@ -42,7 +39,7 @@ export const useRoomDescription = ({ leadId }) => {
     const _final = [];
     _final.push({
       id: 1,
-      nombre: 'Otro',
+      nombre: "Otro",
     });
     _options.map((_hotel) => {
       _final.push(_hotel);
@@ -54,17 +51,18 @@ export const useRoomDescription = ({ leadId }) => {
   useEffect(() => {
     if (discovery.discovery !== undefined) {
       const _discovery = discovery.discovery;
-      const status = _discovery.fecha_llegada == 'ABIERTO'
-        && _discovery.fecha_salida == 'ABIERTO'
-        ? 1
-        : 2;
+      const status =
+        _discovery.fecha_llegada == "ABIERTO" &&
+        _discovery.fecha_salida == "ABIERTO"
+          ? 1
+          : 2;
       if (status == 2) {
         setArrivalDate(_discovery.fecha_llegada); // M-D-A  O A-D-M
         setDepartureDate(_discovery.fecha_salida); // M-D-A  O A-D-M
       }
       setOpenDates(status);
     }
-  }, [discovery]);
+  }, [discovery, lead]);
 
   useEffect(() => {
     console.log(hotel);
@@ -117,6 +115,9 @@ export const useRoomDescription = ({ leadId }) => {
     setExternalNotes,
     setQuantityCards,
     setTotal,
+    destinationString,
+    setDestinationString,
+    lead
   });
 
   return [getPropsRoom];

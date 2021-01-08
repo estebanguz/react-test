@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => leadsTableStyles(theme));
 
 export const LeadsMuiTable = ({
   leads,
+  page,
+  label,
   type = 'leads',
   actionCheckbox,
   pageChange,
@@ -56,6 +58,7 @@ export const LeadsMuiTable = ({
     rowsPerPage: 10,
     serverSide: true,
     search: false,
+    page: page - 1,
     filter: false,
     count: leads.total_rows,
     download: false,
@@ -77,7 +80,7 @@ export const LeadsMuiTable = ({
       title={`${
         type == 'leads'
           ? 'Leads Recientes'
-          : 'Seleccione los leads a afectar'
+          : label
       }`}
       data={leads.data}
       columns={_columns}

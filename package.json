@@ -277,5 +277,7 @@
     "webpack-hot-middleware": "2.24.3 ",
     "webpack-pwa-manifest": "4.0.0",
     "whatwg-fetch": "3.0.0"
-  }
+  },
+  "main": "index.js",
+  "license": "MIT"
 }

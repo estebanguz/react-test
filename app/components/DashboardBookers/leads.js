@@ -99,6 +99,7 @@ export const LeadsBooker = () => {
       {leads ? (
         <LeadsMuiTable
           leads={leads}
+          page={page}
           pageChange={setPage}
           setSearch={setSearch}
           actionRowComponent={leadSetStatus}

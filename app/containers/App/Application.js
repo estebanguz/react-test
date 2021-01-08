@@ -13,7 +13,7 @@ import {
   LeadsList,
   Distribution,
   BookerLeadsList,
-  LeadDetails,
+  // LeadDetails,
   Solicitude,
   HotelList,
   CouponsView,
@@ -23,6 +23,8 @@ import {
   CreateLead,
   StatusByBookerContainer,
   Reservation,
+  DetalleReservacion,
+  BookerStats,
 } from "../pageListAsync";
 
 class Application extends React.Component {
@@ -54,6 +56,12 @@ class Application extends React.Component {
             exact
             path="/app/leads/new"
             Component={CreateLead}
+            roles={[ADMIN, GERENTE]}
+          />
+          <AuthRoute
+            exact
+            path="/app/stats/booker"
+            Component={BookerStats}
             roles={[ADMIN, GERENTE]}
           />
           <AuthRoute
@@ -136,6 +144,12 @@ class Application extends React.Component {
             path="/app/reservation"
             Component={Reservation}
             roles={[GERENTE]}
+          />
+
+          <AuthRoute
+            path="/app/bookings/details/:bookingCode"
+            Component={DetalleReservacion}
+            roles={[ADMIN]}
           />
           <Route path="/app/not-found" component={NotFound} />
           <Route path="/app/error" component={Error} />
