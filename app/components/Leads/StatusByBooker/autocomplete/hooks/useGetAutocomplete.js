@@ -18,6 +18,7 @@ export const useGetAutocomplete = ({ repository }) => {
   }, [query]);
 
   const searchFunction = async () => {
+    console.log(query)
     const response = await repository({ query });
     setPredictions(response.data.message.users);
   };

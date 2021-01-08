@@ -2,17 +2,32 @@ import {useState,useEffect} from 'react'
 import {getReservation } from "enl-api/reservation";
 
 export const useGetReservation = () => { 
-    const [data , setData] = useState([]);
-    const [request ,setRequest] = useState({page : 1  , size : 10 })
-    useEffect(()=>{         
-        console.log("se llamo ")      
-        llamar()               
+    const [response , setResponse] = useState([]);
+    const [request ,setRequest] = useState({ page : 1  , size : 10 , filtro : '' })    
+    const [search,setSearch] = useState(true)
+
+    useEffect(() => {                   
+        if (request.filtro && search) {
+            const _time = setTimeout(() => {
+                searchReservation()                
+            }, 500);
+            
+            return () => clearTimeout(_time);
+        }
+        else {           
+            searchReservation()            
+        }       
     },[request])
 
-    const llamar = async () =>{
-        const result = await getReservation({ page : request.page,size : request.size})        
-        setData(result.data.messange)
+    const searchReservation = async () =>{
+        const result = await getReservation({ page : request.page,size : request.size , filtro: request.filtro})
+        setResponse(result.data.messange)
     }
 
-    return [data ,setRequest ,setData]
+    return [
+        response ,
+        request,
+        setRequest ,     
+        setSearch        
+    ]
 }

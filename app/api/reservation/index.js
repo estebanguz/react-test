@@ -37,10 +37,6 @@ export const nextFolio = async () => {
   }
 };
 
-export const getReservation = async ({ page, size }) => {
-  return await get(`/reservas?page=${page}&size=${size}`);
-};
-
-export const getSaearchReservation = async ({filtro}) => {  
-  return await post(`/find`,{filtro : filtro});
+export const getReservation = async ({ page, size ,filtro}) => {
+  return await post(`/reservas?page=${page}&size=${size}`,{filtro : filtro});
 };
