@@ -3,7 +3,6 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { TextField } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,15 +11,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { searchUser } from 'enl-api/users';
-import { setLeadsByQuantity, setLeadsByArray } from "../../../api/distribution";
-import { FiltersLeads } from "../LeadsFilters";
-import { LeadsMuiTable } from "../ListLeads/table";
+import { setLeadsByQuantity, setLeadsByArray, getFreeLeads } from '../../../api/distribution';
+import { FiltersLeads } from '../LeadsFilters';
+import { LeadsMuiTable } from '../ListLeads/table';
 import SnackBarCustom from '../../../utils/tools/SnackBarCustom';
 import { useSearchLeads } from '../ListLeads/hooks/useSearchLeads';
 import { distributionStyles } from './distributionStyles';
-import { AutoCompleteSitio } from '../../AutocompleteSitio';
-import { useSearchUser } from './hooks/useSearchUser';
-import { getFreeLeads } from '../../../api/distribution';
+
 import { useUpdateComments } from './hooks/useUpdateComments';
 import { LogTable } from '../../Events';
 import { AutocompleteUser } from '../StatusByBooker/autocomplete';
@@ -155,6 +152,7 @@ export const DistributionList = () => {
       {leads ? (
         <LeadsMuiTable
           leads={leads}
+          page={page}
           label={`Seleccione los leads a afectar. Seleccionados ${selectedLeads.length}`}
           actionCheckbox={selectLead}
           type="distribution"
