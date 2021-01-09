@@ -50,6 +50,7 @@ export TableCoupon from "./Coupon/TableCoupon.js";
 // leads
 export NewLead from "./Leads/CreateLeads/index.js";
 
+export ListReservation from "./Reservation/listReservation.js";
 export { BookerStatsComponent } from "./BookerStatsComponent/index.js";
 
 export { ChartCRM } from "./helpers/chartCRM.js";

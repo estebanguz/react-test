@@ -22,6 +22,7 @@ import {
   LeadDetail,
   CreateLead,
   StatusByBookerContainer,
+  Reservation,
   DetalleReservacion,
   BookerStats,
 } from "../pageListAsync";
@@ -138,10 +139,17 @@ class Application extends React.Component {
             Component={PaymentLink}
             roles={[AGENCIA]}
           />
+          {/*RESERVATIONS*/}
+          <AuthRoute
+            path="/app/reservation"
+            Component={Reservation}
+            roles={[GERENTE]}
+          />
+
           <AuthRoute
             path="/app/bookings/details/:bookingCode"
             Component={DetalleReservacion}
-            roles={[ADMIN]}
+            roles={[ADMIN,GERENTE]}
           />
           <Route path="/app/not-found" component={NotFound} />
           <Route path="/app/error" component={Error} />

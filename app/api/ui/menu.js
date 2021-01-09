@@ -108,4 +108,19 @@ module.exports = [
       },
     ],
   },
+  {
+    key: 'reservas',
+    name: 'Reservaciones',
+    icon: 'list-alt',
+    roles: [1, 6, 4],
+    child: [
+      {
+        key: 'index',
+        name: 'Lista de Reservaciones',
+        roles: [1, 6, 4],
+        icon: 'list-alt',
+        link: '/app/reservation',
+      }
+    ],
+  },
 ];
